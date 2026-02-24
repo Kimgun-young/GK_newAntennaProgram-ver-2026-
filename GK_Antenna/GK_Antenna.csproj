@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\logos\GK_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\logos\GK_logo.png" />
+  </ItemGroup>
+
 </Project>

@@ -6,14 +6,11 @@
         xmlns:local="clr-namespace:GK_Antenna"
         mc:Ignorable="d"
         Title="GlobalKonet Antenna SW"
-
         WindowState="Maximized">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="5*"/>
-        </Grid.ColumnDefinitions>
-
+        <Frame x:Name="fr"
+               NavigationUIVisibility="Hidden"/>
     </Grid>
+
 </Window>
