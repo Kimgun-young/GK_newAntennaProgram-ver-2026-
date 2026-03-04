@@ -15,7 +15,7 @@
                 Width="556"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Height="560">
+                Height="612">
 
             <StackPanel>
 
@@ -37,44 +37,81 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0"
-                               Grid.Column="0"
-                               Text="Company Code:"
-                               VerticalAlignment="Center"
-                               FontSize="18"/>
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       FontFamily="Hancom MalangMalang Regular"
+                       FontSize="18"><Run Text="Company Code"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
 
                     <TextBox Grid.Row="0"
-                             Grid.Column="1"
-                             Height="35"
-                             Padding="5"/>
+                         Grid.Column="1"
+                         Height="35"
+                         Padding="5"
+                         FontFamily="Hancom MalangMalang Regular"
+                         FontSize="16"
+                         x:Name="CompanyCodeBox"/>
 
-                    <TextBlock Grid.Row="1"
-                               Grid.Column="0"
-                               Text="Antenna IP:"
-                               VerticalAlignment="Center"
-                               Margin="0,30,0,0"
-                               FontSize="18"/>
-
-                    <TextBox Grid.Row="1"
-                             Grid.Column="1"
-                             Height="35"
-                             Padding="5"
-                             Margin="0,30,0,0"/>
+                    <Label Grid.Row="1"
+                       Grid.Column="1"
+                       x:Name="CompanyCodemsg"
+                       Content=""
+                       FontSize="14"
+                       Foreground="#FFB60000"
+                       Margin="0,5,0,0"/>
 
                     <TextBlock Grid.Row="2"
-                               Grid.Column="0"
-                               Text="Antenna Port:"
-                               VerticalAlignment="Center"
-                               Margin="0,30,0,0"
-                               FontSize="18"/>
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="0,20,0,0"
+                       FontFamily="Hancom MalangMalang Regular"
+                       FontSize="18"><Run Text="Antenna IP"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
 
                     <TextBox Grid.Row="2"
-                             Grid.Column="1"
-                             Height="35"
-                             Padding="5"
-                             Margin="0,30,0,0"/>
+                         Grid.Column="1"
+                         Height="35"
+                         Padding="5"
+                         Margin="0,20,0,0"
+                         FontFamily="Hancom MalangMalang Regular"
+                         FontSize="16"
+                         x:Name="AntennaIpBox"/>
+
+                    <Label Grid.Row="3"
+                       Grid.Column="1"
+                       x:Name="ipmsg"
+                       Content=""
+                       FontSize="14"
+                       Foreground="#FFB60000"
+                       Margin="0,5,0,0"/>
+
+                    <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       Margin="0,20,0,0"
+                       FontFamily="Hancom MalangMalang Regular"
+                       FontSize="18"><Run Text="Antenna Port"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
+
+                    <TextBox Grid.Row="4"
+                         Grid.Column="1"
+                         Height="35"
+                         Padding="5"
+                         Margin="0,20,0,0"
+                         FontFamily="Hancom MalangMalang Regular"
+                         FontSize="16"
+                         x:Name="AntennaPortBox"/>  
+
+                    <Label Grid.Row="5"
+                       Grid.Column="1"
+                       x:Name="portmsg"
+                       Content=""
+                       FontSize="14"
+                       Foreground="#FFB60000"
+                       Margin="0,5,0,0"/>
+
                 </Grid>
 
                 <StackPanel Orientation="Horizontal"
