@@ -35,32 +35,90 @@ namespace GK_Antenna
         private string filePath = "ip.txt"; // 저장할 파일 경로
         private string defaultIp = "192.168.0.2"; // 기본 IP 주소
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private async void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            string inputCode = CompanyCodeBox.Text?.Trim() ?? "";
+            string companyCode = CompanyCodeBox.Text?.Trim() ?? "";
+            string ip = AntennaIpBox.Text?.Trim() ?? "";
+            string port = AntennaPortBox.Text?.Trim() ?? "";
 
-            if (string.IsNullOrWhiteSpace(inputCode))
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(companyCode))
             {
                 CompanyCodemsg.Content = "Please Enter Company Code";
-                return;
+                isValid = false;
             }
-
-            CompanyVerifier verifier = new CompanyVerifier();
-            if (!verifier.Verify(inputCode))
+            else
             {
-                CompanyCodemsg.Content = "Invalid Company Code";
-                return;
+                CompanyVerifier verifier = new CompanyVerifier();
+                if (!verifier.Verify(companyCode))
+                {
+                    CompanyCodemsg.Content = "Invalid Company Code";
+                    isValid = false;
+                }
+                else
+                {
+                    CompanyCodemsg.Content = "";
+                }
             }
 
-            bool isInputValid =
-                string.IsNullOrEmpty(ipmsg.Content?.ToString()) &&
-                string.IsNullOrEmpty(portmsg.Content?.ToString()) &&
-                string.IsNullOrEmpty(CompanyCodemsg.Content?.ToString());
+            Regex ipRegex = new Regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
 
-            if (!isInputValid)
+            if (!ipRegex.IsMatch(ip))
+            {
+                ipmsg.Content = "Please Check The Ip Address";
+                isValid = false;
+            }
+            else
+            {
+                ipmsg.Content = "";
+            }
+
+            if (!int.TryParse(port, out int portNumber) || portNumber < 0 || portNumber > 65535)
+            {
+                portmsg.Content = "Please Check The Port Number(0~65535)";
+                isValid = false;
+            }
+            else
+            {
+                portmsg.Content = "";
+            }
+
+            if (!isValid)
                 return;
 
-            NavigationService?.Navigate(new StatusPage());
+            OkButton.IsEnabled = false;
+
+            try
+            {
+                await Task.Delay(500);
+
+                ApiService api = new ApiService();
+                Root result = await api.Connect(ip, port);
+
+                // 🔥 핵심 수정 부분
+                bool isSuccess = result.code == 0 ||
+                                 (result.msg != null && result.msg.Contains("repeat"));
+
+                if (isSuccess)
+                {
+                    MessageBox.Show(result.msg.Contains("repeat")
+                        ? "Already Connected"
+                        : "Connection Success");
+
+                    NavigationService?.Navigate(new StatusPage());
+                }
+                else
+                {
+                    MessageBox.Show($"Connection Failed: {result.msg}");
+                    OkButton.IsEnabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Connection Error: {ex.Message}");
+                OkButton.IsEnabled = true;
+            }
         }
 
         private void CancelButton_Click(Object sender, RoutedEventArgs e)

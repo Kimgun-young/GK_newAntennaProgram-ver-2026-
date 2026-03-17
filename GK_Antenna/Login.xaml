@@ -125,6 +125,7 @@
                             Background="#0078D7"
                             Foreground="White"
                             FontWeight="Bold"
+                            x:Name="OkButton"
                             Click="OkButton_Click"/>
 
                     <Button Content="Cancel"
@@ -133,6 +134,7 @@
                             Background="#D83B01"
                             Foreground="White"
                             FontWeight="Bold"
+                            x:Name="CacelButton"
                             Click="CancelButton_Click"/>
 
                 </StackPanel>
