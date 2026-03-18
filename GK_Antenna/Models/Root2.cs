@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GK_Antenna
+namespace GK_Antenna.Models
 {
-    internal class Root
+    public class Root2
     {
-        public int code { get; set; }
-        public string msg { get; set; }
+        public AntennaData antennaData { get; set; }
     }
 }

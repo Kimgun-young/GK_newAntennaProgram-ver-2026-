@@ -1,29 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-
+using System.Diagnostics;
 
 namespace GK_Antenna
 {
-    /// <summary>
-    /// Login.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class Login : Page
     {
         public Login()
@@ -31,9 +17,28 @@ namespace GK_Antenna
             InitializeComponent();
         }
 
+        private string filePath = "ip.txt";
+        private string defaultIp = "192.168.0.2";
 
-        private string filePath = "ip.txt"; // 저장할 파일 경로
-        private string defaultIp = "192.168.0.2"; // 기본 IP 주소
+        private void StartWebServer()
+        {
+            string batPath = @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\start.bat";
+
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = batPath,
+                    WorkingDirectory = Path.GetDirectoryName(batPath),
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"WebServer 실행 실패: {ex.Message}");
+            }
+        }
 
         private async void OkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -91,12 +96,12 @@ namespace GK_Antenna
 
             try
             {
-                await Task.Delay(500);
+                StartWebServer();
+                await Task.Delay(1000);
 
                 ApiService api = new ApiService();
                 Root result = await api.Connect(ip, port);
 
-                // 🔥 핵심 수정 부분
                 bool isSuccess = result.code == 0 ||
                                  (result.msg != null && result.msg.Contains("repeat"));
 
@@ -121,7 +126,7 @@ namespace GK_Antenna
             }
         }
 
-        private void CancelButton_Click(Object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
@@ -141,16 +146,10 @@ namespace GK_Antenna
                 if (config == null) return false;
 
                 string cleanedInput = inputCompanyCode.Trim();
-
                 string inputHash = ComputeSHA256(cleanedInput);
-
-
-                //System.Windows.MessageBox.Show($"입력값: [{cleanedInput}]\n계산된 해시: {inputHash}\n파일의 해시: {config.companyCodeHash}");
 
                 return inputHash.Equals(config.companyCodeHash?.Trim(), StringComparison.OrdinalIgnoreCase);
             }
-
-
 
             public class CompanyConfig
             {
@@ -158,10 +157,8 @@ namespace GK_Antenna
                 public string companyCodeHash { get; set; }
             }
 
-
             private string ComputeSHA256(string input)
             {
-                // UTF8 인코딩 시 BOM(Byte Order Mark) 문제가 생기지 않도록 생성
                 using (var sha256 = SHA256.Create())
                 {
                     byte[] bytes = Encoding.UTF8.GetBytes(input);
@@ -170,7 +167,7 @@ namespace GK_Antenna
                     StringBuilder builder = new StringBuilder();
                     foreach (byte b in hashBytes)
                     {
-                        builder.Append(b.ToString("x2")); // 소문자 16진수로 변환
+                        builder.Append(b.ToString("x2"));
                     }
                     return builder.ToString();
                 }
@@ -179,7 +176,6 @@ namespace GK_Antenna
 
         private void IPTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //ipmsg 로딩까지 기다리기
             if (ipmsg != null)
             {
                 if (AntennaIpBox.Text == "")
@@ -188,27 +184,15 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
                     bool isMatch = regex.IsMatch(AntennaIpBox.Text);
-
-                    if (!isMatch)
-                    {
-                        ipmsg.Content = "Please Check The Ip Address";
-                    }
-                    else
-                    {
-                        ipmsg.Content = "";
-                    }
-
+                    ipmsg.Content = isMatch ? "" : "Please Check The Ip Address";
                 }
             }
-
         }
 
         private void portbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //portmsg 로딩까지 기다리기
             if (portmsg != null)
             {
                 if (AntennaPortBox.Text == "")
@@ -217,21 +201,9 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^(?:[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$");
                     bool isMatch = regex.IsMatch(AntennaPortBox.Text);
-
-                    if (!isMatch)
-                    {
-                        //매치실패시
-                        portmsg.Content = "Please Check The Port Number(0~65535)";
-                    }
-                    else
-                    {
-                        //매치시
-                        portmsg.Content = "";
-                    }
-
+                    portmsg.Content = isMatch ? "" : "Please Check The Port Number(0~65535)";
                 }
             }
         }
@@ -241,16 +213,9 @@ namespace GK_Antenna
             if (CompanyCodemsg == null)
                 return;
 
-            if (string.IsNullOrWhiteSpace(CompanyCodeBox.Text))
-            {
-                CompanyCodemsg.Content = "Please Enter Company Code";
-            }
-            else
-            {
-                // 입력 중에는 아무 메시지도 표시하지 않음
-                CompanyCodemsg.Content = "";
-            }
+            CompanyCodemsg.Content = string.IsNullOrWhiteSpace(CompanyCodeBox.Text)
+                ? "Please Enter Company Code"
+                : "";
         }
-
     }
 }
