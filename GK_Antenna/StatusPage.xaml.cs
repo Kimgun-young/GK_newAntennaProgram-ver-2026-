@@ -63,6 +63,8 @@ namespace GK_Antenna
                             UpdateVoltageBoxUI(response.antennaData);
 
                             UpdateCurrentBoxUI(response.antennaData);
+
+                            UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
                         }
                         catch (Exception ex)
                         {
@@ -121,6 +123,15 @@ namespace GK_Antenna
             CurrentText.Text = $"{current:F1} A";
 
             CurrentBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
+        }
+
+        public void UpdateEsNoBoxUI(AntennaData antenna, MultiModeReceiverData mmr)
+        {
+            double esno = mmr.mmrCnrPower;
+
+            EsNoText.Text = $"{esno:F1} dB";
+
+            EsNoBox.Background = antenna.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
     }
 }

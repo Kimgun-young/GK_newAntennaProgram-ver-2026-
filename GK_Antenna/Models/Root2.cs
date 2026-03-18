@@ -9,5 +9,7 @@ namespace GK_Antenna.Models
     public class Root2
     {
         public AntennaData antennaData { get; set; }
+
+        public MultiModeReceiverData multiModeReceiverData { get; set; }
     }
 }
