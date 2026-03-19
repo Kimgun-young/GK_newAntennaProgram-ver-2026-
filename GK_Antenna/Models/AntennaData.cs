@@ -31,4 +31,32 @@ namespace GK_Antenna.Models
         public bool mmrUTSwitch { get; set; }
         public string mmrWorkMode { get; set; }
     }
+
+    public class ImuData
+    {
+        public double imuAngleX { get; set; }
+        public double imuAngleY { get; set; }
+        public double imuAngleZ { get; set; }
+        public double imuPitch { get; set; }
+        public double imuRoll { get; set; }
+        public string imuState { get; set; }
+        public double imuTemperature { get; set; }
+        public double imuYaw { get; set; }
+    }
+
+    public class RxArrayPanelData
+    {
+        public double directionGeographicPhi { get; set; }
+        public double directionGeographicPolarityAngle { get; set; }
+        public double directionGeographicTheta { get; set; }
+        public double directionPhi { get; set; }
+        public double directionPolarityAngle { get; set; }
+        public string directionPolarityType { get; set; }
+        public double directionRFFreq { get; set; }
+        public double directionTheta { get; set; }
+        public bool on { get; set; }
+        public List<double> panelElectricity { get; set; }
+        public List<double> panelTemperature { get; set; }
+        public List<double> panelVoltage { get; set; }
+    }
 }

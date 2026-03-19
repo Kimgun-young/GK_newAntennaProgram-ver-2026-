@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using GK_Antenna.Models;
 using Newtonsoft.Json;
 
@@ -21,6 +22,8 @@ namespace GK_Antenna
         {
             InitializeComponent();
             _ = StartWebSocket();
+            DrawCompass();
+            CreateNeedle();
         }
 
         public async Task StartWebSocket()
@@ -133,5 +136,130 @@ namespace GK_Antenna
 
             EsNoBox.Background = antenna.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
+
+        public void DrawCompass()
+        {
+            double centerX = 200;
+            double centerY = 200;
+            double radius = 180;
+
+            // 원
+            var circle = new Ellipse
+            {
+                Width = radius * 2,
+                Height = radius * 2,
+                Stroke = Brushes.Black,
+                StrokeThickness = 3,
+                Fill = Brushes.White
+            };
+
+            Canvas.SetLeft(circle, centerX - radius);
+            Canvas.SetTop(circle, centerY - radius);
+            CompassCanvas.Children.Add(circle);
+
+            // 10도 눈금 (36개)
+            for (int i = 0; i < 360; i += 10)
+            {
+                double angleRad = i * Math.PI / 180;
+
+                double inner = (i % 30 == 0) ? radius - 20 : radius - 10;
+                double outer = radius;
+
+                double x1 = centerX + inner * Math.Sin(angleRad);
+                double y1 = centerY - inner * Math.Cos(angleRad);
+
+                double x2 = centerX + outer * Math.Sin(angleRad);
+                double y2 = centerY - outer * Math.Cos(angleRad);
+
+                var tick = new Line
+                {
+                    X1 = x1,
+                    Y1 = y1,
+                    X2 = x2,
+                    Y2 = y2,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = (i % 30 == 0) ? 3 : 1
+                };
+
+                CompassCanvas.Children.Add(tick);
+            }
+
+            AddDirectionLabels(centerX, centerY, radius);
+        }
+
+        private void AddDirectionLabels(double centerX, double centerY, double radius)
+        {
+            double offset = 40;
+
+            AddDirection("N", centerX, centerY - radius + offset);
+            AddDirection("S", centerX, centerY + radius - offset);
+            AddDirection("E", centerX + radius - offset, centerY);
+            AddDirection("W", centerX - radius + offset, centerY);
+        }
+
+
+
+        private void AddDirection(string text, double x, double y)
+        {
+            var tb = new TextBlock
+            {
+                Text = text,
+                FontSize = 20,
+                FontWeight = FontWeights.Bold,
+                Foreground = Brushes.Black
+            };
+
+            tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            var size = tb.DesiredSize;
+
+            Canvas.SetLeft(tb, x - size.Width / 2);
+            Canvas.SetTop(tb, y - size.Height / 2);
+
+            CompassCanvas.Children.Add(tb);
+        }
+
+        private Polygon needleTop;
+        private Polygon needleBottom;
+        private RotateTransform needleRotate;
+
+        public void CreateNeedle()
+        {
+            needleTop = new Polygon
+            {
+                Points = new PointCollection
+        {
+            new Point(200, 100),  
+            new Point(185, 200),
+            new Point(215, 200)
+        },
+                Fill = Brushes.Red
+            };
+
+            needleBottom = new Polygon
+            {
+                Points = new PointCollection
+        {
+            new Point(200, 300),  
+            new Point(185, 200),
+            new Point(215, 200)
+        },
+                Fill = Brushes.Blue
+            };
+
+            needleRotate = new RotateTransform(0, 200, 200);
+
+            needleTop.RenderTransform = needleRotate;
+            needleBottom.RenderTransform = needleRotate;
+
+            CompassCanvas.Children.Add(needleTop);
+            CompassCanvas.Children.Add(needleBottom);
+        }
+
+        public void UpdateCompass(double azimuth)
+        {
+            needleRotate.Angle = azimuth;
+        }
+
+
     }
 }
