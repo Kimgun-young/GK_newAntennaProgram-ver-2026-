@@ -89,9 +89,150 @@
         <Canvas x:Name="CompassCanvas"
                 Width="400"
                 Height="400"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Margin="0,0,775,382"/>
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="738,307,0,0"/>
 
+        <TextBlock x:Name="AzimuthText"
+           Text="Azimuth: 0°"
+           Foreground="White"
+           FontSize="24"
+           FontWeight="Bold"
+           HorizontalAlignment="Right"
+           VerticalAlignment="Bottom"
+           Margin="0,0,880,284"/>
+
+        <Viewbox x:Name="AttitudeIndicatorGroup" Width="450" Height="450" 
+         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1207,302,0,0">
+            <Canvas Width="450" Height="450">
+
+                <Grid Canvas.Left="25" Canvas.Top="25" Width="400" Height="400">
+                    <Ellipse Stroke="Black" StrokeThickness="1" Fill="#1A1A1A"/>
+                    <Grid Margin="5">
+                        <Grid.Clip>
+                            <EllipseGeometry Center="195,195" RadiusX="195" RadiusY="195"/>
+                        </Grid.Clip>
+                        <Rectangle Fill="#2196F3" Height="195" VerticalAlignment="Top"/>
+                        <Rectangle Fill="#5D4037" Height="195" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </Grid>
+
+                <Polygon Points="-12,0 12,0 0,45" Fill="White" 
+                 Canvas.Left="225" Canvas.Top="30"/>
+
+                <Canvas IsHitTestVisible="False" Width="450" Height="450">
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-10"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-20"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-45"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="10"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="20"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="45"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-30"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-60"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="-90"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="30"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="60"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
+                        <Rectangle.RenderTransform>
+                            <RotateTransform Angle="90"/>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <TextBlock Text="10" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="249" Canvas.Top="6"/>
+                    <TextBlock Text="20" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="285" Canvas.Top="13"/>
+                    <TextBlock Text="30" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="318" Canvas.Top="30"/>
+                    <TextBlock Text="45" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="371" Canvas.Top="62"/>
+                    <TextBlock Text="60" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="401" Canvas.Top="109"/>
+                    <TextBlock Text="90" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="429" Canvas.Top="213"/>
+                </Canvas>
+
+                <Canvas x:Name="InnerRotatingCircle" Canvas.Left="75" Canvas.Top="75" Width="300" Height="300" RenderTransformOrigin="0.5,0.5">
+                    <Canvas.RenderTransform>
+                        <RotateTransform x:Name="RollTransform" Angle="0"/>
+                    </Canvas.RenderTransform>
+
+                    <Ellipse Width="300" Height="300" Stroke="Black" StrokeThickness="2" Fill="#1A1A1A"/>
+                    <Grid Width="300" Height="300">
+                        <Grid.Clip>
+                            <EllipseGeometry Center="150,150" RadiusX="148" RadiusY="148"/>
+                        </Grid.Clip>
+                        <Rectangle Height="150" Fill="#2196F3" VerticalAlignment="Top"/>
+                        <Rectangle Height="150" Fill="#5D4037" VerticalAlignment="Bottom"/>
+                        <Rectangle Height="3" Fill="White" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Polygon Points="-10,25 10,25 0,0" 
+                     Fill="Transparent" 
+                     Stroke="Orange" 
+                     StrokeThickness="3" 
+                     Canvas.Left="150" Canvas.Top="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                    <Path Data="M 110,150 L 145,150 L 145,160 M 155,160 L 155,150 L 190,150" 
+                  Stroke="Orange" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                </Canvas>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="435" VerticalAlignment="Top">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Margin="10">
+                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Margin="10">
+                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Canvas>
+        </Viewbox>
     </Grid>
 </Page>

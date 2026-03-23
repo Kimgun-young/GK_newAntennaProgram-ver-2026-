@@ -50,30 +50,39 @@ namespace GK_Antenna
 
                     string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
 
+                    // ⭐⭐⭐ 핵심 추가 부분 ⭐⭐⭐
                     Dispatcher.Invoke(() =>
                     {
                         try
                         {
                             var response = JsonConvert.DeserializeObject<Root2>(message);
 
-                            if (response?.antennaData == null)
+                            if (response?.antennaData == null || response?.imuData == null)
                                 return;
 
+                            // 상태 UI
                             UpdateConnectionBoxUI(response.antennaData);
-
                             UpdateTemperatureBoxUI(response.antennaData);
-
                             UpdateVoltageBoxUI(response.antennaData);
-
                             UpdateCurrentBoxUI(response.antennaData);
-
                             UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
+
+                            // 인공수평계
+                            UpdateAttitude(
+                                response.imuData.imuRoll,
+                                response.imuData.imuPitch,
+                                response.imuData.imuYaw
+                            );
+
+                            // 나침반 (Yaw)
+                            UpdateCompass(response.imuData.imuYaw);
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("파싱 에러: " + ex.Message);
                         }
                     });
+                    // ⭐⭐⭐ 여기까지 ⭐⭐⭐
                 }
             }
             catch (Exception ex)
@@ -82,10 +91,8 @@ namespace GK_Antenna
             }
         }
 
-        //원래배경 색깔(하늘색)
         private Brush DefaultBrush = new SolidColorBrush(
         (Color)ColorConverter.ConvertFromString("#5A78C9"));
-
 
         public void UpdateConnectionBoxUI(AntennaData data)
         {
@@ -104,36 +111,28 @@ namespace GK_Antenna
         public void UpdateTemperatureBoxUI(AntennaData data)
         {
             double temp = data.antennaTemperature;
-
             TemperatureText.Text = $"{temp:F1}°C";
-
             TemperatureBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
         public void UpdateVoltageBoxUI(AntennaData data)
         {
             double voltage = data.antennaVoltage;
-
             VoltageText.Text = $"{voltage:F1} V";
-
             VoltageBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
         public void UpdateCurrentBoxUI(AntennaData data)
         {
             double current = data.antennaElectricity;
-
             CurrentText.Text = $"{current:F1} A";
-
             CurrentBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
         public void UpdateEsNoBoxUI(AntennaData antenna, MultiModeReceiverData mmr)
         {
             double esno = mmr.mmrCnrPower;
-
             EsNoText.Text = $"{esno:F1} dB";
-
             EsNoBox.Background = antenna.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
@@ -143,7 +142,6 @@ namespace GK_Antenna
             double centerY = 200;
             double radius = 180;
 
-            // 원
             var circle = new Ellipse
             {
                 Width = radius * 2,
@@ -157,7 +155,6 @@ namespace GK_Antenna
             Canvas.SetTop(circle, centerY - radius);
             CompassCanvas.Children.Add(circle);
 
-            // 10도 눈금 (36개)
             for (int i = 0; i < 360; i += 10)
             {
                 double angleRad = i * Math.PI / 180;
@@ -197,8 +194,6 @@ namespace GK_Antenna
             AddDirection("W", centerX - radius + offset, centerY);
         }
 
-
-
         private void AddDirection(string text, double x, double y)
         {
             var tb = new TextBlock
@@ -227,22 +222,22 @@ namespace GK_Antenna
             needleTop = new Polygon
             {
                 Points = new PointCollection
-        {
-            new Point(200, 100),  
-            new Point(185, 200),
-            new Point(215, 200)
-        },
+                {
+                    new Point(200, 100),
+                    new Point(185, 200),
+                    new Point(215, 200)
+                },
                 Fill = Brushes.Red
             };
 
             needleBottom = new Polygon
             {
                 Points = new PointCollection
-        {
-            new Point(200, 300),  
-            new Point(185, 200),
-            new Point(215, 200)
-        },
+                {
+                    new Point(200, 300),
+                    new Point(185, 200),
+                    new Point(215, 200)
+                },
                 Fill = Brushes.Blue
             };
 
@@ -258,7 +253,26 @@ namespace GK_Antenna
         public void UpdateCompass(double azimuth)
         {
             needleRotate.Angle = azimuth;
+            AzimuthText.Text = $"Azimuth: {azimuth:F1}°";
         }
+
+        public void UpdateAttitude(double roll, double pitch, double yaw)
+        {
+            RollTransform.Angle = roll;
+
+            RollValueText.Text = $"{roll:F1}°";
+            PitchValueText.Text = $"{pitch:F1}°";
+            YawValueText.Text = $"{yaw:F1}°";
+
+        }
+
+        // 위에서 만든 메서드를 호출하는 래퍼 메서드 (기존 구조 유지)
+        public void UpdateAttitude(ImuData data)
+        {
+            if (data == null) return;
+            UpdateAttitude(data.imuRoll, data.imuPitch, data.imuYaw);
+        }
+
 
 
     }
