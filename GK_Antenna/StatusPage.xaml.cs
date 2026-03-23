@@ -258,12 +258,46 @@ namespace GK_Antenna
 
         public void UpdateAttitude(double roll, double pitch, double yaw)
         {
-            RollTransform.Angle = roll;
+            // 1. Roll (회전) 연동
+            if (RollTransform != null) RollTransform.Angle = roll;
 
-            RollValueText.Text = $"{roll:F1}°";
-            PitchValueText.Text = $"{pitch:F1}°";
-            YawValueText.Text = $"{yaw:F1}°";
+            // 2. Pitch (배경 및 수평선) 연동
+            if (SkyRect != null && GroundRect != null && HorizonLine != null)
+            {
+                // 눈금 일치: 10도 눈금이 중앙(150)에서 30px 떨어져 있으므로 1도당 3px 이동
+                double offset = pitch * 3;
 
+                if (pitch >= 30)
+                {
+                    // 30도 이상: 전체 하늘색 (단색)
+                    SkyRect.Height = 300;
+                    GroundRect.Height = 0;
+                    HorizonLine.Visibility = Visibility.Collapsed;
+                }
+                else if (pitch <= -30)
+                {
+                    // -30도 이하: 전체 땅색 (단색)
+                    SkyRect.Height = 0;
+                    GroundRect.Height = 300;
+                    HorizonLine.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    // 범위 내: 수평선이 눈금을 가리키며 배경 비율 조절
+                    double newSkyHeight = 150 + offset;
+                    SkyRect.Height = newSkyHeight;
+                    GroundRect.Height = 300 - newSkyHeight;
+
+                    // 수평선을 하늘/땅 경계선에 위치시킴
+                    Canvas.SetTop(HorizonLine, newSkyHeight - 1.5);
+                    HorizonLine.Visibility = Visibility.Visible;
+                }
+            }
+
+            // 3. 텍스트 정보 업데이트
+            if (RollValueText != null) RollValueText.Text = $"{roll:F1}°";
+            if (PitchValueText != null) PitchValueText.Text = $"{pitch:F1}°";
+            if (YawValueText != null) YawValueText.Text = $"{yaw:F1}°";
         }
 
         // 위에서 만든 메서드를 호출하는 래퍼 메서드 (기존 구조 유지)

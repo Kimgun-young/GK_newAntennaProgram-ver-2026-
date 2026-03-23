@@ -98,9 +98,9 @@
            Foreground="White"
            FontSize="24"
            FontWeight="Bold"
-           HorizontalAlignment="Right"
-           VerticalAlignment="Bottom"
-           Margin="0,0,880,284"/>
+           HorizontalAlignment="Center"
+           VerticalAlignment="Top"
+           Margin="0,776,0,0"/>
 
         <Viewbox x:Name="AttitudeIndicatorGroup" Width="450" Height="450" 
          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1207,302,0,0">
@@ -136,7 +136,6 @@
                             <RotateTransform Angle="-45"/>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-
                     <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
                         <Rectangle.RenderTransform>
                             <RotateTransform Angle="10"/>
@@ -198,36 +197,58 @@
                     </Canvas.RenderTransform>
 
                     <Ellipse Width="300" Height="300" Stroke="Black" StrokeThickness="2" Fill="#1A1A1A"/>
+
                     <Grid Width="300" Height="300">
                         <Grid.Clip>
                             <EllipseGeometry Center="150,150" RadiusX="148" RadiusY="148"/>
                         </Grid.Clip>
-                        <Rectangle Height="150" Fill="#2196F3" VerticalAlignment="Top"/>
-                        <Rectangle Height="150" Fill="#5D4037" VerticalAlignment="Bottom"/>
-                        <Rectangle Height="3" Fill="White" VerticalAlignment="Center"/>
+
+                        <StackPanel Orientation="Vertical">
+                            <Rectangle x:Name="SkyRect" Fill="#2196F3" Height="150"/>
+                            <Rectangle x:Name="GroundRect" Fill="#5D4037" Height="150"/>
+                        </StackPanel>
+
+                        <Canvas Width="300" Height="300">
+                            <Line X1="110" Y1="90" X2="190" Y2="90" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
+                            <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="85" Canvas.Top="82"/>
+                            <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="195" Canvas.Top="82"/>
+
+                            <Line X1="130" Y1="120" X2="170" Y2="120" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
+                            <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="105" Canvas.Top="112"/>
+                            <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="175" Canvas.Top="112"/>
+
+                            <Line X1="130" Y1="180" X2="170" Y2="180" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
+                            <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="105" Canvas.Top="172"/>
+                            <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="175" Canvas.Top="172"/>
+
+                            <Line X1="110" Y1="210" X2="190" Y2="210" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
+                            <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="85" Canvas.Top="202"/>
+                            <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="195" Canvas.Top="202"/>
+                        </Canvas>
+
+                        <Canvas Width="300" Height="300">
+                            <Rectangle x:Name="HorizonLine" Width="300" Height="3" Fill="White" Canvas.Top="148.5"/>
+                        </Canvas>
                     </Grid>
 
-                    <Polygon Points="-10,25 10,25 0,0" 
-                     Fill="Transparent" 
-                     Stroke="Orange" 
-                     StrokeThickness="3" 
-                     Canvas.Left="150" Canvas.Top="6" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Polygon Points="-10,25 10,25 0,0" Fill="Transparent" Stroke="Orange" StrokeThickness="3" 
+                     Canvas.Left="150" Canvas.Top="6"/>
 
-                    <Path Data="M 110,150 L 145,150 L 145,160 M 155,160 L 155,150 L 190,150" 
-                  Stroke="Orange" StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                    <Path Data="M 90,150 L 140,150 L 140,165 M 160,165 L 160,150 L 210,150" 
+                  Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 </Canvas>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="435" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="435">
                     <StackPanel Margin="10">
-                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
                         <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Margin="10">
-                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
                         <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel Margin="10">
-                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center"/>
+                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
                         <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
                     </StackPanel>
                 </StackPanel>
