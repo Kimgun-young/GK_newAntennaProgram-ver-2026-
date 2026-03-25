@@ -87,23 +87,23 @@
 
         <!-- 🔹 나침반 영역 -->
         <Canvas x:Name="CompassCanvas"
-                Width="400"
-                Height="400"
+                Width="352"
+                Height="368"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="738,307,0,0"/>
+                Margin="756,226,0,0"/>
 
         <TextBlock x:Name="AzimuthText"
            Text="Azimuth: 0°"
            Foreground="White"
            FontSize="24"
            FontWeight="Bold"
-           HorizontalAlignment="Center"
+           HorizontalAlignment="Left"
            VerticalAlignment="Top"
-           Margin="0,776,0,0"/>
+           Margin="867,632,0,0"/>
 
-        <Viewbox x:Name="AttitudeIndicatorGroup" Width="450" Height="450" 
-         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1207,302,0,0">
+        <Viewbox x:Name="AttitudeIndicatorGroup" Width="432" Height="432" 
+         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1172,204,0,0">
             <Canvas Width="450" Height="450">
 
                 <Grid Canvas.Left="25" Canvas.Top="25" Width="400" Height="400">
@@ -255,5 +255,62 @@
 
             </Canvas>
         </Viewbox>
+
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" 
+            Margin="1650,227,0,0" Width="250">
+
+            <TextBlock Text="Antenna Temp" Foreground="White" FontSize="14" 
+               FontWeight="Bold" Width="154" Height="30"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Grid Height="400" Width="70">
+                    <Rectangle Fill="White" Stroke="#555" StrokeThickness="1"/>
+                    <Rectangle x:Name="TempLevelBar" 
+                       Width="66" 
+                       Height="0" 
+                       VerticalAlignment="Bottom" 
+                       HorizontalAlignment="Center"
+                       Margin="2">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                <GradientStop Color="#2196F3" Offset="0.0"/>
+                                <GradientStop Color="#4CAF50" Offset="0.4"/>
+                                <GradientStop Color="#FFEB3B" Offset="0.7"/>
+                                <GradientStop Color="#F44336" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+
+                <Canvas Width="50" Height="400" Margin="5,0,0,0">
+                    <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
+                    <TextBlock Text="80" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-8"/>
+
+                    <Line X1="0" Y1="14.2" X2="7" Y2="14.2" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+
+                    <Line X1="0" Y1="57.1" X2="15" Y2="57.1" Stroke="White" StrokeThickness="2"/>
+                    <TextBlock Text="60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="49.1"/>
+
+                    <Line X1="0" Y1="100" X2="7" Y2="100" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+                    <Line X1="0" Y1="142.8" X2="7" Y2="142.8" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+                    <Line X1="0" Y1="185.7" X2="7" Y2="185.7" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+                    <Line X1="0" Y1="228.5" X2="15" Y2="228.5" Stroke="White" StrokeThickness="2"/>
+                    <TextBlock Text="0" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="220.5"/>
+
+                    <Line X1="0" Y1="271.4" X2="7" Y2="271.4" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+
+                    <Line X1="0" Y1="314.2" X2="15" Y2="314.2" Stroke="White" StrokeThickness="2"/>
+                    <TextBlock Text="-30" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="306.2"/>
+
+                    <Line X1="0" Y1="357.1" X2="7" Y2="357.1" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+
+                    <Line X1="0" Y1="400" X2="15" Y2="400" Stroke="White" StrokeThickness="2"/>
+                    <TextBlock Text="-60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="390"/>
+                </Canvas>
+            </StackPanel>
+
+            <TextBlock x:Name="TempValueText" Text="N/A" Foreground="Yellow" FontSize="22" 
+               FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>

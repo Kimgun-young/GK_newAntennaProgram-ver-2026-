@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using GK_Antenna.Models;
 using Newtonsoft.Json;
@@ -67,6 +68,7 @@ namespace GK_Antenna
                             UpdateCurrentBoxUI(response.antennaData);
                             UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
 
+
                             // 인공수평계
                             UpdateAttitude(
                                 response.imuData.imuRoll,
@@ -113,6 +115,7 @@ namespace GK_Antenna
             double temp = data.antennaTemperature;
             TemperatureText.Text = $"{temp:F1}°C";
             TemperatureBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
+            UpdateTemperatureGauge(temp);
         }
 
         public void UpdateVoltageBoxUI(AntennaData data)
@@ -307,7 +310,29 @@ namespace GK_Antenna
             UpdateAttitude(data.imuRoll, data.imuPitch, data.imuYaw);
         }
 
+        private void UpdateTemperatureGauge(double temp)
+        {
+            if (TempLevelBar == null) return;
 
+            TempValueText.Text = $"{temp:F1}°C";
+
+            const double minTemp = -60;
+            const double maxTemp = 80;
+            const double maxHeight = 400; // XAML 온도계 몸체 높이와 일치시킬 것
+
+            double clampedTemp = Math.Max(minTemp, Math.Min(maxTemp, temp));
+            double targetHeight = ((clampedTemp - minTemp) / (maxTemp - minTemp)) * maxHeight;
+
+            // 부드러운 움직임을 위한 애니메이션
+            DoubleAnimation anim = new DoubleAnimation
+            {
+                To = targetHeight,
+                Duration = TimeSpan.FromMilliseconds(300), // 웹소켓 주기가 빠르면 300ms 정도가 적당함
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            TempLevelBar.BeginAnimation(Rectangle.HeightProperty, anim);
+        }
 
     }
 }
