@@ -15,5 +15,7 @@ namespace GK_Antenna.Models
         public ImuData imuData { get; set; }
 
         public RxArrayPanelData rxArrayPanelData { get; set; }
+
+        public GnssData gnssData { get; set; }
     }
 }

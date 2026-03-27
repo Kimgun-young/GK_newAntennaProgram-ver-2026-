@@ -59,4 +59,14 @@ namespace GK_Antenna.Models
         public List<double> panelTemperature { get; set; }
         public List<double> panelVoltage { get; set; }
     }
+
+    public class GnssData
+    {
+        public double gpsAltitude { get; set; }
+        public double gpsLatitude { get; set; }
+        public double gpsLongitude { get; set; }
+        public double gpsSpeed { get; set; }
+        public long gpsTime { get; set; }
+        public int state { get; set; }
+    }
 }

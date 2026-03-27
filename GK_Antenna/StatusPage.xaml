@@ -256,18 +256,19 @@
             </Canvas>
         </Viewbox>
 
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" 
-            Margin="1650,227,0,0" Width="250">
+        <Grid x:Name="TempGaugeGroup" 
+      HorizontalAlignment="Left" 
+      VerticalAlignment="Top" 
+      Margin="1681,172,0,0" 
+      Background="Transparent" Height="461">
 
-            <TextBlock Text="Antenna Temp" Foreground="White" FontSize="14" 
-               FontWeight="Bold" Width="154" Height="30"/>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
                 <Grid Height="400" Width="70">
                     <Rectangle Fill="White" Stroke="#555" StrokeThickness="1"/>
+
                     <Rectangle x:Name="TempLevelBar" 
                        Width="66" 
-                       Height="0" 
+                       Height="150" 
                        VerticalAlignment="Bottom" 
                        HorizontalAlignment="Center"
                        Margin="2">
@@ -282,35 +283,709 @@
                     </Rectangle>
                 </Grid>
 
-                <Canvas Width="50" Height="400" Margin="5,0,0,0">
+                <Canvas Width="60" Height="400" Margin="5,0,0,0">
                     <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="80" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-8"/>
-
-                    <Line X1="0" Y1="14.2" X2="7" Y2="14.2" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+                    <TextBlock Text="80" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
 
                     <Line X1="0" Y1="57.1" X2="15" Y2="57.1" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="49.1"/>
+                    <TextBlock Text="60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="50"/>
 
-                    <Line X1="0" Y1="100" X2="7" Y2="100" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
-                    <Line X1="0" Y1="142.8" X2="7" Y2="142.8" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
-                    <Line X1="0" Y1="185.7" X2="7" Y2="185.7" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
                     <Line X1="0" Y1="228.5" X2="15" Y2="228.5" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="0" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="220.5"/>
-
-                    <Line X1="0" Y1="271.4" X2="7" Y2="271.4" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
-
-                    <Line X1="0" Y1="314.2" X2="15" Y2="314.2" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="-30" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="306.2"/>
-
-                    <Line X1="0" Y1="357.1" X2="7" Y2="357.1" Stroke="White" StrokeThickness="1" Opacity="0.6"/>
+                    <TextBlock Text="0" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="221"/>
 
                     <Line X1="0" Y1="400" X2="15" Y2="400" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="-60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="390"/>
+                    <TextBlock Text="-60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="392"/>
                 </Canvas>
             </StackPanel>
 
-            <TextBlock x:Name="TempValueText" Text="N/A" Foreground="Yellow" FontSize="22" 
-               FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,0"/>
-        </StackPanel>
+
+        </Grid>
+        
+        <TextBlock x:Name="TempValueText" 
+            Text="25.5°C" 
+            Foreground="Yellow" 
+            FontSize="22" 
+            FontWeight="Bold" 
+            HorizontalAlignment="Left" 
+            Margin="1683,606,0,0" 
+            VerticalAlignment="Top" RenderTransformOrigin="-0.318,3.315"/>
+
+        <Viewbox x:Name="SpeedometerViewbox" 
+                 Width="617" Height="417" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" 
+                 Margin="86,215,0,0">
+
+            <Border Background="White" CornerRadius="12" Padding="30" Width="550" Height="400">
+                <StackPanel Width="500">
+
+                    <Grid Width="450" Height="350" HorizontalAlignment="Center">
+                        <Canvas x:Name="SpeedometerCanvas" Margin="0,0,-1,3">
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-120"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-118"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-116"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-114"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-112"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-110"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-108"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-106"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-104"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-102"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-100"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-98"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-96"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-94"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-92"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-90"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-88"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-86"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-84"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-82"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-80"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-78"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-76"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-74"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-72"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-70"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-68"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-66"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-64"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-62"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-60"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-58"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-56"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-54"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-52"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-50"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-48"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-46"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-44"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-42"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-40"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-38"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-36"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-34"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-32"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-30"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-28"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-26"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-24"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-22"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-20"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-18"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-16"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-14"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-12"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-10"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-8"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-6"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-4"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="-2"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223" Canvas.Top="40" RenderTransformOrigin="0.5,6.4">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="0"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="2"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="4"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="6"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="8"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="10"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="12"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="14"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="16"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="18"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="20"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="22"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="24"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="26"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="28"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="30"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="32"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="34"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="36"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="38"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="40"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="42"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="44"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="46"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="48"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="50"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="52"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="54"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="56"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="58"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="60"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="62"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="64"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="66"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="68"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="70"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="72"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="74"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="76"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="78"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="80"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="82"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="84"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="86"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="88"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="90"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="92"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="94"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="96"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="98"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="100"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="102"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="104"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="106"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="108"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="110"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="112"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="114"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="116"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="#A0AEC0" Width="1" Height="8" Canvas.Left="224.5" Canvas.Top="40" RenderTransformOrigin="0.5,20">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="118"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform Angle="120"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <TextBlock Text="0" Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="108" Canvas.Top="258" RenderTransformOrigin="-16.171,1.216" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="94" Canvas.Top="211" RenderTransformOrigin="-16.171,1.216" HorizontalAlignment="Left" VerticalAlignment="Top" Text="20"/>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="94" Canvas.Top="167" RenderTransformOrigin="-16.171,1.216" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="ko-kr" Text="4"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="109" Canvas.Top="124" RenderTransformOrigin="-16.171,1.216" HorizontalAlignment="Center" VerticalAlignment="Top" Width="20"><Run Language="ko-kr" Text="6"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="138" Canvas.Top="90" RenderTransformOrigin="-16.171,1.216" Width="20" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="ko-kr" Text="8"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="167" Canvas.Top="70" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Language="ko-kr" Text="10"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="208" Canvas.Top="64" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="1"/><Run Language="ko-kr" Text="2"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="254" Canvas.Top="70" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="1"/><Run Language="ko-kr" Text="4"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="291" Canvas.Top="92" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="1"/><Run Language="ko-kr" Text="6"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="315" Canvas.Top="122" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="1"/><Run Language="ko-kr" Text="8"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="332" Canvas.Top="165" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Language="ko-kr" Text="20"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="332" Canvas.Top="211" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Left" VerticalAlignment="Center"><Run Text="2"/><Run Language="ko-kr" Text="2"/><Run Text="0"/></TextBlock>
+                            <TextBlock Foreground="Black" FontSize="16" FontWeight="Bold" Canvas.Left="315" Canvas.Top="257" RenderTransformOrigin="-16.171,1.216" Width="31" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="2"/><Run Language="ko-kr" Text="4"/><Run Text="0"/></TextBlock>
+
+                            <Rectangle x:Name="NeedleRect" 
+                               Width="4" Height="140" Fill="Red" 
+                               Canvas.Left="223" Canvas.Top="80"
+                               RenderTransformOrigin="0.5, 1.0">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform x:Name="NeedleRotation" Angle="-120"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+
+                            <Ellipse Width="24" Height="24" Fill="Black" 
+                             Canvas.Left="213" Canvas.Top="208"/>
+                            <TextBlock x:Name="speed" Text="0.0 km/h" Foreground="#2B6CB0" FontSize="32" 
+                           FontWeight="Bold" Canvas.Left="158" Canvas.Top="297"/>
+
+                        </Canvas>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+        </Viewbox>
+        
+        
+        
     </Grid>
 </Page>

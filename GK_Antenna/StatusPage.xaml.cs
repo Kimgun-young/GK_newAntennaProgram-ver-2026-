@@ -51,7 +51,6 @@ namespace GK_Antenna
 
                     string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
 
-                    // ⭐⭐⭐ 핵심 추가 부분 ⭐⭐⭐
                     Dispatcher.Invoke(() =>
                     {
                         try
@@ -67,6 +66,7 @@ namespace GK_Antenna
                             UpdateVoltageBoxUI(response.antennaData);
                             UpdateCurrentBoxUI(response.antennaData);
                             UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
+                            UpdateSpeedGauge(response.gnssData.gpsSpeed);
 
 
                             // 인공수평계
@@ -334,5 +334,30 @@ namespace GK_Antenna
             TempLevelBar.BeginAnimation(Rectangle.HeightProperty, anim);
         }
 
+        public void UpdateSpeedGauge(double speedValue)
+        {
+            // 1. 공식 적용: 220km/h일 때 100도, 240km/h일 때 120도가 나옵니다.
+            double targetAngle = speedValue - 120;
+
+            
+            if (targetAngle < -120) targetAngle = -120; // 0km/h일 때
+            if (targetAngle > 120) targetAngle = 120;   // 240km/h일 때
+
+            // 3. UI 스레드에서 업데이트 수행
+            Dispatcher.Invoke(() =>
+            {
+                // 바늘 회전 업데이트 (XAML의 RotateTransform 이름: NeedleRotation)
+                if (NeedleRotation != null)
+                {
+                    NeedleRotation.Angle = targetAngle;
+                }
+
+                // 디지털 수치 텍스트 업데이트 (TextBlock 이름: SpeedText)
+                if (speed != null)
+                {
+                    speed.Text = $"{speedValue:F1} km/h";
+                }
+            });
+        }
     }
 }
