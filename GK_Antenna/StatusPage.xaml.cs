@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using GK_Antenna.Models;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SkiaSharp;
+using WebSocketSharp;
+
 
 namespace GK_Antenna
 {
@@ -19,8 +32,40 @@ namespace GK_Antenna
     {
         private ClientWebSocket ws = new ClientWebSocket();
 
+        private DateTime _currentTime;
+
+        private static double _currentValue;
+
+        private ObservableCollection<double> _values;
+
+        private System.Timers.Timer _timer;
+
+        private ObservableCollection<string> _timeStamps = new ObservableCollection<string>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        public ObservableCollection<ISeries> Series { get; set; }
+
         public StatusPage()
         {
+            DataContext = this;
+            _currentTime = DateTime.Now;
+
+            // 초기 데이터 및 시리즈 설정
+            _values = new ObservableCollection<double> { _currentValue };
+            //선차트
+            Series = new ObservableCollection<ISeries>
+            {
+                new LineSeries<double> { Values = _values, Stroke = new SolidColorPaint(SKColors.DeepSkyBlue, 2), Fill = null, GeometryFill = null,
+                    GeometryStroke = null }
+            };
+
+            _timer = new System.Timers.Timer(1000);
+            _timer.Elapsed += UpdateData;
+
             InitializeComponent();
             _ = StartWebSocket();
             DrawCompass();
@@ -37,7 +82,7 @@ namespace GK_Antenna
 
                 var buffer = new byte[1024];
 
-                while (ws.State == WebSocketState.Open)
+                while (ws.State == System.Net.WebSockets.WebSocketState.Open)
                 {
                     var messageBuffer = new List<byte>();
                     WebSocketReceiveResult result;
@@ -68,7 +113,8 @@ namespace GK_Antenna
                             UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
                             UpdateSpeedGauge(response.gnssData.gpsSpeed);
 
-
+                            double cnrPower = response.multiModeReceiverData.mmrCnrPower;
+                            _currentValue = cnrPower;
                             // 인공수평계
                             UpdateAttitude(
                                 response.imuData.imuRoll,
@@ -78,13 +124,15 @@ namespace GK_Antenna
 
                             // 나침반 (Yaw)
                             UpdateCompass(response.imuData.imuYaw);
+
+                            _timer.Start();
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("파싱 에러: " + ex.Message);
                         }
                     });
-                    // ⭐⭐⭐ 여기까지 ⭐⭐⭐
+                    
                 }
             }
             catch (Exception ex)
@@ -359,5 +407,171 @@ namespace GK_Antenna
                 }
             });
         }
+
+        private WebSocketSharp.WebSocket ws2;
+
+        public async Task WebSocket2()
+        {
+
+
+            ws2 = new WebSocketSharp.WebSocket("ws://localhost:9999/wsMessage");
+
+            //ws.OnMessage;
+            ws2.OnMessage += amipMessage2;
+            ws2.Connect();
+            // Console.ReadKey(true);
+            await Task.Delay(Timeout.Infinite);
+
+
+        }
+
+        private void amipMessage2(object sender, MessageEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(delegate ()
+            {
+
+                //   string message = e.Data;
+                openlistbox.Items.Add(e.Data);
+
+
+
+            }));
+
+        }
+
+        private void amipClearDown(object sender, MouseEventArgs e)
+        {
+
+            openlistbox.Items.Clear();
+
+        }
+
+        public Axis[] XAxes { get; set; } =
+       {
+            new Axis
+            {
+
+                Labels = new string[] {"00:00"}, // 초기 레이블 예시
+                LabelsRotation = 20,
+            }
+        };
+
+        public Axis[] YAxes { get; set; } =
+        {
+            new Axis
+            {
+                MinLimit = null,
+                MaxLimit = null,
+                MinStep = 2,
+                ForceStepToMin = true,
+                Labeler = value => value.ToString("0"),
+                SeparatorsPaint = new SolidColorPaint
+                {
+                    Color = SKColors.LightGray, // 가로선 색상
+                    StrokeThickness = 1         // 두께
+                }
+            }
+        };
+
+        private void UpdateData(object sender, ElapsedEventArgs e)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                try
+                {
+
+                    _currentTime = _currentTime.AddSeconds(1);
+                    // _currentValue에 실시간 데이터 소스로부터의 값을 할당
+                    // _currentValue = GetRealTimeValue(); // 예: 센서 데이터 또는 외부 API 호출
+
+                    // 3초마다 values, timestamps 초기화
+                    if (_currentTime.Second % 40 == 0)
+                    {
+                        _values.Clear();
+                        _timeStamps.Clear();
+                    }
+
+
+                    // _currentValue 값을 그래프에 추가'
+                    _values.Add(_currentValue);
+                    _timeStamps.Add(_currentTime.ToString("HH:mm:ss"));
+                    // 오래된 데이터를 제거하여 일정 개수만 유지
+                    /*if (_values.Count > 15)
+                    {
+                        _values.RemoveAt(0);
+                    }*/
+
+                    UpdateChartLimits(_currentValue);
+
+                    OnPropertyChanged(nameof(Series));
+                    UpdateXAxes();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"예외 발생: {ex.Message}");
+                }
+            });
+        }
+
+        private void UpdateXAxes()
+        {
+            // XAxes의 Labels를 최신 시간 값으로 업데이트
+            XAxes[0].Labels = _timeStamps.ToArray();
+        }
+
+        private void UpdateChartLimits(double value)
+        {
+            double min;
+            double max;
+            double step;
+
+            if (value < 0)
+            {
+                if (value >= -100 && value <= -30)
+                {
+                    // -100 <= value <= -30 : 간격 10
+                    min = -100;
+                    step = 20;
+                }
+                else if (value < -100)
+                {
+                    // value < -100 : 간격 30
+                    min = value;
+                    step = 30;
+                }
+                else
+                {
+                    // -30 < value < 0 : 간격 5, 최소값 -30
+                    min = -30;
+                    step = 5;
+                }
+
+                max = 0; // 음수일 때 최대값 고정
+            }
+            else
+            {
+                step = 2;
+
+                if (value > 10)
+                {
+                    // value > 10 : 최소값 = value - 10, 최대값 = value
+                    min = value - 10;
+                    max = value;
+                }
+                else
+                {
+                    // 0 <= value <= 10 : 최소값 = 0, 최대값 = 10
+                    min = 0;
+                    max = 10;
+                }
+            }
+
+            // Y축 적용
+            YAxes[0].MinLimit = min;
+            YAxes[0].MaxLimit = max;
+            YAxes[0].MinStep = step;
+        }
+
+
     }
 }

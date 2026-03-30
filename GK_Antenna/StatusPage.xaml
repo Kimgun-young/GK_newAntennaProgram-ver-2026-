@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
       mc:Ignorable="d"
       d:DesignHeight="1080"
       d:DesignWidth="1920"
@@ -91,7 +92,7 @@
                 Height="368"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Margin="756,226,0,0"/>
+                Margin="756,218,0,0"/>
 
         <TextBlock x:Name="AzimuthText"
            Text="Azimuth: 0°"
@@ -100,7 +101,7 @@
            FontWeight="Bold"
            HorizontalAlignment="Left"
            VerticalAlignment="Top"
-           Margin="867,632,0,0"/>
+           Margin="867,608,0,0"/>
 
         <Viewbox x:Name="AttitudeIndicatorGroup" Width="432" Height="432" 
          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1172,204,0,0">
@@ -238,7 +239,7 @@
                   Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 </Canvas>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="435">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="431" VerticalAlignment="Top">
                     <StackPanel Margin="10">
                         <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
                         <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
@@ -300,7 +301,7 @@
 
 
         </Grid>
-        
+
         <TextBlock x:Name="TempValueText" 
             Text="25.5°C" 
             Foreground="Yellow" 
@@ -313,7 +314,7 @@
         <Viewbox x:Name="SpeedometerViewbox" 
                  Width="617" Height="417" 
                  HorizontalAlignment="Left" VerticalAlignment="Top" 
-                 Margin="86,215,0,0">
+                 Margin="86,203,0,0">
 
             <Border Background="White" CornerRadius="12" Padding="30" Width="550" Height="400">
                 <StackPanel Width="500">
@@ -984,8 +985,42 @@
                 </StackPanel>
             </Border>
         </Viewbox>
-        
-        
-        
+
+        <GroupBox x:Name="openAmip" 
+          Header="OpenAMIP Log" 
+          HorizontalAlignment="Left" 
+          VerticalAlignment="Top" 
+          Width="590" Height="330" 
+          Margin="79,677,0,0"
+          FontFamily="Hancom MalangMalang Bold" 
+          FontSize="20" 
+          Foreground="White">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <ListBox x:Name="openlistbox" 
+                 Grid.Row="1"
+                 Margin="5,0,5,5" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            </Grid>
+        </GroupBox>
+        <Label Grid.Row="0"
+            Content="Clear log" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top" 
+            Margin="0,651,1207,0" 
+            Foreground="#FF087DFF" 
+            FontSize="20" 
+            Cursor="Hand" 
+            PreviewMouseDown="amipClearDown"/>
+
+        <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="760,701,42,17"/>
+
     </Grid>
 </Page>
