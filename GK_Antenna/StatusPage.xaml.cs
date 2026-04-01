@@ -597,7 +597,7 @@ namespace GK_Antenna
         {
             try
             {
-                this.NavigationService.Navigate(new Uri("BeamSetting.xaml", UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("BeamSettingPage.xaml", UriKind.Relative));
             }
             catch (Exception ex)
             {
