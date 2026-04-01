@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Resources\logos\GK_logo.png" />
+    <None Remove="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\logos\GK_logo.png" />
+    <Resource Include="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
 </Project>

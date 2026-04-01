@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -572,6 +571,51 @@ namespace GK_Antenna
             YAxes[0].MinStep = step;
         }
 
+
+        private void TopBar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DropBar.Visibility = Visibility.Visible;
+        }
+
+        private void TopBar_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // 바로 사라지지 않게 약간 딜레이 느낌 필요하면 나중에 개선 가능
+            DropBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void DropBar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DropBar.Visibility = Visibility.Visible;
+        }
+
+        private void DropBar_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DropBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void BeamSettingText_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Uri("BeamSetting.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
+            }
+        }
+
+        private void StatusText_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Uri("StatusPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
+            }
+        }
 
     }
 }
