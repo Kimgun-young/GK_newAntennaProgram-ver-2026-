@@ -99,7 +99,7 @@ namespace GK_Antenna
                 StartWebServer();
                 await Task.Delay(1000);
 
-                ApiService api = new ApiService();
+                ApiService api = ApiService.Instance;
                 Root result = await api.Connect(ip, port);
 
                 bool isSuccess = result.code == 0 ||

@@ -351,8 +351,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border x:Name="radioButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <Grid x:Name="markGrid" Margin="2">
-                                    <Ellipse x:Name="optionMark" Fill="{StaticResource RadioButton.Static.Glyph}" MinWidth="6" MinHeight="6" Opacity="0"/>
+                                <Grid x:Name="markGrid" Margin="4">
+                                    <Ellipse x:Name="optionMark" Fill="{StaticResource RadioButton.Static.Glyph}" MinWidth="16" MinHeight="16" Opacity="0"/>
                                 </Grid>
                             </Border>
                             <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -432,8 +432,8 @@
         <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
         <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
 
-        <Label Content="Satellite Beam Configuration" HorizontalAlignment="Left" Margin="78,158,0,0" VerticalAlignment="Top" Height="76" Width="678" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
-        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1172,150,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
+        <Label Content="Satellite Beam Configuration" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top" Height="76" Width="678" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
+        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1170,177,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
 
         <Label Content="Working Mode:" HorizontalAlignment="Left" Margin="111,258,0,0" VerticalAlignment="Top" Height="58" Width="282" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
         <Label Content="Carrier Detect:" HorizontalAlignment="Left" Margin="103,337,0,0" VerticalAlignment="Top" Height="54" Width="290" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
@@ -449,7 +449,7 @@
         <TextBox x:Name="Roll" HorizontalAlignment="Left" Margin="406,426,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="Roll_TextChanged" BorderThickness="2" FontSize="24" />
         <Label x:Name="rollRed" HorizontalAlignment="Left" Margin="406,468,0,0" VerticalAlignment="Top" Height="34" Width="126" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
-        <Label Content="GPS Configuration" HorizontalAlignment="Left" Margin="90,487,0,0" VerticalAlignment="Top" Height="73" Width="446" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
+        <Label Content="GPS Configuration" HorizontalAlignment="Left" Margin="90,490,0,0" VerticalAlignment="Top" Height="73" Width="446" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
         <Label Content="GPS Mode:" HorizontalAlignment="Left" Margin="199,572,0,0" VerticalAlignment="Top" Height="54" Width="194" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
 
 
@@ -471,30 +471,156 @@
         <TextBox x:Name="ManualAlt" HorizontalAlignment="Left" Margin="406,820,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="ManualAlt_TextChanged" BorderThickness="2" FontSize="24"/>
         <Label x:Name="altRed" HorizontalAlignment="Left" Margin="408,864,0,0" VerticalAlignment="Top" Height="32" Width="183" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <Grid Margin="20">
             <UniformGrid Rows="1" Columns="5" Margin="0,80,0,0"></UniformGrid>
         </Grid>
+
+        <Label Content="Longitude (°) " HorizontalAlignment="Left" Margin="906,412,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="51" Width="179" FontSize="24"/>
+        <TextBox x:Name="longitude" HorizontalAlignment="Left" Margin="1089,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="230" FontFamily="Hancom MalangMalang Regular" TextChanged="autolongitude_TextChanged" MaxLength="20" FontSize="24" BorderThickness="2"/>
+
+        <Label Content="Sym. Rate (ksps)" HorizontalAlignment="Left" Margin="1368,412,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="49" Width="202"  FontSize="24"/>
+        <TextBox x:Name="sym" HorizontalAlignment="Left" Margin="1570,416,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" TextChanged="Autosym_TextChanged" MaxLength="20" FontSize="24" BorderThickness="2"/>
+        <Label x:Name="symRed" HorizontalAlignment="Left" Margin="1575,462,0,0" VerticalAlignment="Top" Height="30" FontSize="20" FontFamily="Hancom MalangMalang Regular" Foreground="#FFBB0000" Visibility="Visible" Width="120"/>
+
+
+
+
+        <Label Content="Tx__Freq (GHz)" HorizontalAlignment="Left" Margin="896,508,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="38" Width="175" RenderTransformOrigin="1.341,2.4" FontSize="24"/>
+        <TextBox x:Name="txfreq" HorizontalAlignment="Left" Margin="1089,508,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" TextChanged="TxFreq_TextChanged" MaxLength="20" FontSize="24" BorderThickness="2"/>
+
+
+        <Label Content="Tx__Pol" HorizontalAlignment="Left" Margin="985,593,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="42" Width="92" RenderTransformOrigin="-3.687,-4.792" FontSize="24"/>
+        <ComboBox x:Name="txpolType" Style="{DynamicResource ComboBoxStyle1}"  HorizontalAlignment="Left" Margin="1089,596,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" FontSize="24" BorderThickness="2"/>
+
+
+        <Label Content="Tx__LO (GHz)" HorizontalAlignment="Left" Margin="917,689,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="40" Width="160" FontSize="24"/>
+        <ComboBox x:Name="txlo" Style="{DynamicResource ComboBoxStyle1}"  HorizontalAlignment="Left" Margin="1089,687,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" SelectionChanged="autotxlo_SelectionChanged" FontSize="24" BorderThickness="2"/>
+        <TextBlock x:Name="txtextb" HorizontalAlignment="Left" Margin="1103,693,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" FontFamily="Hancom MalangMalang Regular" FontSize="24"/>
+
+
+        <Label Content="Rx__Freq (GHz)" HorizontalAlignment="Left" Margin="1380,508,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="38" Width="178" FontSize="24"/>
+        <TextBox x:Name="rxfreq" HorizontalAlignment="Left" Margin="1570,508,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="Hancom MalangMalang Regular" TextChanged="RxFreq_TextChanged" MaxLength="20" Height="42" BorderThickness="2" FontSize="24"/>
+
+
+        <Label Content="Rx__Pol" HorizontalAlignment="Left" Margin="1463,592,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="44" Width="95" FontSize="24" RenderTransformOrigin="1.46,0.541"/>
+        <ComboBox x:Name="rxpolType" Style="{DynamicResource ComboBoxStyle1}"  HorizontalAlignment="Left" Margin="1570,593,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" BorderThickness="2" FontSize="24"/>
+
+
+        <Label Content="Rx__LO (GHz)" HorizontalAlignment="Left" Margin="1399,681,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="44" Width="159" RenderTransformOrigin="0.683,0.508" FontSize="24" />
+        <ComboBox x:Name="Autorxlocb" Style="{DynamicResource ComboBoxStyle1}" HorizontalAlignment="Left" Margin="1570,682,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" SelectionChanged="autorxlo_SelectionChanged" FontSize="24" BorderThickness="2"/>
+        <TextBlock x:Name="rxtextb" HorizontalAlignment="Left" Margin="1581,689,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontFamily="Hancom MalangMalang Regular" FontSize="24" Height="30"/>
+        <TextBox x:Name="rxlo" HorizontalAlignment="Left" Margin="1230,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontFamily="Hancom MalangMalang Regular" TextChanged="RxLo_TextChanged" Visibility="Collapsed" MaxLength="20"  Grid.Row="1"/>
+        <Label x:Name="RxLORed" HorizontalAlignment="Left" Margin="1575,730,0,0" VerticalAlignment="Top" Height="29" FontSize="20" FontFamily="Hancom MalangMalang Regular" Foreground="#FFBB0000" Visibility="Visible" Width="155"/>
+
+
+
+        <RadioButton x:Name="autoRadio" Style="{DynamicResource RadioButtonStyle1}" Content="Auto Mode" HorizontalAlignment="Left" Margin="905,296,0,0" VerticalAlignment="Top" Checked="AutoMode_Checked" FontFamily="Hancom MalangMalang Regular" Height="39" Width="180" IsChecked="True" BorderBrush="#FF707070" FontSize="24"/>
+        <RadioButton x:Name="manualRadio" Style="{DynamicResource RadioButtonStyle1}" Content="Manual Mode" HorizontalAlignment="Left" Margin="1113,296,0,0" VerticalAlignment="Top" Checked="ManualMode_Checked" FontFamily="Hancom MalangMalang Regular" Height="39" Width="206" IsChecked="False" BorderBrush="#FF707070" FontSize="24"/>
+
+
+        <Grid x:Name="manualModeBox" Margin="798,166,-237,61" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="805*"/>
+                <ColumnDefinition Width="169*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle HorizontalAlignment="Left" Margin="-87,199,0,99" Width="1121" Fill="White" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.189"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="-0.747"/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+
+            <Rectangle HorizontalAlignment="Left" 
+               Margin="-48,215,0,115" 
+               Width="383" 
+               Fill="White" 
+               Stroke="Black" 
+               StrokeThickness="2" 
+               RenderTransformOrigin="0.5,0.5" />
+
+            <Rectangle HorizontalAlignment="Left" 
+               Margin="340,215,0,115" 
+               Width="694" 
+               Fill="White" 
+               Stroke="Black" 
+               StrokeThickness="2" 
+               RenderTransformOrigin="0.5,0.5" />
+
+            <Label Content="TX Beam" HorizontalAlignment="Left" Margin="82,192,0,0" VerticalAlignment="Top" FontFamily="Hancom Hoonminjeongeum_V" FontSize="36" FontWeight="Bold" Height="47" Width="156" Background="White"/>
+
+            <Label Content="Tx-Freq (GHz)" HorizontalAlignment="Left" Margin="-31,267,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="44" Width="183" FontSize="24"/>
+            <TextBox x:Name="manualtxfreq" HorizontalAlignment="Left" Margin="146,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="MTxFreq_TextChanged" FontSize="24" BorderThickness="2,2,2,2" Height="34"/>
+
+            <Label Content="Tx-LO(GHz)" HorizontalAlignment="Left" Margin="-9,341,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="43" Width="147" FontSize="24"/>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="manualtxlo" HorizontalAlignment="Left" Margin="146,345,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="Hancom MalangMalang Regular" FontSize="24" BorderThickness="2,2,2,1.8" />
+
+            <Label Content="Tx-Phi (°)" HorizontalAlignment="Left" Margin="23,417,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="43" Width="117" FontSize="24"/>
+            <TextBox x:Name="txphi" HorizontalAlignment="Left" Margin="146,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="Txphi_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2"/>
+
+            <Label Content="Tx-Theta (°)" HorizontalAlignment="Left" Margin="-6,490,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="44" Width="154" FontSize="24"/>
+            <TextBox x:Name="txtheta" HorizontalAlignment="Left" Margin="146,494,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="TxTheta_TextChanged" Height="34" BorderThickness="2,2,2,2" FontSize="24"/>
+
+            <Label x:Name="txtypelabel" Content="Pol-Type" HorizontalAlignment="Left" Margin="24,562,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="42" Width="116" Visibility="Visible" FontSize="24"/>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="txpolcb" HorizontalAlignment="Left" Margin="146,570,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="Hancom MalangMalang Regular" Visibility="Visible" FontSize="24" BorderThickness="2,2,2,2" />
+
+            <Label x:Name="mtxlabel" Content="Tx-Pol (°)" HorizontalAlignment="Left" Margin="24,650,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="41" Width="114" FontSize="24"/>
+            <TextBox x:Name="txpoltb" HorizontalAlignment="Left" Margin="146,653,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="TxPol_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2"/>
+
+
+            <Label Content="RX Beam" HorizontalAlignment="Left" Margin="612,192,0,0" VerticalAlignment="Top" FontFamily="Hancom Hoonminjeongeum_V" FontSize="36" FontWeight="Bold" Height="47" Width="156" Background="White"/>
+
+            <Label Content="Rx-Freq (GHz)" HorizontalAlignment="Left" Margin="371,278,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="38" Width="174" FontSize="24"/>
+            <TextBox x:Name="manualrxFreq" HorizontalAlignment="Left" Margin="552,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="MRxFreq_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2"/>
+
+            <Label Content="Sym. Rate (ksps)" HorizontalAlignment="Left" Margin="351,385,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="52" Width="200" FontSize="24"/>
+            <TextBox x:Name="manualsym" HorizontalAlignment="Left" Margin="551,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="MSym_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2"/>
+
+            <Label Content="Carrier Detect" HorizontalAlignment="Left" Margin="368,476,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="40" Width="180" FontSize="24"/>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="trackmode" HorizontalAlignment="Left" Margin="552,482,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="Hancom MalangMalang Regular" BorderThickness="2,2,2,2" FontSize="24" />
+
+            <Label Content="Rx-LO(GHz)" HorizontalAlignment="Left" Margin="394,576,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="43" Width="151" FontSize="24"/>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="rxlolist" HorizontalAlignment="Left" Margin="552,581,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="Hancom MalangMalang Regular" SelectionChanged="mrxlo_SelectionChanged" BorderThickness="2,2,2,2" FontSize="24" />
+
+            <Label Content="Rx-Phi (°)" HorizontalAlignment="Left" Margin="731,278,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="38" Width="120" FontSize="24"/>
+            <TextBox x:Name="rxphi" HorizontalAlignment="Left" Margin="851,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="Rxphi_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2"/>
+
+            <Label Content="Rx-Theta (°)" HorizontalAlignment="Left" Margin="731,387,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="42" Width="120" FontSize="24"/>
+            <TextBox x:Name="rxtheta" HorizontalAlignment="Left" Margin="851,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="RxTheta_TextChanged" Height="34" BorderThickness="2,2,2,2" FontSize="24"/>
+
+            <Label x:Name="mrxlabel" Content="Rx-Pol (°)" HorizontalAlignment="Left" Margin="734,477,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="39" Width="120" FontSize="24"/>
+            <TextBox x:Name="rxpoltb" HorizontalAlignment="Left" Margin="852,482,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="Hancom MalangMalang Regular" TextChanged="RxPol_TextChanged" FontSize="24" Height="34" BorderThickness="2,2,2,2"/>
+
+            <Label x:Name="rxtypelabel" Content="Pol-Type" HorizontalAlignment="Left" Margin="734,576,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Bold" Height="49" Width="114" Visibility="Visible" FontSize="24"/>
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="rxpolcb" HorizontalAlignment="Left" Margin="851,580,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="Hancom MalangMalang Regular" Visibility="Visible" FontSize="24" BorderThickness="2,2,2,2" />
+
+
+
+        </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
@@ -543,6 +669,10 @@
                 </Canvas>
             </Border>
         </Canvas>
+
+
+
+
 
 
     </Grid>

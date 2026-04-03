@@ -29,7 +29,6 @@ namespace GK_Antenna
 {
     public partial class StatusPage : Page
     {
-        private ClientWebSocket ws = new ClientWebSocket();
 
         private DateTime _currentTime;
 
@@ -37,9 +36,10 @@ namespace GK_Antenna
 
         private ObservableCollection<double> _values;
 
-        private System.Timers.Timer _timer;
 
         private ObservableCollection<string> _timeStamps = new ObservableCollection<string>();
+
+        private System.Timers.Timer _timer;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -54,8 +54,7 @@ namespace GK_Antenna
             _currentTime = DateTime.Now;
 
             // 초기 데이터 및 시리즈 설정
-            _values = new ObservableCollection<double> { _currentValue };
-            //선차트
+            _values = new ObservableCollection<double> { _currentValue };       
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<double> { Values = _values, Stroke = new SolidColorPaint(SKColors.DeepSkyBlue, 2), Fill = null, GeometryFill = null,
@@ -66,79 +65,43 @@ namespace GK_Antenna
             _timer.Elapsed += UpdateData;
 
             InitializeComponent();
-            _ = StartWebSocket();
             DrawCompass();
             CreateNeedle();
+
+            ApiService.Instance.OnDataReceived += HandleAntennaData;
+
+            _ = ApiService.Instance.StartWebSocket();
         }
 
-        public async Task StartWebSocket()
+        private void HandleAntennaData(Root2 response)
         {
-            try
+            // UI 스레드에서 실행
+            Dispatcher.Invoke(() =>
             {
-                await ws.ConnectAsync(new Uri("ws://localhost:9999/wsApi"), CancellationToken.None);
+                if (response?.antennaData == null) return;
 
-                MessageBox.Show("웹소켓 연결됨");
+                // 질문하신 UI 업데이트 메서드들을 여기서 호출
+                UpdateConnectionBoxUI(response.antennaData);
+                UpdateTemperatureBoxUI(response.antennaData);
+                UpdateVoltageBoxUI(response.antennaData);
+                UpdateCurrentBoxUI(response.antennaData);
+                UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
+                UpdateSpeedGauge(response.gnssData.gpsSpeed);
 
-                var buffer = new byte[1024];
+                _currentValue = response.multiModeReceiverData.mmrCnrPower;
 
-                while (ws.State == System.Net.WebSockets.WebSocketState.Open)
-                {
-                    var messageBuffer = new List<byte>();
-                    WebSocketReceiveResult result;
+                UpdateAttitude(
+                    response.imuData.imuRoll,
+                    response.imuData.imuPitch,
+                    response.imuData.imuYaw
+                );
 
-                    do
-                    {
-                        result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-                        messageBuffer.AddRange(buffer.Take(result.Count));
+                UpdateCompass(response.imuData.imuYaw);
 
-                    } while (!result.EndOfMessage);
-
-                    string message = Encoding.UTF8.GetString(messageBuffer.ToArray());
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        try
-                        {
-                            var response = JsonConvert.DeserializeObject<Root2>(message);
-
-                            if (response?.antennaData == null || response?.imuData == null)
-                                return;
-
-                            // 상태 UI
-                            UpdateConnectionBoxUI(response.antennaData);
-                            UpdateTemperatureBoxUI(response.antennaData);
-                            UpdateVoltageBoxUI(response.antennaData);
-                            UpdateCurrentBoxUI(response.antennaData);
-                            UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
-                            UpdateSpeedGauge(response.gnssData.gpsSpeed);
-
-                            double cnrPower = response.multiModeReceiverData.mmrCnrPower;
-                            _currentValue = cnrPower;
-                            // 인공수평계
-                            UpdateAttitude(
-                                response.imuData.imuRoll,
-                                response.imuData.imuPitch,
-                                response.imuData.imuYaw
-                            );
-
-                            // 나침반 (Yaw)
-                            UpdateCompass(response.imuData.imuYaw);
-
-                            _timer.Start();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("파싱 에러: " + ex.Message);
-                        }
-                    });
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("웹소켓 오류: " + ex.Message);
-            }
+                if (!_timer.Enabled) _timer.Start();
+            });
         }
+
 
         private Brush DefaultBrush = new SolidColorBrush(
         (Color)ColorConverter.ConvertFromString("#5A78C9"));
