@@ -17,5 +17,9 @@ namespace GK_Antenna.Models
         public RxArrayPanelData rxArrayPanelData { get; set; }
 
         public GnssData gnssData { get; set; }
+
+        public TxArrayPanelData txArrayPanelData { get; set; }
+
+        public FrequencyConverterData frequencyConverterData { get; set; }
     }
 }

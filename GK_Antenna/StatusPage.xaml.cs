@@ -71,6 +71,8 @@ namespace GK_Antenna
             ApiService.Instance.OnDataReceived += HandleAntennaData;
 
             _ = ApiService.Instance.StartWebSocket();
+
+        
         }
 
         private void HandleAntennaData(Root2 response)
@@ -370,6 +372,8 @@ namespace GK_Antenna
             });
         }
 
+       
+
         private WebSocketSharp.WebSocket ws2;
 
         public async Task WebSocket2()
@@ -561,6 +565,18 @@ namespace GK_Antenna
             try
             {
                 this.NavigationService.Navigate(new Uri("BeamSettingPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
+            }
+        }
+
+        private void IP_SettingText_Click(Object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Uri("IpSettingPage.xaml", UriKind.Relative));
             }
             catch (Exception ex)
             {

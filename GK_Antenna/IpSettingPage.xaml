@@ -1,0 +1,69 @@
+﻿<Page x:Class="GK_Antenna.IpSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GK_Antenna"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080"
+      d:DesignWidth="1920"
+      Background="#2C3E50"
+      Title="IpSettingPage">
+
+    <Grid>
+
+        <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
+
+        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
+
+
+        <Canvas VerticalAlignment="Top">
+            <Border x:Name="TopBar"
+             Background="#2C3E50"
+             Height="98"
+             Width="1920"
+             MouseEnter="TopBar_MouseEnter"
+             MouseLeave="TopBar_MouseLeave" HorizontalAlignment="Left" Canvas.Left="1" VerticalAlignment="Center">
+                <Image Source="/Resources/logos/white_GK_logo.png"
+            Stretch="Uniform"
+            Margin="38,1,1560,-11"/>
+            </Border>
+
+            <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="36" Canvas.Left="440" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="36" Canvas.Left="971" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="36" Canvas.Left="1316" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="36" Canvas.Left="1664" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <Border x:Name="DropBar"
+         Background="White"
+         Height="160"
+         Width="1920"
+         Canvas.Left="-20"
+         Canvas.Top="79" 
+         Visibility="Collapsed"
+         MouseEnter="DropBar_MouseEnter"
+         MouseLeave="DropBar_MouseLeave">
+
+                <Canvas>
+                    <StackPanel Canvas.Left="600" Canvas.Top="20">
+                        <TextBlock x:Name="StatusText"  Text="Status" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="StatusText_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="958" Canvas.Top="20">
+                        <TextBlock x:Name="BeamSettingText" Text="Beam Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click"/>
+                        <TextBlock x:Name="IP_SettingText" Text="IP Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="1340" Canvas.Top="20">
+                        <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="1662" Canvas.Top="20">
+                        <TextBlock Text="Company Info" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand"/>
+                    </StackPanel>
+                </Canvas>
+            </Border>
+        </Canvas>
+
+    </Grid>
+</Page>

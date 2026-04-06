@@ -69,4 +69,35 @@ namespace GK_Antenna.Models
         public long gpsTime { get; set; }
         public int state { get; set; }
     }
+
+    public class TxArrayPanelData
+    {
+        public double directionGeographicPhi { get; set; }
+        public double directionGeographicPolarityAngle { get; set; }
+        public double directionGeographicTheta { get; set; }
+        public double directionPhi { get; set; }
+        public double directionPolarityAngle { get; set; }
+        public string directionPolarityType { get; set; }
+        public double directionRFFreq { get; set; }
+        public double directionTheta { get; set; }
+        public bool on { get; set; }
+        public List<double> panelElectricity { get; set; }
+        public List<double> panelTemperature { get; set; }
+        public List<double> panelVoltage { get; set; }
+    }
+
+    public class FrequencyConverterData
+    {
+        public double fcElectricity { get; set; }
+        public double fcIFAmplitude { get; set; }
+        public double fcLockState { get; set; }
+        public double fcRFAmplitude { get; set; }
+        public double fcRxGain { get; set; }
+        public double fcRxOsc { get; set; }
+        public int fcState { get; set; }
+        public double fcTemperature { get; set; }
+        public double fcTxGain { get; set; }
+        public double fcTxOsc { get; set; }
+        public double fcVoltage { get; set; }
+    }
 }

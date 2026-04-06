@@ -29,8 +29,6 @@ namespace GK_Antenna.Models
         public string model { get; set; }
         public string serial { get; set; }
     }
-
-
     public class DeviceParamRange
     {
         public double phiMax { get; set; }
@@ -62,4 +60,6 @@ namespace GK_Antenna.Models
         public double txFreqMin { get; set; }
         public List<double> txOscList { get; set; }
     }
+
 }
+
