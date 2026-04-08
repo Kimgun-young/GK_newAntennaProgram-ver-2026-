@@ -1,42 +1,61 @@
-﻿<Page x:Class="GK_Antenna.MapPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GK_Antenna"
-        xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
-        mc:Ignorable="d"
-        d:DesignHeight="1080"
-        d:DesignWidth="1920"
-        Background="#2C3E50"
-        Title= "MapPage">
-
+﻿<Page x:Class="GK_Antenna.ComapnyInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GK_Antenna"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080"
+      d:DesignWidth="1920"
+      Background="#2C3E50"
+      Title="ComapnyInfoPage">
 
     <Grid>
         <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
         <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
 
-        <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
-              Margin="90,170,99,132" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
+        <Label Content="About" 
+           HorizontalAlignment="Left" 
+           Margin="97,221,0,0" 
+           VerticalAlignment="Top" 
+           Height="81" 
+           HorizontalContentAlignment="Center" 
+           VerticalContentAlignment="Center" 
+           FontFamily="Calibri Light" 
+           FontWeight="Bold" 
+           FontSize="48" 
+           Width="174" />
 
-        <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1420,957,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H"/>
+        <Image Source="/Resources/logos/GK_logo.png" 
+           Stretch="Uniform" Margin="234,233,960,479"/>
 
-        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="294,962,0,0" VerticalAlignment="Top" Height="37" Width="130" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H" RenderTransformOrigin="0.665,0.973"/>
-        <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="424,962,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="24" Width="85" FontFamily="Hancom Hoonminjeongeum_H"/>
-        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,962,0,0" VerticalAlignment="Top" Height="37" Width="107" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H"/>
-        <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="202,962,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="24" Width="87" FontFamily="Hancom Hoonminjeongeum_H"/>
+        <Image Source="/Resources/logos/Innobiz.png" 
+            Stretch="Uniform" Margin="1276,255,126,667"/>
+
+        <Image Source="/Resources/logos/Venture_Enterprise.png" 
+            Stretch="Uniform" Margin="1282,735,152,141"/>
+
+        <Image Source="/Resources/logos/AS9100D.png" 
+            Stretch="Uniform" Margin="1280,467,151,377"/>
+
+        <Label Content="GLOBAL KONET CO., LTD." HorizontalAlignment="Left" Margin="360,584,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KR" FontSize="30"/>
+        <Label Content="+82-31-388-8236, +82-31-1544-9874(International)" HorizontalAlignment="Left" Margin="170,733,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Noto Sans KR"/>
+        <Label Content="sales@globalkonet.com" HorizontalAlignment="Left" Margin="369,656,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Noto Sans KR"/>
+        <Label Content="V1.0.0" HorizontalAlignment="Left" Margin="777,513,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Height="60" Width="183" RenderTransformOrigin="0.12,-0.117"/>
+        <Label Content="Headquarters: 704, ACA 25, Simin-daero 248beon-gil, Dongangu, Anyang, Gyeonggi-do" HorizontalAlignment="Left" Margin="97,880,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KR" FontSize="24" Width="1044" FontWeight="Bold"/>
+        <Label Content="Factory: 901, ACA 25, Simin-daero 248beon-gil, Dongangu, Anyang, Gyeonggi-do" HorizontalAlignment="Left" Margin="97,944,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KRt" FontSize="24" Width="945" FontWeight="Bold"/>
 
 
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
-                     Background="#2C3E50"
-                     Height="98"
-                     Width="1920"
-                     MouseEnter="TopBar_MouseEnter"
-                     MouseLeave="TopBar_MouseLeave" HorizontalAlignment="Left" Canvas.Left="1" VerticalAlignment="Center">
+             Background="#2C3E50"
+             Height="98"
+             Width="1920"
+             MouseEnter="TopBar_MouseEnter"
+             MouseLeave="TopBar_MouseLeave" HorizontalAlignment="Left" Canvas.Left="1" VerticalAlignment="Center">
                 <Image Source="/Resources/logos/white_GK_logo.png"
-                    Stretch="Uniform"
-                    Margin="38,1,1560,-11"/>
+            Stretch="Uniform"
+            Margin="38,1,1560,-11"/>
             </Border>
 
             <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="36" Canvas.Left="440" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>

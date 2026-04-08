@@ -608,5 +608,17 @@ namespace GK_Antenna
             }
         }
 
+        private void CompanyInfoText_Click(System.Object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Uri("CompanyInfoPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
+            }
+        }
+
     }
 }

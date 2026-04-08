@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <None Remove="Resources\Icons\marker.png" />
+    <None Remove="Resources\logos\AS9100D.png" />
     <None Remove="Resources\logos\GK_logo.png" />
+    <None Remove="Resources\logos\Innobiz.png" />
+    <None Remove="Resources\logos\Venture_Enterprise.png" />
     <None Remove="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
@@ -24,7 +27,10 @@
 
   <ItemGroup>
     <Resource Include="Resources\Icons\marker.png" />
+    <Resource Include="Resources\logos\AS9100D.png" />
     <Resource Include="Resources\logos\GK_logo.png" />
+    <Resource Include="Resources\logos\Innobiz.png" />
+    <Resource Include="Resources\logos\Venture_Enterprise.png" />
     <Resource Include="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
