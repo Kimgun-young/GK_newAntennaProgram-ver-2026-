@@ -159,6 +159,18 @@ namespace GK_Antenna
             }
         }
 
+        private void MapText_Click(System.Object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.NavigationService.Navigate(new Uri("MapPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
+            }
+        }
+
 
         // Roll > RoF 변경 필요 
         private void Roll_TextChanged(object sender, TextChangedEventArgs e)
@@ -366,15 +378,28 @@ namespace GK_Antenna
                     string realData = rawdata.Replace("\\", "");
                     // Console.Write(realData);
                     Root3 realResponse = JsonConvert.DeserializeObject<Root3>(realData);
-                    if (realResponse.workMode == 0)
-                    {
-                        workMode.SelectedValue = "COTM";
-                    }
-                    else if (realResponse.workMode == 1)
-                    {
-                        workMode.SelectedValue = "OpenAMIP";
-                    }
 
+                    workMode.SelectedIndex = realResponse.workMode;
+
+                    AppSettings.WorkMode = realResponse.workMode.ToString();
+                    AppSettings.TrackMode = realResponse.trackMode.ToString();
+                    AppSettings.RollF = realResponse.rollFactor.ToString();
+                    AppSettings.MGPS = realResponse.manual_gps.ToString();
+
+                    AppSettings.MLong = realResponse.manual_longitude.ToString();
+                    AppSettings.MLat = realResponse.manual_latitude.ToString();
+                    AppSettings.MHeight = realResponse.manual_height.ToString();
+
+                    AppSettings.OpenHost = realResponse.openamipHost;
+                    AppSettings.OpenPort = realResponse.openamipPort.ToString();
+                    AppSettings.OpenMask = realResponse.openamipMask;
+
+                    AppSettings.ServerHost = realResponse.serverHost;
+                    AppSettings.ServerPort = realResponse.serverPort.ToString();
+                    AppSettings.ServerMask = realResponse.serverMask;
+
+
+                  
                     if (realResponse.trackMode == 0)
                     {
                         trackMode.SelectedValue = "DVB";
@@ -668,11 +693,11 @@ namespace GK_Antenna
 
         private void autolongitude_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (longRed != null)
+            if (autolongred != null)
             {
                 if (longitude.Text == "")
                 {
-                    longRed.Content = "No Value (°)";
+                    autolongred.Content = "No Value (°)";
                 }
                 else
                 {
@@ -681,12 +706,12 @@ namespace GK_Antenna
 
                     if (!isMatch)
                     {
-                        longRed.Content = "-180°~ 180°";
+                        autolongred.Content = "-180°~ 180°";
 
                     }
                     else
                     {
-                        longRed.Content = "";
+                        autolongred.Content = "";
                     }
 
 
@@ -1996,13 +2021,143 @@ namespace GK_Antenna
 
         }
 
-
-        public void setBtn_Click(object sender, RoutedEventArgs e)
+        private void setBtn_Click(object sender, RoutedEventArgs e)
         {
-            // 나중에 Systemm.xaml.cs의 SettingOK 메소드 삽입
+           
 
+            string workM;
+            string trackM;
+            string rollF = Roll.Text;
+            string mGPS;
+
+            
+
+            if (workMode.SelectedValue.ToString() == "COTM")
+                workM = "0";
+            else
+                workM = "1";
+
+            if (trackMode.SelectedValue.ToString() == "DVB")
+                trackM = "0";
+            else if (trackMode.SelectedValue.ToString() == "Detection")
+                trackM = "1";
+            else if (trackMode.SelectedValue.ToString() == "Beacon")
+                trackM = "2";
+            else
+                trackM = "3";
+
+            // GNSS
+            if (GNSSMode.SelectedValue.ToString() == "Auto")
+                mGPS = "0";
+            else
+                mGPS = "1";
+
+            AppSettings.WorkMode = workM;
+            AppSettings.TrackMode = trackM;
+            AppSettings.RollF = rollF;
+            AppSettings.MGPS = mGPS;
+
+            if (mGPS == "1")
+            {
+                AppSettings.MLong = manaulLong.Text;
+                AppSettings.MLat = ManualLat.Text;
+                AppSettings.MHeight = ManualAlt.Text;
+            }
+
+            string openHost = AppSettings.OpenHost;
+            string openPort = AppSettings.OpenPort;
+            string openMask = AppSettings.OpenMask;
+
+            string serverHost = AppSettings.ServerHost;
+            string serverPort = AppSettings.ServerPort;
+            string serverMask = AppSettings.ServerMask;
+
+            string url = "";
+
+            if (mGPS == "0") // Auto
+            {
+                url = "http://localhost:9999/api/executeCommand?commandCode=SetWorkParam&param={"
+                    + "workMode:" + workM
+                    + ",trackMode:" + trackM
+                    + ",rollFactor:" + rollF
+                    + ",manual_gps:0"
+                    + ",openamipHost:\"" + openHost + "\""
+                    + ",openamipPort:" + openPort
+                    + ",openamipMask:\"" + openMask + "\""
+                    + ",serverHost:\"" + serverHost + "\""
+                    + ",serverPort:" + serverPort
+                    + ",serverMask:\"" + serverMask + "\""
+                    + "}";
+            }
+            else // Manual
+            {
+                url = "http://localhost:9999/api/executeCommand?commandCode=SetWorkParam&param={"
+                    + "workMode:" + workM
+                    + ",trackMode:" + trackM
+                    + ",rollFactor:" + rollF
+                    + ",manual_longitude:" + AppSettings.MLong
+                    + ",manual_latitude:" + AppSettings.MLat
+                    + ",manual_height:" + AppSettings.MHeight
+                    + ",manual_gps:1"
+                    + ",openamipHost:\"" + openHost + "\""
+                    + ",openamipPort:" + openPort
+                    + ",openamipMask:\"" + openMask + "\""
+                    + ",serverHost:\"" + serverHost + "\""
+                    + ",serverPort:" + serverPort
+                    + ",serverMask:\"" + serverMask + "\""
+                    + "}";
+            }
+
+            Console.WriteLine(url);
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Method = "GET";
+                request.Timeout = 10000;
+
+                using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(res.GetResponseStream()))
+                {
+                    string response = reader.ReadToEnd();
+
+                    Root classRes = JsonConvert.DeserializeObject<Root>(response);
+
+                    if (classRes.code == 0)
+                        MessageBox.Show("Beam/GPS Setting Success");
+                    else
+                        MessageBox.Show("Beam/GPS Setting Failed");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Beam/GPS Setting Failed");
+                Console.WriteLine("에러: " + ex);
+            }
         }
 
+        private void ＷorkMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (workMode.SelectedItem != null)
+            {
+                string selected = workMode.SelectedItem.ToString();
+                UpdateWorkModeUI(selected);
+            }
+        }
+
+        void UpdateWorkModeUI(string mode)
+        {
+            bool isCOTM = mode == "COTM";
+
+            longitude.IsEnabled = isCOTM;
+            sym.IsEnabled = isCOTM;
+            txfreq.IsEnabled = isCOTM;
+            rxfreq.IsEnabled = isCOTM;
+            txpolType.IsEnabled = isCOTM;
+            rxpolType.IsEnabled = isCOTM;
+            txlo.IsEnabled = isCOTM;
+            Autorxlocb.IsEnabled = isCOTM;
+        }
     }
 }
 

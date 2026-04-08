@@ -13,8 +13,98 @@
     <Grid>
 
         <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
-
         <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
+
+        <Label Content="OpenAMIP Configuration" HorizontalAlignment="Left" Margin="556,209,0,0" VerticalAlignment="Top" Height="86" Width="606" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
+
+        <Label Content="OpenAMIP IP:" HorizontalAlignment="Left" Margin="138,375,0,0" VerticalAlignment="Top" Height="56" Width="224" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipIP" HorizontalAlignment="Left" Margin="392,382,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipIP_TextChanged" FontSize="24" BorderThickness="2,2,2,2"/>
+        <Label x:Name="amipIpRed" HorizontalAlignment="Left" Margin="395,429,0,0" VerticalAlignment="Top" Height="37" Width="162" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+        <Label Content="OpenAMIP Port:" HorizontalAlignment="Left" Margin="118,542,0,0" VerticalAlignment="Top" Height="47" Width="244" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipPort" HorizontalAlignment="Left" Margin="392,544,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="amipPortRed" HorizontalAlignment="Left" Margin="395,590,0,0" VerticalAlignment="Top" Height="33" Width="143" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+        <Label Content="OpenAMIP Mask:" HorizontalAlignment="Left" Margin="104,700,0,0" VerticalAlignment="Top" Height="54" Width="258" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipMask" HorizontalAlignment="Left" Margin="392,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="amipMaskRed" HorizontalAlignment="Left" Margin="395,753,0,0" VerticalAlignment="Top" Height="35" Width="158" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+        <Label Content="Antenna IP:" HorizontalAlignment="Left" Margin="932,364,0,0" VerticalAlignment="Top" Height="50" Width="202" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaIP" HorizontalAlignment="Left" Margin="1152,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaIP_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaIPRed" HorizontalAlignment="Left" Margin="1156,418,0,0" VerticalAlignment="Top" Height="36" Width="156" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+        <Label Content="Antenna Port:" HorizontalAlignment="Left" Margin="924,532,0,0" VerticalAlignment="Top" Height="48" Width="210" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaPort" HorizontalAlignment="Left" Margin="1152,534,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaPortRed" HorizontalAlignment="Left" Margin="1156,580,0,0" VerticalAlignment="Top" Height="38" Width="178" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+
+        <Label Content="Antenna Mask:" HorizontalAlignment="Left" Margin="910,690,0,0" VerticalAlignment="Top" Height="46" Width="224" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaMask" HorizontalAlignment="Left" Margin="1152,692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,738,0,0" VerticalAlignment="Top" Height="32" Width="196" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+        <Button x:Name="AMIP_SettingBtn" 
+            Content="AMIP Setting"  
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="754,851,0,0" 
+            Width="342" 
+            Height="78" 
+            Background="#FF007CFA" 
+            Foreground="White" 
+            BorderBrush="{x:Null}" 
+            FontFamily="Hancom MalangMalang Bold" 
+            FontSize="24" 
+            Click="OpenAmipSetting_Click"/>
+
+        <Button x:Name="RestartBtn" 
+            Content="Antenna Restart" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="263,851,0,0" 
+            Width="342" 
+            Height="78" 
+            Background="#FF9E0000" 
+            Foreground="White" 
+            BorderBrush="{x:Null}" 
+            FontFamily="Hancom MalangMalang Regular" 
+            FontSize="24" 
+            Click="RestartBtn_Click"/>
+
+        <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="191,946,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Regular" FontSize="20"/>
+
+        <Button x:Name="DisconnectBtn" 
+            Content="Disconnect" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="1234,851,0,0" 
+            Width="342" 
+            Height="78" 
+            Background="Black" 
+            Foreground="White" 
+            BorderBrush="{x:Null}" 
+            FontFamily="Hancom MalangMalang Regular" 
+            FontSize="24" 
+            Click="DisconnectBtn_Click"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <Canvas VerticalAlignment="Top">
@@ -32,7 +122,7 @@
             <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="36" Canvas.Left="440" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="36" Canvas.Left="971" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="36" Canvas.Left="1316" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="36" Canvas.Left="1664" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarAbout" Text="About" Foreground="White" FontSize="36" Canvas.Left="1664" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
             <Border x:Name="DropBar"
          Background="White"
@@ -55,7 +145,7 @@
                     </StackPanel>
 
                     <StackPanel Canvas.Left="1340" Canvas.Top="20">
-                        <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand"/>
+                        <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="MapText_Click"/>
                     </StackPanel>
 
                     <StackPanel Canvas.Left="1662" Canvas.Top="20">

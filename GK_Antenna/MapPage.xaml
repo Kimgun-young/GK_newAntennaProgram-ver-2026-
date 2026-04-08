@@ -1,0 +1,79 @@
+﻿<Page x:Class="GK_Antenna.MapPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GK_Antenna"
+        xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        mc:Ignorable="d"
+        d:DesignHeight="1080"
+        d:DesignWidth="1920"
+        Background="#2C3E50"
+        Title= "MapPage">
+
+
+    <Grid>
+        <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
+        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
+
+        <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
+              Margin="90,170,99,132" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
+
+        <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1420,957,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H"/>
+
+        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="294,962,0,0" VerticalAlignment="Top" Height="37" Width="130" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H" RenderTransformOrigin="0.665,0.973"/>
+        <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="424,962,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="24" Width="85" FontFamily="Hancom Hoonminjeongeum_H"/>
+        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,962,0,0" VerticalAlignment="Top" Height="37" Width="107" FontSize="24" FontFamily="Hancom Hoonminjeongeum_H"/>
+        <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="202,962,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="24" Width="87" FontFamily="Hancom Hoonminjeongeum_H"/>
+
+
+        <Canvas VerticalAlignment="Top">
+            <Border x:Name="TopBar"
+                     Background="#2C3E50"
+                     Height="98"
+                     Width="1920"
+                     MouseEnter="TopBar_MouseEnter"
+                     MouseLeave="TopBar_MouseLeave" HorizontalAlignment="Left" Canvas.Left="1" VerticalAlignment="Center">
+                <Image Source="/Resources/logos/white_GK_logo.png"
+                    Stretch="Uniform"
+                    Margin="38,1,1560,-11"/>
+            </Border>
+
+            <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="36" Canvas.Left="440" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="36" Canvas.Left="971" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="36" Canvas.Left="1316" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="36" Canvas.Left="1664" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <Border x:Name="DropBar"
+                 Background="White"
+                 Height="160"
+                 Width="1920"
+                 Canvas.Left="-20"
+                 Canvas.Top="79" 
+                 Visibility="Collapsed"
+                 MouseEnter="DropBar_MouseEnter"
+                 MouseLeave="DropBar_MouseLeave">
+
+                <Canvas>
+                    <StackPanel Canvas.Left="600" Canvas.Top="20">
+                        <TextBlock x:Name="StatusText"  Text="Status" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="StatusText_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="958" Canvas.Top="20">
+                        <TextBlock x:Name="BeamSettingText" Text="Beam Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click"/>
+                        <TextBlock x:Name="IP_SettingText" Text="IP Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="1340" Canvas.Top="20">
+                        <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="MapText_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Canvas.Left="1662" Canvas.Top="20">
+                        <TextBlock Text="Company Info" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand"/>
+                    </StackPanel>
+                </Canvas>
+            </Border>
+        </Canvas>
+
+    </Grid>
+</Page>

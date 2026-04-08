@@ -9,17 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\marker.png" />
     <None Remove="Resources\logos\GK_logo.png" />
     <None Remove="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="GMap.NET.Core" Version="2.1.7" />
+    <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.7" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\marker.png" />
     <Resource Include="Resources\logos\GK_logo.png" />
     <Resource Include="Resources\logos\white_gk_logo.png" />
   </ItemGroup>

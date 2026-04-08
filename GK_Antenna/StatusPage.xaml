@@ -140,7 +140,7 @@
                         </StackPanel>
 
                         <StackPanel Canvas.Left="1340" Canvas.Top="20">
-                            <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand"/>
+                            <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="MapText_Click"/>
                         </StackPanel>
 
                         <StackPanel Canvas.Left="1662" Canvas.Top="20">
