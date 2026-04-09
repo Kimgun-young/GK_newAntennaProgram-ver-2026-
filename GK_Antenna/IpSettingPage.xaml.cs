@@ -54,63 +54,35 @@ namespace GK_Antenna
 
         private void BeamSettingText_Click(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                this.NavigationService.Navigate(new Uri("BeamSettingPage.xaml", UriKind.Relative));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
-            }
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new BeamSettingPage();
         }
 
         private void IP_SettingText_Click(Object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                this.NavigationService.Navigate(new Uri("IpSettingPage.xaml", UriKind.Relative));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
-            }
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new IpSettingPage();
         }
 
         private void StatusText_Click(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                this.NavigationService.Navigate(new Uri("StatusPage.xaml", UriKind.Relative));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
-            }
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new StatusPage();
+
         }
 
         private void MapText_Click(System.Object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                this.NavigationService.Navigate(new Uri("MapPage.xaml", UriKind.Relative));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
-            }
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new MapPage();
         }
 
         private void CompanyInfoText_Click(System.Object sender, MouseButtonEventArgs e)
         {
-            try
-            {
-                this.NavigationService.Navigate(new Uri("CompanyInfoPage.xaml", UriKind.Relative));
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("페이지 이동 오류: " + ex.Message);
-            }
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new CompanyInfoPage();
         }
+
 
         private void GetWorkMode()
         {
