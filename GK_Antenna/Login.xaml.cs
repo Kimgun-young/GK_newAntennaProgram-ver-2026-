@@ -111,6 +111,8 @@ namespace GK_Antenna
                         ? "Already Connected"
                         : "Connection Success");
 
+                    _ = ApiService.Instance.StartWebSocket();
+
                     NavigationService?.Navigate(new StatusPage());
                 }
                 else

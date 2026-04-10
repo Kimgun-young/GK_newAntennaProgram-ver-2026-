@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,79 +23,93 @@ using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using WebSocketSharp;
 
-
 namespace GK_Antenna
 {
-    public partial class StatusPage : Page
+    public partial class StatusPage : Page, INotifyPropertyChanged
     {
-
         private DateTime _currentTime;
-
         private static double _currentValue;
-
         private ObservableCollection<double> _values;
-
-
         private ObservableCollection<string> _timeStamps = new ObservableCollection<string>();
-
         private System.Timers.Timer _timer;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public ObservableCollection<ISeries> Series { get; set; }
 
-        public StatusPage()
+        // 1. 매개변수 없는 기본 생성자 (MainWindow에서 호출할 때 대비)
+        public StatusPage() : this(true) { }
+
+        // 2. 핵심 생성자: 페이지 이동 시 호출됨
+        public StatusPage(bool isConnect)
         {
+            InitializeComponent(); // UI 요소 초기화 (가장 먼저)
             DataContext = this;
             _currentTime = DateTime.Now;
 
-            // 초기 데이터 및 시리즈 설정
-            _values = new ObservableCollection<double> { _currentValue };       
+            // 그래프 시리즈 초기 설정
+            _values = new ObservableCollection<double> { _currentValue };
             Series = new ObservableCollection<ISeries>
             {
-                new LineSeries<double> { Values = _values, Stroke = new SolidColorPaint(SKColors.DeepSkyBlue, 2), Fill = null, GeometryFill = null,
-                    GeometryStroke = null }
+                new LineSeries<double> {
+                    Values = _values,
+                    Stroke = new SolidColorPaint(SKColors.DeepSkyBlue, 2),
+                    Fill = null,
+                    GeometryFill = null,
+                    GeometryStroke = null
+                }
             };
 
+            // 타이머 초기 설정 (1초 간격)
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += UpdateData;
 
-            InitializeComponent();
+            // 나침반 및 바늘 생성 로직
             DrawCompass();
             CreateNeedle();
 
+           
+
+            // 연결 상태일 때 즉시 기동 로직
+            if (isConnect)
+            {
+                ApiService.Instance.StartWebSocket();
+
+                if (!_timer.Enabled) _timer.Start();
+
+                
+            }
+
+            this.Loaded += StatusPage_Loaded;
+
+        }
+
+        private void StatusPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // 이벤트 재등록
             ApiService.Instance.OnDataReceived -= HandleAntennaData;
             ApiService.Instance.OnDataReceived += HandleAntennaData;
 
-            _ = ApiService.Instance.StartWebSocket();
-
-            this.Unloaded += StatusPage_Unloaded;
-        }
-        private void StatusPage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            ApiService.Instance.OnDataReceived -= HandleAntennaData;
-
-            if (_timer != null)
+            // ⭐ 마지막 데이터 즉시 반영
+            if (ApiService.Instance.CurrentData != null)
             {
-                _timer.Stop();
-                _timer.Dispose();
+                HandleAntennaData(ApiService.Instance.CurrentData);
             }
 
-            Debug.WriteLine("Unloaded 호출됨: " + this.GetHashCode());
+            // 타이머 재시작
+            if (_timer != null && !_timer.Enabled)
+                _timer.Start();
         }
-       
 
         private void HandleAntennaData(Root2 response)
         {
-            // UI 스레드에서 실행
+            // 수신된 데이터를 UI 스레드에서 업데이트
             Dispatcher.Invoke(() =>
             {
                 if (response?.antennaData == null) return;
 
-                // 질문하신 UI 업데이트 메서드들을 여기서 호출
                 UpdateConnectionBoxUI(response.antennaData);
                 UpdateTemperatureBoxUI(response.antennaData);
                 UpdateVoltageBoxUI(response.antennaData);
@@ -114,6 +127,7 @@ namespace GK_Antenna
 
                 UpdateCompass(response.imuData.imuYaw);
 
+                // 만약 타이머가 멈춰있다면 다시 시작
                 if (!_timer.Enabled) _timer.Start();
             });
         }

@@ -92,9 +92,11 @@ namespace GK_Antenna
             GetDeviceQuery();
 
             GetBeamQuery();
+
+            ApiService.Instance.OnDataReceived += UpdateUI;
+
             isGetAutoParam = true;
 
-            StartWebSocket();
 
             _RxPolarValues = new ObservableCollection<ObservablePolarPoint>();
 
@@ -139,7 +141,7 @@ namespace GK_Antenna
         {
             MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             main.fr.Content = new StatusPage();
-        
+
         }
 
         private void MapText_Click(System.Object sender, MouseButtonEventArgs e)
@@ -382,7 +384,7 @@ namespace GK_Antenna
                     AppSettings.ServerMask = realResponse.serverMask;
 
 
-                  
+
                     if (realResponse.trackMode == 0)
                     {
                         trackMode.SelectedValue = "DVB";
@@ -576,102 +578,157 @@ namespace GK_Antenna
 
         private void GetBeamQuery()
         {
-
-            string disconnectApiUrl = "http://localhost:9999/api/executeCommand?commandCode=QueryBeamParam&param={}";
-
-            string response = "";
-            //localhost:9999 고정
+            string url = "http://localhost:9999/api/executeCommand?commandCode=QueryBeamParam&param={}";
 
             try
             {
-                // request setting
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
+                string result = "";
+
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
-                    HttpStatusCode status = res.StatusCode;
-                    Stream response_stream = res.GetResponseStream();
-                    using (StreamReader read_stream = new StreamReader(response_stream))
+                    using (StreamReader reader = new StreamReader(res.GetResponseStream()))
                     {
-                        response = read_stream.ReadToEnd();
+                        result = reader.ReadToEnd();
                     }
                 }
 
+                Root classRes = JsonConvert.DeserializeObject<Root>(result);
 
-                //  Console.WriteLine(response);
-                Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
-                if (classRes.code == 0)
+                if (classRes.code != 0)
+                    return;
+
+                string rawdata = classRes.data;
+                string realData = rawdata.Replace("\\", "");
+
+                Root4 BeamResponse = JsonConvert.DeserializeObject<Root4>(realData);
+
+                _txPhiValue = BeamResponse.tx_phi;
+                _txThetaValue = BeamResponse.tx_theta;
+
+                _rxPhiValue = BeamResponse.rx_phi;
+                _rxThetaValue = BeamResponse.rx_theta;
+
+                Dispatcher.Invoke(() =>
                 {
-                    //연결성공
-                    Console.WriteLine("beamQuery연결성공");
-                    string rawdata = classRes.data;
-                    string realData = rawdata.Replace("\\", "");
-
-                    Root4 BeamResponse = JsonConvert.DeserializeObject<Root4>(realData);
-
-                    _txPhiValue = BeamResponse.tx_phi;
-                    _txThetaValue = BeamResponse.tx_theta;
-                    _rxPhiValue = BeamResponse.rx_phi;
-                    _rxThetaValue = BeamResponse.rx_theta;
-
-                    //오토모드
                     longitude.Text = BeamResponse.sat_longitude.ToString();
-
-
-                    /* sym.Text = BeamResponse.sym.ToString();
-                     txfreq.Text = BeamResponse.tx_freq.ToString();
-                     rxfreq.Text = BeamResponse.rx_freq.ToString();
-                     txpolType.Text = BeamResponse.tx_polarity_type;
-                     rxpolType.Text = BeamResponse.rx_polarity_type;
-                     txlo.Text = BeamResponse.tx_osc.ToString();
-                     rxlo.Text = BeamResponse.rx_osc.ToString();
-
-
-                     //매뉴얼모드
-                     manualrxFreq.Text = BeamResponse.rx_freq.ToString();
-                     manualsym.Text = BeamResponse.sym.ToString();
-                     trackmode.Text = BeamResponse.workMode;
-                     //rxlolist.Text = BeamResponse.rx_osc.ToString();
-                     mrxloblock.Text = BeamResponse.rx_osc.ToString();
-                     rxphi.Text = BeamResponse.rx_phi.ToString();
-                     rxtheta.Text = BeamResponse.rx_theta.ToString();
-                     rxpoltb.Text = BeamResponse.rx_pol.ToString();
-                     rxpolcb.Text = BeamResponse.rx_polarity_type;
-
-                     manualtxfreq.Text = BeamResponse.tx_freq.ToString();
-                     manualtxlo.Text = BeamResponse.tx_osc.ToString();
-                     txphi.Text = BeamResponse.tx_phi.ToString();
-                     txtheta.Text = BeamResponse.tx_theta.ToString();
-                     txpoltb.Text = BeamResponse.tx_pol.ToString();
-                     txpolcb.Text = BeamResponse.tx_polarity_type;
-
-
- */
-
-
-
-                }
-                else if (classRes.code == -1)
-                {
-                    //연결실패(disconnected)
-                    // Console.WriteLine("연결실패");
-
-
-
-                }
-
+                });
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine("에러 " + ex);
+                Console.WriteLine("GetBeamQuery 에러: " + ex.Message);
             }
-
         }
+
+        private void UpdateUI(Root2 response)
+        {
+            if (response == null) return;
+
+            Dispatcher.Invoke(() =>
+            {
+                try
+                {
+                    // =========================
+                    // 🔥 TX / RX 상태
+                    // =========================
+                    if (response.antennaData?.antennaTxRfState == "ON")
+                    {
+                        txOn.Visibility = Visibility.Visible;
+                        txOff.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        txOn.Visibility = Visibility.Hidden;
+                        txOff.Visibility = Visibility.Visible;
+                    }
+
+                    if (response.antennaData?.antennaRxRfState == "ON")
+                    {
+                        rxOn.Visibility = Visibility.Visible;
+                        rxOff.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        rxOn.Visibility = Visibility.Hidden;
+                        rxOff.Visibility = Visibility.Visible;
+                    }
+
+                    // =========================
+                    // 🔥 Auto Mode
+                    // =========================
+                    if (isGetAutoParam)
+                    {
+                        sym.Text = response.multiModeReceiverData?.mmrSym.ToString();
+
+                        txfreq.Text = response.txArrayPanelData?.directionRFFreq.ToString();
+                        rxfreq.Text = response.rxArrayPanelData?.directionRFFreq.ToString();
+
+                        txpolType.SelectedItem = response.txArrayPanelData?.directionPolarityType;
+                        rxpolType.SelectedItem = response.rxArrayPanelData?.directionPolarityType;
+
+                        txlo.SelectedItem = response.frequencyConverterData?.fcTxOsc;
+                        Autorxlocb.SelectedItem = response.frequencyConverterData?.fcRxOsc;
+
+                        txtextb.Text = response.frequencyConverterData?.fcTxOsc.ToString();
+                        rxtextb.Text = response.frequencyConverterData?.fcRxOsc.ToString();
+
+                        isGetAutoParam = false;
+                    }
+
+                    // =========================
+                    // 🔥 Manual Mode
+                    // =========================
+                    if (isGetManualParam)
+                    {
+                        manualrxFreq.Text = response.rxArrayPanelData?.directionRFFreq.ToString();
+                        manualsym.Text = response.multiModeReceiverData?.mmrSym.ToString();
+
+                        trackmode.Text = response.multiModeReceiverData?.mmrWorkMode ?? "DVB";
+
+                        mrxloblock.Text = response.frequencyConverterData?.fcRxOsc.ToString();
+
+                        rxphi.Text = response.rxArrayPanelData?.directionPhi.ToString();
+                        rxtheta.Text = response.rxArrayPanelData?.directionTheta.ToString();
+                        rxpoltb.Text = response.rxArrayPanelData?.directionPolarityAngle.ToString();
+                        rxpolcb.SelectedItem = response.rxArrayPanelData?.directionPolarityType;
+
+                        manualtxfreq.Text = response.txArrayPanelData?.directionRFFreq.ToString();
+                        manualtxlo.Text = response.frequencyConverterData?.fcTxOsc.ToString();
+
+                        txphi.Text = response.txArrayPanelData?.directionPhi.ToString();
+                        txtheta.Text = response.txArrayPanelData?.directionTheta.ToString();
+                        txpoltb.Text = response.txArrayPanelData?.directionPolarityAngle.ToString();
+                        txpolcb.SelectedItem = response.txArrayPanelData?.directionPolarityType;
+
+                        isGetManualParam = false;
+                    }
+
+                    // =========================
+                    // 🔥 내부 값 업데이트
+                    // =========================
+                    if (response.txArrayPanelData != null)
+                    {
+                        _txPhiValue = response.txArrayPanelData.directionPhi;
+                        _txThetaValue = response.txArrayPanelData.directionTheta;
+                    }
+
+                    if (response.rxArrayPanelData != null)
+                    {
+                        _rxPhiValue = response.rxArrayPanelData.directionPhi;
+                        _rxThetaValue = response.rxArrayPanelData.directionTheta;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("UpdateUI 오류: " + ex.Message);
+                }
+            });
+        }
+
+
 
 
         private void autolongitude_TextChanged(object sender, TextChangedEventArgs e)
@@ -1668,180 +1725,130 @@ namespace GK_Antenna
         }
 
 
-        private WebSocketSharp.WebSocket ws;
-        public async Task WebSocket()
+
+
+
+        private void HandleBeamData(Root2 response)
         {
-            try
+
+
+            //tx 스위치
+            if (response.antennaData.antennaTxRfState == "ON")
             {
-                ws = new WebSocketSharp.WebSocket("ws://localhost:9999/wsApi");
 
-                ws.OnMessage += webMessage;
-                ws.Connect();
-                //Console.ReadKey(true);
-                await Task.Delay(Timeout.Infinite);
-
+                txOn.Visibility = Visibility.Visible;
+                txOff.Visibility = Visibility.Hidden;
 
             }
-            catch (Exception ex)
+            else if (response.antennaData.antennaTxRfState == "OFF")
             {
-                MessageBox.Show($"웹소켓 작업2 중 오류 발생: {ex.Message}");
+
+                txOn.Visibility = Visibility.Hidden;
+                txOff.Visibility = Visibility.Visible;
+
+            }
+            //rx 스위치
+            if (response.antennaData.antennaRxRfState == "ON")
+            {
+
+                rxOn.Visibility = Visibility.Visible;
+                rxOff.Visibility = Visibility.Hidden;
+
+            }
+            else if (response.antennaData.antennaRxRfState == "OFF")
+            {
+                rxOn.Visibility = Visibility.Hidden;
+                rxOff.Visibility = Visibility.Visible;
+
             }
 
-        }
-
-        private void webMessage(object sender, MessageEventArgs e)
-        {
-            Root2 response = null;
-            string data = e.Data;
-
-            try
+            if (isGetAutoParam)
             {
-                response = JsonConvert.DeserializeObject<Root2>(data);
-                this.Dispatcher.Invoke(new Action(delegate ()
+
+                //sym rate가 3000이여야 하는데 300으로 뜬다????
+                sym.Text = response.multiModeReceiverData.mmrSym.ToString();
+                txfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
+                rxfreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
+                txpolType.Text = response.txArrayPanelData.directionPolarityType.ToString();
+                rxpolType.Text = response.rxArrayPanelData.directionPolarityType.ToString();
+                txlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
+                rxlo.Text = response.frequencyConverterData.fcRxOsc.ToString();
+                rxtextb.Text = response.frequencyConverterData.fcRxOsc.ToString();
+                txtextb.Text = response.frequencyConverterData.fcTxOsc.ToString();
+
+
+                isGetAutoParam = false;
+
+            }
+
+
+            //manual 파라미터
+            if (isGetManualParam)
+            {
+                //매뉴얼모드
+                manualrxFreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
+                manualsym.Text = response.multiModeReceiverData.mmrSym.ToString();
+                if (response.multiModeReceiverData.mmrWorkMode == null)
                 {
+                    trackmode.Text = "DVB";
+                }
+                else
+                {
+                    trackmode.Text = response.multiModeReceiverData.mmrWorkMode.ToString();
+                }
+                //rxlolist.Text = BeamResponse.rx_osc.ToString();
+                mrxloblock.Text = response.frequencyConverterData.fcRxOsc.ToString();
+                rxphi.Text = response.rxArrayPanelData.directionPhi.ToString();
+                rxtheta.Text = response.rxArrayPanelData.directionTheta.ToString();
+                rxpoltb.Text = response.rxArrayPanelData.directionPolarityAngle.ToString();
+                rxpolcb.Text = response.rxArrayPanelData.directionPolarityType.ToString();
+
+                manualtxfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
+                manualtxlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
+                txphi.Text = response.txArrayPanelData.directionPhi.ToString();
+                txtheta.Text = response.txArrayPanelData.directionTheta.ToString();
+                txpoltb.Text = response.txArrayPanelData.directionPolarityAngle.ToString();
+                txpolcb.Text = response.txArrayPanelData.directionPolarityType.ToString();
 
 
-                    string data = e.Data;
-                    Root2 response = JsonConvert.DeserializeObject<Root2>(data);
+                isGetManualParam = false;
 
-
-                    //tx 스위치
-                    if (response.antennaData.antennaTxRfState == "ON")
-                    {
-
-                        txOn.Visibility = Visibility.Visible;
-                        txOff.Visibility = Visibility.Hidden;
-
-                    }
-                    else if (response.antennaData.antennaTxRfState == "OFF")
-                    {
-
-                        txOn.Visibility = Visibility.Hidden;
-                        txOff.Visibility = Visibility.Visible;
-
-                    }
-                    //rx 스위치
-                    if (response.antennaData.antennaRxRfState == "ON")
-                    {
-
-                        rxOn.Visibility = Visibility.Visible;
-                        rxOff.Visibility = Visibility.Hidden;
-
-                    }
-                    else if (response.antennaData.antennaRxRfState == "OFF")
-                    {
-                        rxOn.Visibility = Visibility.Hidden;
-                        rxOff.Visibility = Visibility.Visible;
-
-                    }
-
-                    if (isGetAutoParam)
-                    {
-
-                        //sym rate가 3000이여야 하는데 300으로 뜬다????
-                        sym.Text = response.multiModeReceiverData.mmrSym.ToString();
-                        txfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-                        rxfreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-                        txpolType.Text = response.txArrayPanelData.directionPolarityType.ToString();
-                        rxpolType.Text = response.rxArrayPanelData.directionPolarityType.ToString();
-                        txlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-                        rxlo.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                        rxtextb.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                        txtextb.Text = response.frequencyConverterData.fcTxOsc.ToString();
-
-
-                        isGetAutoParam = false;
-
-                    }
-
-
-                    //manual 파라미터
-                    if (isGetManualParam)
-                    {
-                        //매뉴얼모드
-                        manualrxFreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-                        manualsym.Text = response.multiModeReceiverData.mmrSym.ToString();
-                        if (response.multiModeReceiverData.mmrWorkMode == null)
-                        {
-                            trackmode.Text = "DVB";
-                        }
-                        else
-                        {
-                            trackmode.Text = response.multiModeReceiverData.mmrWorkMode.ToString();
-                        }
-                        //rxlolist.Text = BeamResponse.rx_osc.ToString();
-                        mrxloblock.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                        rxphi.Text = response.rxArrayPanelData.directionPhi.ToString();
-                        rxtheta.Text = response.rxArrayPanelData.directionTheta.ToString();
-                        rxpoltb.Text = response.rxArrayPanelData.directionPolarityAngle.ToString();
-                        rxpolcb.Text = response.rxArrayPanelData.directionPolarityType.ToString();
-
-                        manualtxfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-                        manualtxlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-                        txphi.Text = response.txArrayPanelData.directionPhi.ToString();
-                        txtheta.Text = response.txArrayPanelData.directionTheta.ToString();
-                        txpoltb.Text = response.txArrayPanelData.directionPolarityAngle.ToString();
-                        txpolcb.Text = response.txArrayPanelData.directionPolarityType.ToString();
-
-
-                        isGetManualParam = false;
-
-
-
-                    }
-
-
-
-
-
-                    if (response?.txArrayPanelData != null)
-                    {
-                        _txPhiValue = response.txArrayPanelData.directionPhi;
-                        _txThetaValue = response.txArrayPanelData.directionTheta;
-                    }
-
-                    if (response?.rxArrayPanelData != null)
-                    {
-                        _rxPhiValue = response.rxArrayPanelData.directionPhi;
-                        _rxThetaValue = response.rxArrayPanelData.directionTheta;
-                    }
-
-
-
-
-
-
-
-
-                }));
 
 
             }
-            catch (Exception ex)
+
+
+
+
+
+            if (response?.txArrayPanelData != null)
             {
-                MessageBox.Show($"웹소켓 작업3 중 오류 발생: {ex.Message}");
-                Debug.WriteLine($"JSON 파싱 오류: {ex.Message}");
-                return;
+                _txPhiValue = response.txArrayPanelData.directionPhi;
+                _txThetaValue = response.txArrayPanelData.directionTheta;
             }
+
+            if (response?.rxArrayPanelData != null)
+            {
+                _rxPhiValue = response.rxArrayPanelData.directionPhi;
+                _rxThetaValue = response.rxArrayPanelData.directionTheta;
+            }
+
+
+
+
+
+
 
 
         }
-
-        private async void StartWebSocket()
-        {
-
-            try
-            {
-                await WebSocket(); // 비동기 웹소켓 호출
-                                   // MessageBox.Show("웹소켓 작업 완료!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"웹소켓 작업 중 오류 발생: {ex.Message}");
-            }
+        
 
 
-        }
+        
+
+        
+
+     
 
         public void setAutoPara(object sender, RoutedEventArgs e)
         {
