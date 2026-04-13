@@ -449,6 +449,8 @@ namespace GK_Antenna
             string response = "";
             //localhost:9999 고정
 
+
+
             try
             {
                 // request setting

@@ -34,4 +34,10 @@
     <Resource Include="Resources\logos\white_gk_logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="WebServer\config\DeviceParamRange_KU.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
