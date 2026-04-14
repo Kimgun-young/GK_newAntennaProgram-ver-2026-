@@ -166,7 +166,7 @@
            FontWeight="Bold"
            HorizontalAlignment="Left"
            VerticalAlignment="Top"
-           Margin="883,539,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031"/>
+           Margin="895,539,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031"/>
 
         <Viewbox x:Name="AttitudeIndicatorGroup" Width="390" Height="378" 
          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1196,160,0,0" Grid.Row="2">
@@ -304,18 +304,18 @@
                   Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 </Canvas>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="147" Canvas.Top="431" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="100" Canvas.Top="422" VerticalAlignment="Top">
                     <StackPanel Margin="10">
-                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
-                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="64"/>
+                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="38"/>
                     </StackPanel>
                     <StackPanel Margin="10">
-                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
-                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="76"/>
+                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="45"/>
                     </StackPanel>
                     <StackPanel Margin="10">
-                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center" FontSize="12"/>
-                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="59"/>
+                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="41" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -325,56 +325,69 @@
         <Grid x:Name="TempGaugeGroup" 
       HorizontalAlignment="Left" 
       VerticalAlignment="Top" 
-      Margin="1673,134,0,0" 
-      Background="Transparent" Height="461" Width="135" Grid.Row="2">
+      Margin="1674,134,0,0" 
+      Background="Transparent" Height="461" Width="144" Grid.Row="2">
 
-            <StackPanel Orientation="Horizontal">
-                <Grid Height="400" Width="70">
-                    <Rectangle Fill="White" Stroke="#555" StrokeThickness="1"/>
+            <Rectangle Fill="#B0B0B0" Stroke="#2A100A" StrokeThickness="2" RadiusX="15" RadiusY="15" Margin="5,30,-15,48"/>
 
-                    <Rectangle x:Name="TempLevelBar" 
-                       Width="66" 
-                       Height="150" 
-                       VerticalAlignment="Bottom" 
-                       HorizontalAlignment="Center"
-                       Margin="2">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                                <GradientStop Color="#2196F3" Offset="0.0"/>
-                                <GradientStop Color="#4CAF50" Offset="0.4"/>
-                                <GradientStop Color="#FFEB3B" Offset="0.7"/>
-                                <GradientStop Color="#F44336" Offset="1.0"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                </Grid>
+            <Rectangle x:Name="ThermometerTubePath" 
+           Fill="White" 
+           Stroke="#2A100A" 
+           StrokeThickness="3" 
+          
+           HorizontalAlignment="Left" 
+           VerticalAlignment="Top" 
+           Margin="56,43,0,0" 
+           Width="44" 
+           Height="356"/>
 
-                <Canvas Width="60" Height="400" Margin="5,0,0,0">
-                    <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="80" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
+            <Canvas x:Name="TempLevelCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,45,0,0" Width="60" Height="360">
 
-                    <Line X1="0" Y1="57.1" X2="15" Y2="57.1" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="50"/>
+                <Rectangle x:Name="TempLevelBar" 
+                   Fill="#F44336" 
+                   Width="32" 
+                   Height="0" 
+                   Canvas.Left="20" 
+                   Canvas.Top="350" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Rectangle.RenderTransform>
+                        <ScaleTransform ScaleY="-1"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Canvas>
 
-                    <Line X1="0" Y1="228.5" X2="15" Y2="228.5" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="0" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="221"/>
+            <Canvas Width="65" Height="360" VerticalAlignment="Top" Margin="105,45,0,0" HorizontalAlignment="Left">
+                <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="80" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
+                <Line X1="0" Y1="25" X2="8" Y2="25" Stroke="#333333" StrokeThickness="1"/>
 
-                    <Line X1="0" Y1="400" X2="15" Y2="400" Stroke="White" StrokeThickness="2"/>
-                    <TextBlock Text="-60" Foreground="White" FontSize="12" FontWeight="Bold" Canvas.Left="20" Canvas.Top="392"/>
-                </Canvas>
-            </StackPanel>
+                <Line X1="0" Y1="50" X2="15" Y2="50" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="60" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="43"/>
+                <Line X1="0" Y1="75" X2="8" Y2="75" Stroke="#333333" StrokeThickness="1"/>
 
+                <Line X1="0" Y1="100" X2="15" Y2="100" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="40" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="93"/>
+                <Line X1="0" Y1="125" X2="8" Y2="125" Stroke="#333333" StrokeThickness="1"/>
 
+                <Line X1="0" Y1="150" X2="15" Y2="150" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="20" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="143"/>
+                <Line X1="0" Y1="175" X2="8" Y2="175" Stroke="#333333" StrokeThickness="1"/>
+
+                <Line X1="0" Y1="200" X2="20" Y2="200" Stroke="#333333" StrokeThickness="2.5"/>
+                <TextBlock Text="0" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="25" Canvas.Top="193"/>
+                <Line X1="0" Y1="225" X2="8" Y2="225" Stroke="#333333" StrokeThickness="1"/>
+
+                <Line X1="0" Y1="250" X2="15" Y2="250" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="-20" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="243"/>
+                <Line X1="0" Y1="275" X2="8" Y2="275" Stroke="#333333" StrokeThickness="1"/>
+
+                <Line X1="0" Y1="300" X2="15" Y2="300" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="-40" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="293"/>
+                <Line X1="0" Y1="325" X2="8" Y2="325" Stroke="#333333" StrokeThickness="1"/>
+
+                <Line X1="0" Y1="350" X2="15" Y2="350" Stroke="#333333" StrokeThickness="2"/>
+                <TextBlock Text="-60" Foreground="#333333" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="343"/>
+            </Canvas>
         </Grid>
-
-        <TextBlock x:Name="TempValueText" 
-            Text="25.5°C" 
-            Foreground="Yellow" 
-            FontSize="22" 
-            FontWeight="Bold" 
-            HorizontalAlignment="Left" 
-            Margin="1679,562,0,0" 
-            VerticalAlignment="Top" RenderTransformOrigin="-0.318,3.315" Height="29" Width="67" Grid.Row="2"/>
 
         <Viewbox x:Name="SpeedometerViewbox" 
                  Width="610" Height="367" 

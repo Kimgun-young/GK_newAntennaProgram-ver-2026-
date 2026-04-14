@@ -354,26 +354,31 @@ namespace GK_Antenna
         {
             if (TempLevelBar == null) return;
 
-            TempValueText.Text = $"{temp:F1}°C";
-
+            // 1. 온도 범위 설정
             const double minTemp = -60;
             const double maxTemp = 80;
-            const double maxHeight = 400; // XAML 온도계 몸체 높이와 일치시킬 것
 
+            // 2. 눈금의 물리적 거리 (XAML의 Y축 0 ~ 350 거리와 일치)
+            // 몸체 Height가 356이더라도, 눈금이 350 간격으로 그려졌다면 이 값을 350으로 유지해야 합니다.
+            const double totalRangeHeight = 350;
+
+            // 3. 온도 제한 (범위를 벗어나지 않게)
             double clampedTemp = Math.Max(minTemp, Math.Min(maxTemp, temp));
-            double targetHeight = ((clampedTemp - minTemp) / (maxTemp - minTemp)) * maxHeight;
 
-            // 부드러운 움직임을 위한 애니메이션
+            // 4. 높이 비율 계산 
+            // (현재온도 - (-60)) / (80 - (-60)) * 350
+            double targetHeight = ((clampedTemp - minTemp) / (maxTemp - minTemp)) * totalRangeHeight;
+
+            // 5. 애니메이션 적용
             DoubleAnimation anim = new DoubleAnimation
             {
                 To = targetHeight,
-                Duration = TimeSpan.FromMilliseconds(300), // 웹소켓 주기가 빠르면 300ms 정도가 적당함
+                Duration = TimeSpan.FromMilliseconds(300),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
 
             TempLevelBar.BeginAnimation(Rectangle.HeightProperty, anim);
         }
-
         public void UpdateSpeedGauge(double speedValue)
         {
             // 1. 공식 적용: 220km/h일 때 100도, 240km/h일 때 120도가 나옵니다.
