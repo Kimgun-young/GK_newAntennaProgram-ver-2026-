@@ -304,20 +304,29 @@
                   Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                 </Canvas>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Canvas.Left="100" Canvas.Top="422" VerticalAlignment="Top">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="ROLL" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="64"/>
-                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="38"/>
-                    </StackPanel>
-                    <StackPanel Margin="10">
-                        <TextBlock Text="PITCH" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="76"/>
-                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="45"/>
-                    </StackPanel>
-                    <StackPanel Margin="10">
-                        <TextBlock Text="YAW" Foreground="White" HorizontalAlignment="Center" FontSize="24" Width="59"/>
-                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="20" FontWeight="Bold" Width="41" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </StackPanel>
+                <!-- ROLL 레이블 -->
+                <TextBlock Text="ROLL" Foreground="White" FontSize="30"
+           Canvas.Left="75" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <!-- PITCH 레이블 -->
+                <TextBlock Text="PITCH" Foreground="White" FontSize="30"
+           Canvas.Left="198" Canvas.Top="431"/>
+
+                <!-- YAW 레이블 -->
+                <TextBlock Text="YAW" Foreground="White" FontSize="30"
+           Canvas.Left="333" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <!-- ROLL 값 -->
+                <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
+           Canvas.Left="37" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="147" TextAlignment="Center"/>
+
+                <!-- PITCH 값 -->
+                <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
+           Canvas.Left="181" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="117" TextAlignment="Center" RenderTransformOrigin="0.487,0.304"/>
+
+                <!-- YAW 값 -->
+                <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
+           Canvas.Left="303" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" TextAlignment="Center"/>
 
             </Canvas>
         </Viewbox>
@@ -394,7 +403,7 @@
                  HorizontalAlignment="Left" VerticalAlignment="Top" 
                  Margin="86,169,0,0" Grid.Row="2">
 
-            <Border Background="White" CornerRadius="12" Padding="30" Width="677" Height="426">
+            <Border Background="White" CornerRadius="12" Padding="30" Width="670" Height="409">
                 <StackPanel Width="500">
 
                     <Grid Width="450" Height="350" HorizontalAlignment="Center">
@@ -1066,39 +1075,44 @@
 
         <GroupBox x:Name="openAmip" 
           Header="OpenAMIP Log" 
-          HorizontalAlignment="Left" 
-          VerticalAlignment="Top" 
-          Width="590" Height="330" 
-          Margin="79,569,0,0"
+          HorizontalAlignment="Left"
+          Width="708"
+          Margin="28,590,0,0"
           FontFamily="Hancom MalangMalang Bold" 
           FontSize="20" 
           Foreground="White" Grid.Row="2">
-
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-
                 <ListBox x:Name="openlistbox" 
                  Grid.Row="1"
                  Margin="5,0,5,5" 
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+                 FontSize="16"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                 ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextWrapping="NoWrap"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </GroupBox>
-        <Label Grid.Row="2"
-            Content="Clear log" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top" 
-            Margin="0,543,1225,0" 
-            Foreground="#FF087DFF" 
-            FontSize="20" 
-            Cursor="Hand" 
-            PreviewMouseDown="amipClearDown" Height="37" Width="92"/>
 
-        <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="760,593,42,17" Grid.Row="2"/>
+        <Label Grid.Row="2"
+       Content="Clear log" 
+       HorizontalAlignment="Right" 
+       VerticalAlignment="Top" 
+       Margin="0,555,1144,0" 
+       Foreground="#FF087DFF" 
+       FontSize="24" 
+       Cursor="Hand" 
+       PreviewMouseDown="amipClearDown" Height="51" Width="108"/>
+
+        <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="758,600,44,0" Grid.Row="2"/>
 
     </Grid>
 </Page>

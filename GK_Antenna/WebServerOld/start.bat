@@ -1,1 +1,0 @@
-./jfinal.bat start

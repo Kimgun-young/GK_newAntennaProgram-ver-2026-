@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -79,11 +80,59 @@ namespace GK_Antenna
 
                 if (!_timer.Enabled) _timer.Start();
 
-                
+                _ = WebSocket2();
+
+                StartLatestLogMonitoring();
+
             }
 
             this.Loaded += StatusPage_Loaded;
 
+        }
+
+        public void StartLatestLogMonitoring()
+        {
+            string logPath = @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\log\server.log";
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    using (var stream = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var reader = new StreamReader(stream, Encoding.Default)) // 한글 깨짐 방지 위해 Default 권장
+                    {
+                        // [수정] 무조건 끝으로 가지 말고, 끝에서 약 5000바이트(약 20~50줄) 전으로 이동
+                        long startPos = Math.Max(0, stream.Length - 5000);
+                        stream.Seek(startPos, SeekOrigin.Begin);
+
+                        // 첫 줄은 중간부터 읽힐 수 있으니 한 번 버림
+                        if (startPos > 0) reader.ReadLine();
+
+                        while (true)
+                        {
+                            string line = reader.ReadLine();
+                            if (line != null)
+                            {
+                                this.Dispatcher.Invoke(() =>
+                                {
+                                    openlistbox.Items.Add(line);
+                                    // 자동 스크롤
+                                    if (openlistbox.Items.Count > 0)
+                                        openlistbox.ScrollIntoView(openlistbox.Items[openlistbox.Items.Count - 1]);
+                                });
+                            }
+                            else
+                            {
+                                Thread.Sleep(200); // CPU 점유율 방지
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Dispatcher.Invoke(() => openlistbox.Items.Add("에러 발생: " + ex.Message));
+                }
+            });
         }
 
         private void StatusPage_Loaded(object sender, RoutedEventArgs e)
@@ -154,8 +203,11 @@ namespace GK_Antenna
         {
             double temp = data.antennaTemperature;
             TemperatureText.Text = $"{temp:F1}°C";
-            TemperatureBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
+
+            TemperatureText.Foreground = (temp >= 60 || temp <= -10) ? Brushes.Red : Brushes.Green;
+
             UpdateTemperatureGauge(temp);
+            TemperatureBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
         public void UpdateVoltageBoxUI(AntennaData data)
@@ -296,7 +348,8 @@ namespace GK_Antenna
         public void UpdateCompass(double azimuth)
         {
             needleRotate.Angle = azimuth;
-            AzimuthText.Text = $"Azimuth: {azimuth:F1}°";
+            double displayAzimuth = azimuth >= 360 ? 0 : azimuth;
+            AzimuthText.Text = $"Azimuth: {displayAzimuth:F1}°";
         }
 
         public void UpdateAttitude(double roll, double pitch, double yaw)
@@ -428,14 +481,9 @@ namespace GK_Antenna
         {
             this.Dispatcher.Invoke(new Action(delegate ()
             {
-
-                //   string message = e.Data;
+                //string message = e.Data;
                 openlistbox.Items.Add(e.Data);
-
-
-
             }));
-
         }
 
         private void amipClearDown(object sender, MouseEventArgs e)
