@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -6,7 +7,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Diagnostics;
+using System.Windows.Media.Imaging;
+
 
 namespace GK_Antenna
 {
@@ -107,23 +109,25 @@ namespace GK_Antenna
 
                 if (isSuccess)
                 {
-                    MessageBox.Show(result.msg.Contains("repeat")
+                    string msg = result.msg.Contains("repeat")
                         ? "Already Connected"
-                        : "Connection Success");
+                        : "Connection Success";
+
+                    await alertt(@"\ant-design--check-circle-filled (1).png", msg);
 
                     _ = ApiService.Instance.StartWebSocket();
-
                     NavigationService?.Navigate(new StatusPage());
                 }
                 else
                 {
-                    MessageBox.Show($"Connection Failed: {result.msg}");
+                    await alertt(@"\ant-design--close-circle-filled.png", result.msg);
                     OkButton.IsEnabled = true;
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Connection Error: {ex.Message}");
+                await alertt(@"\ant-design--close-circle-filled.png", ex.Message);
                 OkButton.IsEnabled = true;
             }
         }
@@ -218,6 +222,30 @@ namespace GK_Antenna
             CompanyCodemsg.Content = string.IsNullOrWhiteSpace(CompanyCodeBox.Text)
                 ? "Please Enter Company Code"
                 : "";
+        }
+
+
+        public async Task alertt(string url, string content)
+        {
+            string appDirectory = AppContext.BaseDirectory;
+            string WebServerPath = System.IO.Path.Combine(appDirectory, "Resources/Images/");
+
+            await Task.Run(() =>
+            {
+                //버튼누를시 작동시
+                this.Dispatcher.Invoke(new Action(delegate ()
+                {
+                    alertImg.Source = new BitmapImage(new Uri(WebServerPath + url));
+                    alertText.Content = content;
+                    alert.Visibility = Visibility.Visible;
+                }));
+                Thread.Sleep(1000);
+            });
+
+            alert.Visibility = Visibility.Collapsed;
+
+
+
         }
     }
 }

@@ -183,52 +183,105 @@ namespace GK_Antenna
 
 
         private Brush DefaultBrush = new SolidColorBrush(
-        (Color)ColorConverter.ConvertFromString("#5A78C9"));
+        (Color)ColorConverter.ConvertFromString("#121212"));
 
         public void UpdateConnectionBoxUI(AntennaData data)
         {
             if (data.antennaState == 0)
             {
                 ConnectionText.Text = "OK";
-                ConnectionBox.Background = Brushes.Green;
+                ConnectionText.Foreground = Brushes.Lime; 
+                ConnectionBox.Background = DefaultBrush;  
+                ConnectionBox.BorderBrush = Brushes.Lime; 
             }
             else
             {
-                ConnectionText.Text = "NO";
-                ConnectionBox.Background = Brushes.Red;
+                ConnectionText.Text = "---";
+                ConnectionText.Foreground = Brushes.Red;
+                ConnectionBox.Background = DefaultBrush;
             }
         }
 
         public void UpdateTemperatureBoxUI(AntennaData data)
         {
             double temp = data.antennaTemperature;
-            TemperatureText.Text = $"{temp:F1}°C";
 
-            TemperatureText.Foreground = (temp >= 60 || temp <= -10) ? Brushes.Red : Brushes.Green;
+            TemperatureBox.Background = DefaultBrush;
+
+            if (data.antennaState != 0)
+            {
+                TemperatureText.Text = "---";
+                TemperatureText.Foreground = Brushes.Red; 
+            }
+            else if (temp >= 60 || temp <= -10)
+            {
+                TemperatureText.Text = $"{temp:F1}°C";
+                TemperatureText.Foreground = Brushes.Red;
+            }
+            else
+            {
+                TemperatureText.Text = $"{temp:F1}°C";
+                TemperatureText.Foreground = Brushes.Lime;
+            }
 
             UpdateTemperatureGauge(temp);
-            TemperatureBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
         }
 
         public void UpdateVoltageBoxUI(AntennaData data)
         {
             double voltage = data.antennaVoltage;
             VoltageText.Text = $"{voltage:F1} V";
-            VoltageBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
+            VoltageBox.Background = DefaultBrush;
+
+            if(data.antennaState != 0)
+            {
+                VoltageText.Foreground = Brushes.Red;
+                VoltageText.Text = "---";
+            }
         }
 
         public void UpdateCurrentBoxUI(AntennaData data)
         {
             double current = data.antennaElectricity;
             CurrentText.Text = $"{current:F1} A";
-            CurrentBox.Background = data.antennaState == 0 ? DefaultBrush : Brushes.Red;
+            CurrentBox.Background = DefaultBrush;
+
+            if (data.antennaState != 0)
+            {
+                CurrentText.Foreground = Brushes.Red;
+                CurrentText.Text = "---";
+            }
         }
 
         public void UpdateEsNoBoxUI(AntennaData antenna, MultiModeReceiverData mmr)
         {
             double esno = mmr.mmrCnrPower;
-            EsNoText.Text = $"{esno:F1} dB";
-            EsNoBox.Background = antenna.antennaState == 0 ? DefaultBrush : Brushes.Red;
+
+            this.Dispatcher.Invoke(() =>
+            {
+                EsNoBox.Background = DefaultBrush;
+
+                if (antenna.antennaState != 0)
+                {
+                    EsNoText.Text = "---";
+                    EsNoText.Foreground = Brushes.Red;
+                }
+                else
+                {
+                    EsNoText.Text = $"{esno:F1}";
+
+                    bool isNormal = (esno >= -110 && esno <= -11) || (esno >= -9);
+
+                    if (isNormal)
+                    {
+                        EsNoText.Foreground = Brushes.Lime; 
+                    }
+                    else
+                    {
+                        EsNoText.Foreground = Brushes.Red; 
+                    }
+                }
+            });
         }
 
         public void DrawCompass()

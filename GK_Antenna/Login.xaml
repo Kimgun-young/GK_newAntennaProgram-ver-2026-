@@ -102,7 +102,7 @@
                          Margin="0,20,0,0"
                          FontFamily="Hancom MalangMalang Regular"
                          FontSize="16"
-                         x:Name="AntennaPortBox"/>  
+                         x:Name="AntennaPortBox"/>
 
                     <Label Grid.Row="5"
                        Grid.Column="1"
@@ -141,5 +141,42 @@
 
             </StackPanel>
         </Border>
+
+        <Grid x:Name="alert"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top" 
+              Margin="0,82,0,0"
+              Width="312" 
+              Height="80"
+              Visibility="Collapsed">
+
+            <Rectangle Fill="White"
+               RadiusX="15"
+               RadiusY="15"
+               Stroke="#EEEEEE"
+               StrokeThickness="1" Margin="-29,0,-71,0"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="alertImg"
+               Width="50"
+               Height="50"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left"
+               Source="/Resources/Images/ant-design--check-circle-filled (1).png" Margin="-10,0,0,0"/>
+
+                <Label x:Name="alertText"
+               Content="Connection Success"
+               VerticalAlignment="Center"
+               VerticalContentAlignment="Center"
+               FontFamily="Hancom Hoonminjeongeum_H"
+               FontSize="36" 
+               Foreground="#333333" Margin="45,0,-52,0" Grid.ColumnSpan="2"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

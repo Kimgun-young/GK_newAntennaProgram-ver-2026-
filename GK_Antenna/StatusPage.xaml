@@ -7,7 +7,7 @@
       mc:Ignorable="d"
       d:DesignHeight="1080"
       d:DesignWidth="1920"
-      Background="#2C3E50">
+      Background="#666666">
 
 
 
@@ -30,35 +30,45 @@
 
             <StackPanel Margin="0,99,0,0">
                 <TextBlock Text="Connection" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-                <Border x:Name="ConnectionBox" Height="130" Background="#5A78C9">
+                <Border x:Name="ConnectionBox" Height="130" Background="#121212">
                     <TextBlock x:Name="ConnectionText"
                                Text="N/A"
                                Foreground="White"
-                               FontSize="30"
-                               FontWeight="Bold"
+                               FontFamily="/Resources/fonts/#MilSpec33558"
+                               FontSize="48"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" FontWeight="Bold"/>
                 </Border>
             </StackPanel>
+            
             <StackPanel Margin="0,95,0,0">
                 <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-                <Border x:Name="TemperatureBox" Height="130" Background="#5A78C9" Margin="5">
+                <Border x:Name="TemperatureBox" Height="130" Background="#121212" Margin="5">
                     <TextBlock x:Name="TemperatureText"
                                Text="N/A"
                                Foreground="White"
-                               FontSize="30"
-                               FontWeight="Bold"
+                               FontFamily="/Resources/fonts/#LAB디지털"
+                               FontSize="48"
                                HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" FontWeight="Bold"/>
                 </Border>
             </StackPanel>
-            <StackPanel Margin="0,101,0,0">
+            <StackPanel Margin="0,100,0,0" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-0.041"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.333"/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
                 <TextBlock Text="Voltage (V)" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-                <Border x:Name="VoltageBox" Height="130" Background="#5A78C9">
+                <Border x:Name="VoltageBox" Height="130" Background="#121212">
                     <TextBlock x:Name="VoltageText"
                                Text="N/A"
                                Foreground="White"
-                               FontSize="30"
+                               FontFamily="/Resources/fonts/#LAB디지털"
+                               FontSize="48"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
@@ -68,11 +78,12 @@
 
             <StackPanel Margin="0,95,0,0">
                 <TextBlock Text="Current (A)" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-                <Border x:Name="CurrentBox" Height="130" Background="#5A78C9" Margin="5">
+                <Border x:Name="CurrentBox" Height="130" Background="#121212" Margin="5">
                     <TextBlock x:Name="CurrentText"
                                Text="N/A"
                                Foreground="White"
-                               FontSize="30"
+                               FontFamily="/Resources/fonts/#LAB디지털"
+                               FontSize="48"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
@@ -82,11 +93,12 @@
             <!-- EsNo -->
             <StackPanel Margin="0,100,0,0">
                 <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-                <Border x:Name="EsNoBox" Height="130" Background="#5A78C9">
+                <Border x:Name="EsNoBox" Height="130" Background="#121212">
                     <TextBlock x:Name="EsNoText"
                                Text="N/A"
                                Foreground="White"
-                               FontSize="30"
+                               FontFamily="/Resources/fonts/#LAB디지털"
+                               FontSize="48"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
@@ -102,7 +114,7 @@
 
             <Canvas VerticalAlignment="Top">
                 <Border x:Name="TopBar"
-                Background="#2C3E50"
+                Background="#666666"
                 Height="99"
                 Width="1920" 
                 Canvas.Left="-20" 
@@ -403,11 +415,11 @@
                  HorizontalAlignment="Left" VerticalAlignment="Top" 
                  Margin="86,169,0,0" Grid.Row="2">
 
-            <Border Background="White" CornerRadius="12" Padding="30" Width="670" Height="409">
+            <Border Background="White" CornerRadius="12" Padding="30" Width="519" Height="398">
                 <StackPanel Width="500">
 
                     <Grid Width="450" Height="350" HorizontalAlignment="Center">
-                        <Canvas x:Name="SpeedometerCanvas" Margin="0,0,-1,3">
+                        <Canvas x:Name="SpeedometerCanvas" Margin="-30,-12,-78,-36">
 
                             <Rectangle Fill="Black" Width="3" Height="20" Canvas.Left="223.5" Canvas.Top="40" RenderTransformOrigin="0.5,8">
                                 <Rectangle.RenderTransform>

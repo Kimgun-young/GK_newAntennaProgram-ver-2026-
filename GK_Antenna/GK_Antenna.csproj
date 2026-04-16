@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\fonts\DS-DIGI.TTF" />
+    <None Remove="Resources\fonts\LAB디지털.ttf" />
+    <None Remove="Resources\fonts\MilSpec33558.ttf" />
     <None Remove="Resources\Icons\marker.png" />
+    <None Remove="Resources\Images\ant-design--check-circle-filled %281%29.png" />
+    <None Remove="Resources\Images\ant-design--close-circle-filled.png" />
     <None Remove="Resources\logos\AS9100D.png" />
     <None Remove="Resources\logos\GK_logo.png" />
     <None Remove="Resources\logos\Innobiz.png" />
@@ -26,7 +31,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\fonts\LAB디지털.ttf" />
+    <Resource Include="Resources\fonts\MilSpec33558.ttf" />
     <Resource Include="Resources\Icons\marker.png" />
+    <Content Include="Resources\Images\ant-design--check-circle-filled (1).png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\ant-design--close-circle-filled.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\logos\AS9100D.png" />
     <Resource Include="Resources\logos\GK_logo.png" />
     <Resource Include="Resources\logos\Innobiz.png" />

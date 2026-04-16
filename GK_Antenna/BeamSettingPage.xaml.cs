@@ -1843,14 +1843,14 @@ namespace GK_Antenna
 
 
         }
-        
 
 
-        
 
-        
 
-     
+
+
+
+
 
         public void setAutoPara(object sender, RoutedEventArgs e)
         {
@@ -1983,7 +1983,7 @@ namespace GK_Antenna
                         {
                             //연결성공
 
-                           MessageBox.Show("AutoSet Success");
+                            MessageBox.Show("AutoSet Success");
 
                         }
                         else if (classRes.code == -1)
@@ -1991,7 +1991,7 @@ namespace GK_Antenna
                             //연결실패
                             Console.WriteLine(classRes.msg);
 
-                           MessageBox.Show("AutoSet Failed");
+                            MessageBox.Show("AutoSet Failed");
 
                         }
 
@@ -2009,20 +2009,20 @@ namespace GK_Antenna
 
             }
 
-            
+
 
         }
 
         private void setBtn_Click(object sender, RoutedEventArgs e)
         {
-           
+
 
             string workM;
             string trackM;
             string rollF = Roll.Text;
             string mGPS;
 
-            
+
 
             if (workMode.SelectedValue.ToString() == "COTM")
                 workM = "0";
@@ -2150,9 +2150,170 @@ namespace GK_Antenna
             txlo.IsEnabled = isCOTM;
             Autorxlocb.IsEnabled = isCOTM;
         }
+
+
+        public void ManualTxSetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (mTxFreqRed.Content.ToString() == "" && TxPhiRed.Content.ToString() == "" && TxThetaRed.Content.ToString() == "" && TxPolRed.Content.ToString() == "")
+            {
+
+
+                string txOsc = manualtxlo.Text;
+                string txFreq = manualtxfreq.Text;
+                string txTheta = txtheta.Text;
+                string txPhi = txphi.Text;
+                string txPol = txpoltb.Text;
+                string txPolType = txpolcb.Text;
+
+
+                //   string satName = "";
+
+
+                string SettxApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetManualTrackParam&param={requestMode:1, tx_freq:" + txFreq + ", tx_osc:" + txOsc + ", tx_polarity_type:\"" + txPolType + "\", tx_phi:" + txPhi + ", tx_theta:" + txTheta + ", tx_pol:" + txPol + "}";
+                Console.WriteLine(SettxApiUrl);
+
+                string response = "";
+                //localhost:9999 고정
+
+                try
+                {
+                    // request setting
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SettxApiUrl);
+                    request.Method = "GET";
+                    request.Timeout = 10 * 1000;
+
+                    // GET Request & Response
+                    using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
+                    {
+                        HttpStatusCode status = res.StatusCode;
+                        Stream response_stream = res.GetResponseStream();
+                        using (StreamReader read_stream = new StreamReader(response_stream))
+                        {
+                            response = read_stream.ReadToEnd();
+                        }
+                    }
+
+
+                    //  Console.WriteLine(response);
+                    Root classRes = JsonConvert.DeserializeObject<Root>(response);
+                    //Console.WriteLine(classRes.code);
+                    if (classRes.code == 0)
+                    {
+                        //연결성공
+
+                        MessageBox.Show("TX Setting Success");
+
+                    }
+                    else if (classRes.code == -1)
+                    {
+                        //연결실패
+                        Console.WriteLine(classRes.msg);
+
+                        MessageBox.Show("TX Setting Failed");
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("TX Setting Failed");
+                    Console.WriteLine("에러 " + ex);
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        public void ManualRxSetBtn_Click(Object sender, RoutedEventArgs e)
+        {
+           
+            if (mRxFreqRed.Content.ToString() == "" && mSymRed.Content.ToString() == "" && RxPhiRed.Content.ToString() == "" && RxThetaRed.Content.ToString() == "" && RxPolRed.Content.ToString() == "")
+            {
+
+                string mrxFreq = manualrxFreq.Text;
+                //  string mtxFreq = manualtxfreq.Text;
+                string mrxOsc = mrxloblock.Text;
+                string mrxpolType = rxpolcb.Text;
+                string msym = manualsym.Text;
+                string trackMode = trackmode.Text;
+                //   string mtxOsc = manualtxlo.Text;
+                //   string mtxpolType=txpolcb.Text;
+                //  string txPhi=txphi.Text;
+                //    string txTheta=txtheta.Text;
+                string rxPhi = rxphi.Text;
+                string rxTheta = rxtheta.Text;
+                //    string txPol=txpoltb.Text;
+                string rxPol = rxpoltb.Text;
+                //   string satName = "";
+
+
+                string SetrxApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetManualTrackParam&param={requestMode:0, rx_freq:" + mrxFreq + ", rx_osc:" + mrxOsc + ", rx_polarity_type:\"" + mrxpolType + "\", sym:" + msym + ", workMode:\"" + trackMode + "\", rx_phi:" + rxPhi + ", rx_theta:" + rxTheta + ", rx_pol:" + rxPol + "}";
+                // Console.WriteLine(SetrxApiUrl);
+
+                string response = "";
+                //localhost:9999 고정
+
+                try
+                {
+                    // request setting
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SetrxApiUrl);
+                    request.Method = "GET";
+                    request.Timeout = 10 * 1000;
+
+                    // GET Request & Response
+                    using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
+                    {
+                        HttpStatusCode status = res.StatusCode;
+                        Stream response_stream = res.GetResponseStream();
+                        using (StreamReader read_stream = new StreamReader(response_stream))
+                        {
+                            response = read_stream.ReadToEnd();
+                        }
+                    }
+
+
+                    //  Console.WriteLine(response);
+                    Root classRes = JsonConvert.DeserializeObject<Root>(response);
+                    //Console.WriteLine(classRes.code);
+                    if (classRes.code == 0)
+                    {
+                        //연결성공
+
+                        MessageBox.Show("RX Setting Success");
+
+                    }
+                    else if (classRes.code == -1)
+                    {
+                        //연결실패
+                        Console.WriteLine(classRes.msg);
+
+                        MessageBox.Show("RX Setting Failed");
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("RX Setting Failed");
+                    Console.WriteLine("에러 " + ex);
+                }
+
+            }
+            else
+            {
+                //no
+            }
+
+
+
+
+        }
+
+
     }
+    
 }
-
-
 
 
