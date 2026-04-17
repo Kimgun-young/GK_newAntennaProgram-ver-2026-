@@ -42,9 +42,9 @@
                 </Border>
             </StackPanel>
 
-            <StackPanel Margin="0,78,0,0">
+            <StackPanel Margin="-1,78,-2,0">
                 <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
-                <Border x:Name="TemperatureBox" Height="130" Background="#121212" Margin="5">
+                <Border x:Name="TemperatureBox" Height="130" Background="#121212" Margin="5" Width="376">
                     <TextBlock x:Name="TemperatureText"
                                Text="N/A"
                                Foreground="White"
@@ -54,7 +54,7 @@
                                VerticalAlignment="Center" FontWeight="Bold"/>
                 </Border>
             </StackPanel>
-            <StackPanel Margin="0,83,0,0" RenderTransformOrigin="0.5,0.5">
+            <StackPanel Margin="-10,83,-10,0" RenderTransformOrigin="0.5,0.5">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -63,8 +63,17 @@
                         <TranslateTransform X="0.333"/>
                     </TransformGroup>
                 </StackPanel.RenderTransform>
-                <TextBlock Text="Voltage (V)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
-                <Border x:Name="VoltageBox" Height="130" Background="#121212" Width="366">
+                <TextBlock Text="Voltage (V)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="2.534"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.956"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Border x:Name="VoltageBox" Height="130" Background="#121212" Width="376">
                     <TextBlock x:Name="VoltageText"
                                Text="N/A"
                                Foreground="White"
@@ -75,9 +84,9 @@
                                VerticalAlignment="Center"/>
                 </Border>
             </StackPanel>
-            <StackPanel Margin="-3,76,0,0">
+            <StackPanel Margin="-2,76,-1,0">
                 <TextBlock Text="Current (A)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold" Height="45"/>
-                <Border x:Name="CurrentBox" Height="130" Background="#121212" Margin="5" Width="366">
+                <Border x:Name="CurrentBox" Height="130" Background="#121212" Margin="5" Width="376">
                     <TextBlock x:Name="CurrentText"
                                Text="N/A"
                                Foreground="White"
@@ -92,7 +101,7 @@
             <!-- EsNo -->
             <StackPanel Margin="0,83,0,0">
                 <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
-                <Border x:Name="EsNoBox" Height="130" Background="#121212">
+                <Border x:Name="EsNoBox" Height="130" Background="#121212" Width="376">
                     <TextBlock x:Name="EsNoText"
                                Text="N/A"
                                Foreground="White"
@@ -122,7 +131,7 @@
                 MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Image Source="/Resources/logos/white_GK_logo.png"
                    Stretch="Uniform"
-                   Margin="-5,-28,1650,-18"/>
+                   Margin="0,-27,1645,-19"/>
                 </Border>
 
                 <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="327" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-9" FontWeight="Bold"/>

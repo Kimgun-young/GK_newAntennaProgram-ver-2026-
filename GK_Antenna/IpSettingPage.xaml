@@ -7,45 +7,45 @@
       mc:Ignorable="d" 
       d:DesignHeight="1080"
       d:DesignWidth="1920"
-      Background="#2C3E50"
+      Background="#666666"
       Title="IpSettingPage">
 
     <Grid>
 
-        <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
-        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
+        <Rectangle Height="908" Margin="28,130,30,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
+        <Rectangle Height="861" Margin="64,153,55,0" VerticalAlignment="Top" Fill="White"/>
 
-        <Label Content="OpenAMIP Configuration" HorizontalAlignment="Left" Margin="556,209,0,0" VerticalAlignment="Top" Height="86" Width="606" FontFamily="Hancom MalangMalang Bold" FontSize="48" RenderTransformOrigin="0.533,0.289"/>
+        <Label Content="OpenAMIP Configuration" HorizontalAlignment="Left" Margin="528,210,0,0" VerticalAlignment="Top" Height="86" Width="606" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold" />
 
-        <Label Content="OpenAMIP IP:" HorizontalAlignment="Left" Margin="138,375,0,0" VerticalAlignment="Top" Height="56" Width="224" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="amipIP" HorizontalAlignment="Left" Margin="392,382,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipIP_TextChanged" FontSize="24" BorderThickness="2,2,2,2"/>
-        <Label x:Name="amipIpRed" HorizontalAlignment="Left" Margin="395,429,0,0" VerticalAlignment="Top" Height="37" Width="162" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
-
-
-        <Label Content="OpenAMIP Port:" HorizontalAlignment="Left" Margin="118,542,0,0" VerticalAlignment="Top" Height="47" Width="244" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="amipPort" HorizontalAlignment="Left" Margin="392,544,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
-        <Label x:Name="amipPortRed" HorizontalAlignment="Left" Margin="395,590,0,0" VerticalAlignment="Top" Height="33" Width="143" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label Content="OpenAMIP IP:" HorizontalAlignment="Left" Margin="138,375,0,0" VerticalAlignment="Top" Height="56" Width="224" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipIP" HorizontalAlignment="Left" Margin="392,382,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipIP_TextChanged" FontSize="24" BorderThickness="2,2,2,2"/>
+        <Label x:Name="amipIpRed" HorizontalAlignment="Left" Margin="395,429,0,0" VerticalAlignment="Top" Height="37" Width="162" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
 
-        <Label Content="OpenAMIP Mask:" HorizontalAlignment="Left" Margin="104,700,0,0" VerticalAlignment="Top" Height="54" Width="258" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="amipMask" HorizontalAlignment="Left" Margin="392,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="OpenamipMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
-        <Label x:Name="amipMaskRed" HorizontalAlignment="Left" Margin="395,753,0,0" VerticalAlignment="Top" Height="35" Width="158" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label Content="OpenAMIP Port:" HorizontalAlignment="Left" Margin="118,542,0,0" VerticalAlignment="Top" Height="47" Width="244" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipPort" HorizontalAlignment="Left" Margin="392,544,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="amipPortRed" HorizontalAlignment="Left" Margin="395,590,0,0" VerticalAlignment="Top" Height="33" Width="143" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
 
-        <Label Content="Antenna IP:" HorizontalAlignment="Left" Margin="932,364,0,0" VerticalAlignment="Top" Height="50" Width="202" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="antennaIP" HorizontalAlignment="Left" Margin="1152,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaIP_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
-        <Label x:Name="antennaIPRed" HorizontalAlignment="Left" Margin="1156,418,0,0" VerticalAlignment="Top" Height="36" Width="156" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label Content="OpenAMIP Mask:" HorizontalAlignment="Left" Margin="104,700,0,0" VerticalAlignment="Top" Height="54" Width="258" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="amipMask" HorizontalAlignment="Left" Margin="392,706,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="amipMaskRed" HorizontalAlignment="Left" Margin="395,753,0,0" VerticalAlignment="Top" Height="35" Width="158" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
 
-        <Label Content="Antenna Port:" HorizontalAlignment="Left" Margin="924,532,0,0" VerticalAlignment="Top" Height="48" Width="210" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="antennaPort" HorizontalAlignment="Left" Margin="1152,534,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
-        <Label x:Name="antennaPortRed" HorizontalAlignment="Left" Margin="1156,580,0,0" VerticalAlignment="Top" Height="38" Width="178" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label Content="Antenna IP:" HorizontalAlignment="Left" Margin="932,364,0,0" VerticalAlignment="Top" Height="50" Width="202" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaIP" HorizontalAlignment="Left" Margin="1152,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="AntennaIP_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaIPRed" HorizontalAlignment="Left" Margin="1156,418,0,0" VerticalAlignment="Top" Height="36" Width="156" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+
+
+        <Label Content="Antenna Port:" HorizontalAlignment="Left" Margin="924,532,0,0" VerticalAlignment="Top" Height="48" Width="210" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaPort" HorizontalAlignment="Left" Margin="1152,534,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="AntennaPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaPortRed" HorizontalAlignment="Left" Margin="1156,580,0,0" VerticalAlignment="Top" Height="38" Width="178" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
 
 
-        <Label Content="Antenna Mask:" HorizontalAlignment="Left" Margin="910,690,0,0" VerticalAlignment="Top" Height="46" Width="224" FontFamily="Hancom MalangMalang Regular" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="antennaMask" HorizontalAlignment="Left" Margin="1152,692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="Hancom MalangMalang Regular" VerticalContentAlignment="Center" TextChanged="AntennaMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
-        <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,738,0,0" VerticalAlignment="Top" Height="32" Width="196" FontFamily="Hancom MalangMalang Regular" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label Content="Antenna Mask:" HorizontalAlignment="Left" Margin="910,690,0,0" VerticalAlignment="Top" Height="46" Width="224" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="antennaMask" HorizontalAlignment="Left" Margin="1152,692,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="AntennaMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24"/>
+        <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,738,0,0" VerticalAlignment="Top" Height="32" Width="196" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
         <Button x:Name="AMIP_SettingBtn" 
             Content="AMIP Setting"  
@@ -57,7 +57,7 @@
             Background="#FF007CFA" 
             Foreground="White" 
             BorderBrush="{x:Null}" 
-            FontFamily="Hancom MalangMalang Bold" 
+            FontFamily="#MilSpec33558"
             FontSize="24" 
             Click="OpenAmipSetting_Click"/>
 
@@ -71,11 +71,11 @@
             Background="#FF9E0000" 
             Foreground="White" 
             BorderBrush="{x:Null}" 
-            FontFamily="Hancom MalangMalang Regular" 
+            FontFamily="#MilSpec33558"
             FontSize="24" 
             Click="RestartBtn_Click"/>
 
-        <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="191,946,0,0" VerticalAlignment="Top" FontFamily="Hancom MalangMalang Regular" FontSize="20"/>
+        <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="191,946,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="20"/>
 
         <Button x:Name="DisconnectBtn" 
             Content="Disconnect" 
@@ -87,7 +87,7 @@
             Background="Black" 
             Foreground="White" 
             BorderBrush="{x:Null}" 
-            FontFamily="Hancom MalangMalang Regular" 
+            FontFamily="#MilSpec33558"
             FontSize="24" 
             Click="DisconnectBtn_Click"/>
 
@@ -109,51 +109,42 @@
 
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
-             Background="#2C3E50"
-             Height="98"
-             Width="1920"
-             MouseEnter="TopBar_MouseEnter"
-             MouseLeave="TopBar_MouseLeave" HorizontalAlignment="Left" Canvas.Left="1" VerticalAlignment="Center">
+        Background="#FF555555"
+        Height="86"
+        Width="1920"
+        MouseEnter="TopBar_MouseEnter"
+        MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Image Source="/Resources/logos/white_GK_logo.png"
-            Stretch="Uniform"
-            Margin="38,1,1560,-11"/>
+           Stretch="Uniform"
+           Margin="20,-27,1625,-19"/>
             </Border>
 
-            <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="36" Canvas.Left="440" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="340" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="36" Canvas.Left="971" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="36" Canvas.Left="1316" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBlock x:Name="TopBarAbout" Text="About" Foreground="White" FontSize="36" Canvas.Left="1664" Canvas.Top="26" IsHitTestVisible="False" Height="68" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="11" FontWeight="Bold"/>
+            <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="9" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="9" IsHitTestVisible="False" Height="68" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558" FontWeight="Bold"/>
+            <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
 
             <Border x:Name="DropBar"
-         Background="White"
-         Height="160"
-         Width="1920"
-         Canvas.Left="-20"
-         Canvas.Top="79" 
-         Visibility="Collapsed"
-         MouseEnter="DropBar_MouseEnter"
-         MouseLeave="DropBar_MouseLeave">
+                Background="White"
+                Height="173"
+                Width="1920"
+                Canvas.Top="86" 
+                Visibility="Collapsed"
+                MouseEnter="DropBar_MouseEnter"
+                MouseLeave="DropBar_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top">
 
                 <Canvas>
-                    <StackPanel Canvas.Left="600" Canvas.Top="20">
-                        <TextBlock x:Name="StatusText"  Text="Status" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="StatusText_Click"/>
-                    </StackPanel>
+                    <TextBlock x:Name="StatusText"  Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
 
-                    <StackPanel Canvas.Left="958" Canvas.Top="20">
-                        <TextBlock x:Name="BeamSettingText" Text="Beam Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click"/>
-                        <TextBlock x:Name="IP_SettingText" Text="IP Setting" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click"/>
-                    </StackPanel>
+                    <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" RenderTransformOrigin="0.44,0.606" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                    <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="958" Canvas.Top="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
 
-                    <StackPanel Canvas.Left="1340" Canvas.Top="20">
-                        <TextBlock Text="Map" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="MapText_Click"/>
-                    </StackPanel>
+                    <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1352" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
 
-                    <StackPanel Canvas.Left="1662" Canvas.Top="20">
-                        <TextBlock Text="Company Info" Foreground="Black" FontSize="24" Margin="0,10" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click"/>
-                    </StackPanel>
+
+                    <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1648" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
                 </Canvas>
             </Border>
         </Canvas>
-
     </Grid>
 </Page>
