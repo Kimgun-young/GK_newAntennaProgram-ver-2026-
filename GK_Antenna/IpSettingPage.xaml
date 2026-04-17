@@ -91,32 +91,16 @@
             FontSize="24" 
             Click="DisconnectBtn_Click"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
-        Background="#FF555555"
-        Height="86"
-        Width="1920"
-        MouseEnter="TopBar_MouseEnter"
-        MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Image Source="/Resources/logos/white_GK_logo.png"
-           Stretch="Uniform"
-           Margin="20,-27,1625,-19"/>
+                Background="#FF555555"
+                Height="86"
+                Width="1920"
+                MouseEnter="TopBar_MouseEnter"
+                MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image Source="/Resources/logos/white_GK_logo.png"
+                       Stretch="Uniform"
+                       Margin="20,-27,1625,-19"/>
             </Border>
 
             <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="11" FontWeight="Bold"/>
