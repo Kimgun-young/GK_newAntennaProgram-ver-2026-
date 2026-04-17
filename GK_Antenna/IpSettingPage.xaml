@@ -91,6 +91,36 @@
             FontSize="24" 
             Click="DisconnectBtn_Click"/>
 
+
+
+        <Grid x:Name="alert"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Top" 
+      Margin="0,82,0,0"
+      Height="80"
+      Visibility="Collapsed">
+            <Border Background="White"
+            CornerRadius="15"
+            BorderBrush="#EEEEEE"
+            BorderThickness="1"
+            Padding="20,0,30,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image x:Name="alertImg"
+           Width="50"
+           Height="50"
+           Source="/Resources/Images/ant-design--check-circle-filled (1).png"/>
+
+                    <Label x:Name="alertText"
+           Content="Beam/GPS Setting Success"
+           VerticalAlignment="Center"
+           FontFamily="Hancom Hoonminjeongeum_H"
+           FontSize="36" 
+           Foreground="#333333"
+           Margin="15,0,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
                 Background="#FF555555"

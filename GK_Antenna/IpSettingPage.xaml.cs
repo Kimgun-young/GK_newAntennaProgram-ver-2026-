@@ -205,7 +205,7 @@ namespace GK_Antenna
 
 
 
-                    MessageBox.Show("Restart Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "Restart Success");
 
                     this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
 
@@ -214,17 +214,17 @@ namespace GK_Antenna
                 {
                     //연결실패
                     // Console.WriteLine("연결실패");
-                   
 
-                   MessageBox.Show("Restart Failed");
+
+                    await alertt(@"\ant-design--close-circle-filled.png", "Restart Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                
-                MessageBox.Show("Restart Failed");
+
+                await alertt(@"\ant-design--close-circle-filled.png", "Restart Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
@@ -266,7 +266,7 @@ namespace GK_Antenna
                 {
                     //연결성공
 
-                   MessageBox.Show("Disconnect Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "Disconnect Success");
 
                    //this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
 
@@ -276,14 +276,14 @@ namespace GK_Antenna
                     //연결실패
                     // Console.WriteLine("연결실패");
 
-                    MessageBox.Show("Disconnect Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "Disconnect Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Disconnect Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "Disconnect Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
@@ -483,7 +483,7 @@ namespace GK_Antenna
 
         }
 
-        private void OpenAmipSetting_Click(object sender, RoutedEventArgs e)
+        private async void OpenAmipSetting_Click(object sender, RoutedEventArgs e)
         {
             string openHost = amipIP.Text;
             string openPort = amipPort.Text;
@@ -566,16 +566,16 @@ namespace GK_Antenna
 
                 if (classRes.code == 0)
                 {
-                    MessageBox.Show("AMIP Setting Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "AMIP Setting Success");
                 }
                 else
                 {
-                    MessageBox.Show("AMIP Setting Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "AMIP Setting Failed");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("AMIP Setting Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "AMIP Setting Failed");
                 Console.WriteLine("에러: " + ex);
             }
         }
@@ -590,6 +590,28 @@ namespace GK_Antenna
             DisconnectApi();
         }
 
+        public async Task alertt(string url, string content)
+        {
+            string appDirectory = AppContext.BaseDirectory;
+            string WebServerPath = System.IO.Path.Combine(appDirectory, "Resources/Images/");
+
+            await Task.Run(() =>
+            {
+                //버튼누를시 작동시
+                this.Dispatcher.Invoke(new Action(delegate ()
+                {
+                    alertImg.Source = new BitmapImage(new Uri(WebServerPath + url));
+                    alertText.Content = content;
+                    alert.Visibility = Visibility.Visible;
+                }));
+                Thread.Sleep(1000);
+            });
+
+            alert.Visibility = Visibility.Collapsed;
+
+
+
+        }
 
     }
 }

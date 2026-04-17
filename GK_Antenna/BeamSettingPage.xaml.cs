@@ -1486,7 +1486,7 @@ namespace GK_Antenna
 
         }
 
-        public void TxOFFApi()
+        public async void TxOFFApi()
         {
 
 
@@ -1524,21 +1524,21 @@ namespace GK_Antenna
                     _isTxOn = false;
                     //연결성공
 
-                    MessageBox.Show("TxOFF Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "TxOFF Success");
 
                 }
                 else if (classRes.code == -1)
                 {
 
 
-                    MessageBox.Show("TxOFF Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "TxOFF Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("TxOFF Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "TxOFF Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
@@ -1548,7 +1548,7 @@ namespace GK_Antenna
         }
 
 
-        public void TxOnApi()
+        public async void TxOnApi()
         {
 
             //tx스위치 키기 tx:1
@@ -1585,7 +1585,7 @@ namespace GK_Antenna
                     _isTxOn = true;
                     //연결성공
 
-                    MessageBox.Show("TxON Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "TxON Success");
 
                 }
                 else if (classRes.code == -1)
@@ -1593,14 +1593,14 @@ namespace GK_Antenna
                     //연결실패
                     // Console.WriteLine("연결실패");
 
-                    MessageBox.Show("TxON Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "TxON Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("TxON Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "TxON Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
@@ -1609,7 +1609,7 @@ namespace GK_Antenna
 
         }
 
-        public void RxOnAPi()
+        public async void RxOnAPi()
         {
             //rx스위치 키기 rx:2
             string disconnectApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchRF&param={ tr:2 , isOn: true }";
@@ -1645,28 +1645,28 @@ namespace GK_Antenna
                     _isRxOn = true;
                     //연결성공
 
-                    MessageBox.Show("RxON Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "RxON Success");
 
                 }
                 else if (classRes.code == -1)
                 {
                     //연결실패
 
-                    MessageBox.Show("RxON Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "RxON Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("RxON Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "RxON Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
 
         }
 
-        public void RxOFFApi()
+        public async void RxOFFApi()
         {
 
             //rx스위치 끄기 rx:2
@@ -1703,7 +1703,7 @@ namespace GK_Antenna
                     _isRxOn = false;
                     //연결성공
 
-                    MessageBox.Show("RxOFF Success");
+                    await alertt(@"\ant-design--check-circle-filled (1).png", "RxOFF Success");
 
                 }
                 else if (classRes.code == -1)
@@ -1711,14 +1711,14 @@ namespace GK_Antenna
                     //연결실패
                     // Console.WriteLine("연결실패");
 
-                    MessageBox.Show("RxOFF Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "RxOFF Failed");
 
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("RxOFF Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "RxOFF Failed");
                 Console.WriteLine("에러 " + ex);
             }
 
@@ -1730,119 +1730,110 @@ namespace GK_Antenna
 
 
 
-        private void HandleBeamData(Root2 response)
-        {
+        //private void HandleBeamData(Root2 response)
+        //{
 
 
-            //tx 스위치
-            if (response.antennaData.antennaTxRfState == "ON")
-            {
+        //    //tx 스위치
+        //    if (response.antennaData.antennaTxRfState == "ON")
+        //    {
 
-                txOn.Visibility = Visibility.Visible;
-                txOff.Visibility = Visibility.Hidden;
+        //        txOn.Visibility = Visibility.Visible;
+        //        txOff.Visibility = Visibility.Hidden;
 
-            }
-            else if (response.antennaData.antennaTxRfState == "OFF")
-            {
+        //    }
+        //    else if (response.antennaData.antennaTxRfState == "OFF")
+        //    {
 
-                txOn.Visibility = Visibility.Hidden;
-                txOff.Visibility = Visibility.Visible;
+        //        txOn.Visibility = Visibility.Hidden;
+        //        txOff.Visibility = Visibility.Visible;
 
-            }
-            //rx 스위치
-            if (response.antennaData.antennaRxRfState == "ON")
-            {
+        //    }
+        //    //rx 스위치
+        //    if (response.antennaData.antennaRxRfState == "ON")
+        //    {
 
-                rxOn.Visibility = Visibility.Visible;
-                rxOff.Visibility = Visibility.Hidden;
+        //        rxOn.Visibility = Visibility.Visible;
+        //        rxOff.Visibility = Visibility.Hidden;
 
-            }
-            else if (response.antennaData.antennaRxRfState == "OFF")
-            {
-                rxOn.Visibility = Visibility.Hidden;
-                rxOff.Visibility = Visibility.Visible;
+        //    }
+        //    else if (response.antennaData.antennaRxRfState == "OFF")
+        //    {
+        //        rxOn.Visibility = Visibility.Hidden;
+        //        rxOff.Visibility = Visibility.Visible;
 
-            }
+        //    }
 
-            if (isGetAutoParam)
-            {
+        //    if (isGetAutoParam)
+        //    {
 
-                //sym rate가 3000이여야 하는데 300으로 뜬다????
-                sym.Text = response.multiModeReceiverData.mmrSym.ToString();
-                txfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-                rxfreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-                txpolType.Text = response.txArrayPanelData.directionPolarityType.ToString();
-                rxpolType.Text = response.rxArrayPanelData.directionPolarityType.ToString();
-                txlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-                rxlo.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                rxtextb.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                txtextb.Text = response.frequencyConverterData.fcTxOsc.ToString();
-
-
-                isGetAutoParam = false;
-
-            }
+        //        //sym rate가 3000이여야 하는데 300으로 뜬다????
+        //        sym.Text = response.multiModeReceiverData.mmrSym.ToString();
+        //        txfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
+        //        rxfreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
+        //        txpolType.Text = response.txArrayPanelData.directionPolarityType.ToString();
+        //        rxpolType.Text = response.rxArrayPanelData.directionPolarityType.ToString();
+        //        txlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
+        //        rxlo.Text = response.frequencyConverterData.fcRxOsc.ToString();
+        //        rxtextb.Text = response.frequencyConverterData.fcRxOsc.ToString();
+        //        txtextb.Text = response.frequencyConverterData.fcTxOsc.ToString();
 
 
-            //manual 파라미터
-            if (isGetManualParam)
-            {
-                //매뉴얼모드
-                manualrxFreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-                manualsym.Text = response.multiModeReceiverData.mmrSym.ToString();
-                if (response.multiModeReceiverData.mmrWorkMode == null)
-                {
-                    trackmode.Text = "DVB";
-                }
-                else
-                {
-                    trackmode.Text = response.multiModeReceiverData.mmrWorkMode.ToString();
-                }
-                //rxlolist.Text = BeamResponse.rx_osc.ToString();
-                mrxloblock.Text = response.frequencyConverterData.fcRxOsc.ToString();
-                rxphi.Text = response.rxArrayPanelData.directionPhi.ToString();
-                rxtheta.Text = response.rxArrayPanelData.directionTheta.ToString();
-                rxpoltb.Text = response.rxArrayPanelData.directionPolarityAngle.ToString();
-                rxpolcb.Text = response.rxArrayPanelData.directionPolarityType.ToString();
+        //        isGetAutoParam = false;
 
-                manualtxfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-                manualtxlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-                txphi.Text = response.txArrayPanelData.directionPhi.ToString();
-                txtheta.Text = response.txArrayPanelData.directionTheta.ToString();
-                txpoltb.Text = response.txArrayPanelData.directionPolarityAngle.ToString();
-                txpolcb.Text = response.txArrayPanelData.directionPolarityType.ToString();
+        //    }
 
 
-                isGetManualParam = false;
+        //    //manual 파라미터
+        //    if (isGetManualParam)
+        //    {
+        //        //매뉴얼모드
+        //        manualrxFreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
+        //        manualsym.Text = response.multiModeReceiverData.mmrSym.ToString();
+        //        if (response.multiModeReceiverData.mmrWorkMode == null)
+        //        {
+        //            trackmode.Text = "DVB";
+        //        }
+        //        else
+        //        {
+        //            trackmode.Text = response.multiModeReceiverData.mmrWorkMode.ToString();
+        //        }
+        //        //rxlolist.Text = BeamResponse.rx_osc.ToString();
+        //        mrxloblock.Text = response.frequencyConverterData.fcRxOsc.ToString();
+        //        rxphi.Text = response.rxArrayPanelData.directionPhi.ToString();
+        //        rxtheta.Text = response.rxArrayPanelData.directionTheta.ToString();
+        //        rxpoltb.Text = response.rxArrayPanelData.directionPolarityAngle.ToString();
+        //        rxpolcb.Text = response.rxArrayPanelData.directionPolarityType.ToString();
+
+        //        manualtxfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
+        //        manualtxlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
+        //        txphi.Text = response.txArrayPanelData.directionPhi.ToString();
+        //        txtheta.Text = response.txArrayPanelData.directionTheta.ToString();
+        //        txpoltb.Text = response.txArrayPanelData.directionPolarityAngle.ToString();
+        //        txpolcb.Text = response.txArrayPanelData.directionPolarityType.ToString();
 
 
-
-            }
+        //        isGetManualParam = false;
 
 
 
-
-
-            if (response?.txArrayPanelData != null)
-            {
-                _txPhiValue = response.txArrayPanelData.directionPhi;
-                _txThetaValue = response.txArrayPanelData.directionTheta;
-            }
-
-            if (response?.rxArrayPanelData != null)
-            {
-                _rxPhiValue = response.rxArrayPanelData.directionPhi;
-                _rxThetaValue = response.rxArrayPanelData.directionTheta;
-            }
+        //    }
 
 
 
 
 
+        //    if (response?.txArrayPanelData != null)
+        //    {
+        //        _txPhiValue = response.txArrayPanelData.directionPhi;
+        //        _txThetaValue = response.txArrayPanelData.directionTheta;
+        //    }
 
-
-
-        }
+        //    if (response?.rxArrayPanelData != null)
+        //    {
+        //        _rxPhiValue = response.rxArrayPanelData.directionPhi;
+        //        _rxThetaValue = response.rxArrayPanelData.directionTheta;
+        //    }
 
 
 
@@ -1851,8 +1842,17 @@ namespace GK_Antenna
 
 
 
+        //}
 
-        public void setAutoPara(object sender, RoutedEventArgs e)
+
+
+
+
+
+
+
+
+        public async void setAutoPara(object sender, RoutedEventArgs e)
         {
             if (rxOscMin == 0 || rxOscMax == 0)
             {
@@ -1904,7 +1904,7 @@ namespace GK_Antenna
                         {
                             //연결성공
 
-                            MessageBox.Show("AutoSet Success");
+                            await alertt(@"\ant-design--check-circle-filled (1).png", "AutoSet Success");
 
                         }
                         else if (classRes.code == -1)
@@ -1912,14 +1912,14 @@ namespace GK_Antenna
                             //연결실패
                             Console.WriteLine(classRes.msg);
 
-                            MessageBox.Show("AutoSet Failed");
+                            await alertt(@"\ant-design--close-circle-filled.png", "AutoSet Failed");
 
                         }
 
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("AutoSet Failed");
+                        await alertt(@"\ant-design--close-circle-filled.png", "AutoSet Failed");
                         Console.WriteLine("에러 " + ex);
                     }
                 }
@@ -1983,7 +1983,7 @@ namespace GK_Antenna
                         {
                             //연결성공
 
-                            MessageBox.Show("AutoSet Success");
+                            await alertt(@"\ant-design--check-circle-filled (1).png", "AutoSet Success");
 
                         }
                         else if (classRes.code == -1)
@@ -1991,14 +1991,14 @@ namespace GK_Antenna
                             //연결실패
                             Console.WriteLine(classRes.msg);
 
-                            MessageBox.Show("AutoSet Failed");
+                            await alertt(@"\ant-design--close-circle-filled.png", "AutoSet Failed");
 
                         }
 
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("AutoSet Failed");
+                        await alertt(@"\ant-design--close-circle-filled.png", "AutoSet Failed");
                         Console.WriteLine("에러 " + ex);
                     }
                 }
@@ -2013,7 +2013,7 @@ namespace GK_Antenna
 
         }
 
-        private void setBtn_Click(object sender, RoutedEventArgs e)
+        private async void setBtn_Click(object sender, RoutedEventArgs e)
         {
 
 
@@ -2116,14 +2116,14 @@ namespace GK_Antenna
                     Root classRes = JsonConvert.DeserializeObject<Root>(response);
 
                     if (classRes.code == 0)
-                        MessageBox.Show("Beam/GPS Setting Success");
+                        await alertt(@"\ant-design--check-circle-filled (1).png", "Beam/GPS Setting Success");
                     else
-                        MessageBox.Show("Beam/GPS Setting Failed");
+                        await alertt(@"\ant-design--close-circle-filled.png", "Beam/GPS Setting Failed");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Beam/GPS Setting Failed");
+                await alertt(@"\ant-design--close-circle-filled.png", "Beam/GPS Setting Failed"); 
                 Console.WriteLine("에러: " + ex);
             }
         }
@@ -2152,7 +2152,7 @@ namespace GK_Antenna
         }
 
 
-        public void ManualTxSetBtn_Click(object sender, RoutedEventArgs e)
+        public async void ManualTxSetBtn_Click(object sender, RoutedEventArgs e)
         {
             if (mTxFreqRed.Content.ToString() == "" && TxPhiRed.Content.ToString() == "" && TxThetaRed.Content.ToString() == "" && TxPolRed.Content.ToString() == "")
             {
@@ -2201,7 +2201,7 @@ namespace GK_Antenna
                     {
                         //연결성공
 
-                        MessageBox.Show("TX Setting Success");
+                        await alertt(@"\ant-design--check-circle-filled (1).png", "TX Setting Success");
 
                     }
                     else if (classRes.code == -1)
@@ -2209,14 +2209,14 @@ namespace GK_Antenna
                         //연결실패
                         Console.WriteLine(classRes.msg);
 
-                        MessageBox.Show("TX Setting Failed");
+                        await alertt(@"\ant-design--close-circle-filled.png", "TX Setting Failed");
 
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("TX Setting Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "TX Setting Failed");
                     Console.WriteLine("에러 " + ex);
                 }
             }
@@ -2226,7 +2226,7 @@ namespace GK_Antenna
             }
         }
 
-        public void ManualRxSetBtn_Click(Object sender, RoutedEventArgs e)
+        public async void ManualRxSetBtn_Click(Object sender, RoutedEventArgs e)
         {
            
             if (mRxFreqRed.Content.ToString() == "" && mSymRed.Content.ToString() == "" && RxPhiRed.Content.ToString() == "" && RxThetaRed.Content.ToString() == "" && RxPolRed.Content.ToString() == "")
@@ -2281,7 +2281,7 @@ namespace GK_Antenna
                     {
                         //연결성공
 
-                        MessageBox.Show("RX Setting Success");
+                        await alertt(@"\ant-design--check-circle-filled (1).png", "RX Setting Success");
 
                     }
                     else if (classRes.code == -1)
@@ -2289,14 +2289,14 @@ namespace GK_Antenna
                         //연결실패
                         Console.WriteLine(classRes.msg);
 
-                        MessageBox.Show("RX Setting Failed");
+                        await alertt(@"\ant-design--close-circle-filled.png", "RX Setting Failed");
 
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("RX Setting Failed");
+                    await alertt(@"\ant-design--close-circle-filled.png", "RX Setting Failed");
                     Console.WriteLine("에러 " + ex);
                 }
 
@@ -2306,6 +2306,29 @@ namespace GK_Antenna
                 //no
             }
 
+
+
+
+        }
+
+        public async Task alertt(string url, string content)
+        {
+            string appDirectory = AppContext.BaseDirectory;
+            string WebServerPath = System.IO.Path.Combine(appDirectory, "Resources/Images/");
+
+            await Task.Run(() =>
+            {
+                //버튼누를시 작동시
+                this.Dispatcher.Invoke(new Action(delegate ()
+                {
+                    alertImg.Source = new BitmapImage(new Uri(WebServerPath + url));
+                    alertText.Content = content;
+                    alert.Visibility = Visibility.Visible;
+                }));
+                Thread.Sleep(1000);
+            });
+
+            alert.Visibility = Visibility.Collapsed;
 
 
 

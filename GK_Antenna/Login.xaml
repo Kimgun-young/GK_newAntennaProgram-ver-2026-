@@ -163,19 +163,19 @@
                 </Grid.ColumnDefinitions>
 
                 <Image x:Name="alertImg"
-               Width="50"
-               Height="50"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Source="/Resources/Images/ant-design--check-circle-filled (1).png" Margin="-10,0,0,0"/>
+                   Width="50"
+                   Height="50"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Source="/Resources/Images/ant-design--check-circle-filled (1).png" Margin="-10,0,0,0"/>
 
                 <Label x:Name="alertText"
-               Content="Connection Success"
-               VerticalAlignment="Center"
-               VerticalContentAlignment="Center"
-               FontFamily="Hancom Hoonminjeongeum_H"
-               FontSize="36" 
-               Foreground="#333333" Margin="45,0,-52,0" Grid.ColumnSpan="2"/>
+                   Content="Connection Success"
+                   VerticalAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   FontFamily="Hancom Hoonminjeongeum_H"
+                   FontSize="36" 
+                   Foreground="#333333" Margin="45,0,-52,0" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
     </Grid>
