@@ -179,7 +179,7 @@
            FontWeight="Bold"
            HorizontalAlignment="Left"
            VerticalAlignment="Top"
-           Margin="669,529,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031" Grid.Column="1"/>
+           Margin="650,529,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031" Grid.Column="1"/>
 
         <Viewbox x:Name="AttitudeIndicatorGroup" Width="390" Height="378" 
          HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1046,160,0,0" Grid.Row="2" Grid.Column="1">
@@ -319,7 +319,7 @@
 
                 <!-- ROLL 레이블 -->
                 <TextBlock Text="ROLL" Foreground="White" FontSize="30"
-           Canvas.Left="75" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+           Canvas.Left="54" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                 <!-- PITCH 레이블 -->
                 <TextBlock Text="PITCH" Foreground="White" FontSize="30"
@@ -327,11 +327,11 @@
 
                 <!-- YAW 레이블 -->
                 <TextBlock Text="YAW" Foreground="White" FontSize="30"
-           Canvas.Left="333" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+           Canvas.Left="356" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                 <!-- ROLL 값 -->
                 <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
-           Canvas.Left="37" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="147" TextAlignment="Center"/>
+           Canvas.Left="16" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="147" TextAlignment="Center"/>
 
                 <!-- PITCH 값 -->
                 <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
@@ -339,7 +339,7 @@
 
                 <!-- YAW 값 -->
                 <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="Yellow" FontSize="30" FontWeight="Bold"
-           Canvas.Left="303" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" TextAlignment="Center"/>
+           Canvas.Left="323" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" TextAlignment="Center"/>
 
             </Canvas>
         </Viewbox>

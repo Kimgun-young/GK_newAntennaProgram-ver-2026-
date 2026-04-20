@@ -401,7 +401,7 @@ namespace GK_Antenna
         public void UpdateCompass(double azimuth)
         {
             needleRotate.Angle = azimuth;
-            double displayAzimuth = azimuth >= 360 ? 0 : azimuth;
+            double displayAzimuth = azimuth >= 359.99 ? 0 : azimuth;
             AzimuthText.Text = $"Azimuth: {displayAzimuth:F1}°";
         }
 
@@ -446,8 +446,13 @@ namespace GK_Antenna
             // 3. 텍스트 정보 업데이트
             if (RollValueText != null) RollValueText.Text = $"{roll:F1}°";
             if (PitchValueText != null) PitchValueText.Text = $"{pitch:F1}°";
-            if (YawValueText != null) YawValueText.Text = $"{yaw:F1}°";
-        }
+            if (yaw >= 359.99)
+                yaw = 0;
+
+            if (YawValueText != null)
+                YawValueText.Text = $"{yaw:F1}°";
+          }
+        
 
         // 위에서 만든 메서드를 호출하는 래퍼 메서드 (기존 구조 유지)
         public void UpdateAttitude(ImuData data)
