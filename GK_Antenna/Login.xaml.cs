@@ -22,6 +22,7 @@ namespace GK_Antenna
         private string filePath = "ip.txt";
         private string defaultIp = "192.168.0.2";
 
+
         private void StartWebServer()
         {
             string batPath = @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\start.bat";
@@ -46,7 +47,7 @@ namespace GK_Antenna
         {
             string companyCode = CompanyCodeBox.Text?.Trim() ?? "";
             string ip = AntennaIpBox.Text?.Trim() ?? "";
-            string port = AntennaPortBox.Text?.Trim() ?? "";
+            string port = "5500";
 
             bool isValid = true;
 
@@ -81,15 +82,7 @@ namespace GK_Antenna
                 ipmsg.Content = "";
             }
 
-            if (!int.TryParse(port, out int portNumber) || portNumber < 0 || portNumber > 65535)
-            {
-                portmsg.Content = "Please Check The Port Number(0~65535)";
-                isValid = false;
-            }
-            else
-            {
-                portmsg.Content = "";
-            }
+            
 
             if (!isValid)
                 return;
@@ -197,22 +190,7 @@ namespace GK_Antenna
             }
         }
 
-        private void portbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (portmsg != null)
-            {
-                if (AntennaPortBox.Text == "")
-                {
-                    portmsg.Content = "Please Enter Port Number";
-                }
-                else
-                {
-                    Regex regex = new Regex("^(?:[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$");
-                    bool isMatch = regex.IsMatch(AntennaPortBox.Text);
-                    portmsg.Content = isMatch ? "" : "Please Check The Port Number(0~65535)";
-                }
-            }
-        }
+        
 
         private void CompanyCodeBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -245,6 +223,11 @@ namespace GK_Antenna
             alert.Visibility = Visibility.Collapsed;
 
 
+
+        }
+
+        private void CompanyCodeBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

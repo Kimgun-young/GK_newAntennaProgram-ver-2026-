@@ -161,11 +161,11 @@ namespace GK_Antenna
 
                 UpdateConnectionBoxUI(response.antennaData);
                 UpdateTemperatureBoxUI(response.antennaData);
-                UpdateVoltageBoxUI(response.antennaData);
-                UpdateCurrentBoxUI(response.antennaData);
+                UpdateVoltageText(response.antennaData);
+                UpdateCurrentText(response.antennaData);
                 UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
                 UpdateSpeedGauge(response.gnssData.gpsSpeed);
-
+                UpdateGPSBoxUI(response.antennaData, response.gnssData);
                 _currentValue = response.multiModeReceiverData.mmrCnrPower;
 
                 UpdateAttitude(
@@ -227,11 +227,63 @@ namespace GK_Antenna
             UpdateTemperatureGauge(temp);
         }
 
-        public void UpdateVoltageBoxUI(AntennaData data)
+        public void UpdateGPSBoxUI(AntennaData antennaData, GnssData gnssData)
+        {
+            if (antennaData.antennaState != 0)
+            {
+                glong.Foreground = Brushes.Red;
+                glat.Foreground = Brushes.Red;
+                galt.Foreground = Brushes.Red;
+
+                glong.Text = "---";
+                glat.Text = "---";
+                galt.Text = "---";
+
+                GPS_Label.Foreground = Brushes.Red;
+                GPS_Label.Text = "GPS(Off)";
+
+                return; 
+            }
+
+            glong.Foreground = Brushes.White;
+            glat.Foreground = Brushes.White;
+            galt.Foreground = Brushes.White;
+
+            if (gnssData.state == 1)
+            {
+                glong.Text = gnssData.gpsLongitude.ToString("0.00");
+                glat.Text = gnssData.gpsLatitude.ToString("0.00");
+            }
+            else
+            {
+                glat.Text = 37.392402.ToString("0.00");
+                glong.Text = 126.959046.ToString("0.00");
+            }
+
+            galt.Text = gnssData.gpsAltitude.ToString("0.00");
+
+            if (gnssData.state == 0)
+            {
+                GPS_Label.Foreground = Brushes.Red;
+                GPS_Label.Text = "GPS(Invalid)";
+            }
+            else if (gnssData.state == 1)
+            {
+                GPS_Label.Foreground = Brushes.Lime;
+                GPS_Label.Text = "GPS(Valid)";
+            }
+            else
+            {
+                GPS_Label.Foreground = Brushes.Red;
+                GPS_Label.Text = "GPS(Disconnect)";
+            }
+        }
+
+        public void UpdateVoltageText(AntennaData data)
         {
             double voltage = data.antennaVoltage;
             VoltageText.Text = $"{voltage:F1} V";
-            VoltageBox.Background = DefaultBrush;
+            
 
             if(data.antennaState != 0)
             {
@@ -240,11 +292,11 @@ namespace GK_Antenna
             }
         }
 
-        public void UpdateCurrentBoxUI(AntennaData data)
+        public void UpdateCurrentText(AntennaData data)
         {
             double current = data.antennaElectricity;
             CurrentText.Text = $"{current:F1} A";
-            CurrentBox.Background = DefaultBrush;
+            
 
             if (data.antennaState != 0)
             {

@@ -128,8 +128,7 @@ namespace GK_Antenna
                     amipPort.Text = realResponse.openamipPort.ToString();
                     amipMask.Text = realResponse.openamipMask.ToString();
 
-                    antennaIP.Text = realResponse.serverHost;
-                    antennaPort.Text = realResponse.serverPort.ToString();
+                    antennaIP.Text = realResponse.serverHost;                   
                     antennaMask.Text = realResponse.serverMask.ToString();
 
                     AppSettings.WorkMode = realResponse.workMode.ToString();
@@ -418,37 +417,7 @@ namespace GK_Antenna
         }
 
 
-        private void AntennaPort_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-            if (antennaPortRed != null)
-            {
-                if (antennaPort.Text == "")
-                {
-                    antennaPortRed.Content = "Please Enter Port Number";
-                }
-                else
-                {
-                    //텍스트가 있을시
-                    Regex regex = new Regex("^(?:[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$");
-                    bool isMatch = regex.IsMatch(antennaPort.Text);
-
-                    if (!isMatch)
-                    {
-                        //매치실패시
-                        antennaPortRed.Content = "Please Check The Port Number(0~65535)";
-                    }
-                    else
-                    {
-                        //매치시
-                        antennaPortRed.Content = "";
-                    }
-
-                }
-            }
-
-
-        }
 
 
         private void AntennaMask_TextChanged(object sender, TextChangedEventArgs e)
@@ -490,7 +459,7 @@ namespace GK_Antenna
             string openMask = amipMask.Text;
 
             string serverHost = antennaIP.Text;
-            string serverPort = antennaPort.Text;
+            string serverPort = "5500";
             string serverMask = antennaMask.Text;
 
             AppSettings.OpenHost = openHost;

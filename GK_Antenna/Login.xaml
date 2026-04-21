@@ -9,19 +9,26 @@
       Background="#D3D3D3">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Border Background="White"
                 Padding="40"
                 CornerRadius="10"
                 Width="556"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Height="612">
+                Height="612" Grid.Column="1" Margin="672,0,0,0">
+
+
+
 
             <StackPanel>
 
                 <Image Source="/Resources/logos/GK_logo.png"
-                       Height="126"
-                       Width="330"
+                       Height="146"
+                       Width="304"
                        Stretch="Uniform"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,30"/>
@@ -34,121 +41,80 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
+                        <!-- Company -->
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+
+                        <!-- IP -->
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0"
-                       Grid.Column="0"
-                       VerticalAlignment="Center"
-                       FontFamily="Hancom MalangMalang Regular"
-                       FontSize="18"><Run Text="Company Code"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
+                    <!-- Company Code -->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                       VerticalAlignment="Top"
+                       FontSize="24"
+                       Text="Company Code :" Margin="-19,0,307,0" Grid.ColumnSpan="2" />
 
-                    <TextBox Grid.Row="0"
-                         Grid.Column="1"
+                    <TextBox Grid.Row="0" Grid.Column="1"
                          Height="35"
-                         Padding="5"
-                         FontFamily="Hancom MalangMalang Regular"
-                         FontSize="16"
-                         x:Name="CompanyCodeBox"/>
+                         x:Name="CompanyCodeBox" Width="300" Margin="24,1,2,109" TextChanged="CompanyCodeBox_TextChanged" BorderThickness="2,2,2,2" FontSize="20" Grid.RowSpan="4"/>
 
-                    <Label Grid.Row="1"
-                       Grid.Column="1"
-                       x:Name="CompanyCodemsg"
-                       Content=""
-                       FontSize="14"
-                       Foreground="#FFB60000"
-                       Margin="0,5,0,0"/>
+                    <Label Grid.Row="3" Grid.Column="1"
+                           x:Name="CompanyCodemsg"
+                           Foreground="Red" Margin="26,1,77,77" FontSize="20"/>
 
-                    <TextBlock Grid.Row="2"
-                       Grid.Column="0"
-                       VerticalAlignment="Center"
-                       Margin="0,20,0,0"
-                       FontFamily="Hancom MalangMalang Regular"
-                       FontSize="18"><Run Text="Antenna IP"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
+                    <!-- Antenna IP -->
+                    <TextBlock Grid.Row="3" Grid.Column="0"
+                           VerticalAlignment="Top"
+                           FontSize="24"
+                           Text="Antenna IP :" Margin="28,79,315,0" Grid.ColumnSpan="2" />
 
-                    <TextBox Grid.Row="2"
-                         Grid.Column="1"
+                    <TextBox Grid.Row="3" Grid.Column="1"
                          Height="35"
-                         Padding="5"
-                         Margin="0,20,0,0"
-                         FontFamily="Hancom MalangMalang Regular"
-                         FontSize="16"
-                         x:Name="AntennaIpBox"/>
+                         x:Name="AntennaIpBox" Margin="24,81,2,-4" FontSize="20" Width="300" BorderThickness="2,2,2,2"/>
 
-                    <Label Grid.Row="3"
-                       Grid.Column="1"
-                       x:Name="ipmsg"
-                       Content=""
-                       FontSize="14"
-                       Foreground="#FFB60000"
-                       Margin="0,5,0,0"/>
-
-                    <TextBlock Grid.Row="4"
-                       Grid.Column="0"
-                       VerticalAlignment="Center"
-                       Margin="0,20,0,0"
-                       FontFamily="Hancom MalangMalang Regular"
-                       FontSize="18"><Run Text="Antenna Port"/><Run Language="ko-kr" Text=" "/><Run Text=":"/></TextBlock>
-
-                    <TextBox Grid.Row="4"
-                         Grid.Column="1"
-                         Height="35"
-                         Padding="5"
-                         Margin="0,20,0,0"
-                         FontFamily="Hancom MalangMalang Regular"
-                         FontSize="16"
-                         x:Name="AntennaPortBox"/>
-
-                    <Label Grid.Row="5"
-                       Grid.Column="1"
-                       x:Name="portmsg"
-                       Content=""
-                       FontSize="14"
-                       Foreground="#FFB60000"
-                       Margin="0,5,0,0"/>
+                    <Label Grid.Row="3" Grid.Column="1"
+                           x:Name="ipmsg"
+                           Foreground="Red" Margin="26,116,67,-42" FontSize="20"/>
 
                 </Grid>
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="0,40,0,0">
 
-                    <Button Content="OK"
-                            Width="120"
-                            Height="40"
-                            Margin="0,0,20,0"
-                            Background="#0078D7"
-                            Foreground="White"
-                            FontWeight="Bold"
-                            x:Name="OkButton"
-                            Click="OkButton_Click"/>
 
-                    <Button Content="Cancel"
-                            Width="120"
-                            Height="40"
-                            Background="#D83B01"
-                            Foreground="White"
-                            FontWeight="Bold"
-                            x:Name="CacelButton"
-                            Click="CancelButton_Click"/>
 
-                </StackPanel>
 
             </StackPanel>
         </Border>
 
+
+        <Button 
+            Content="OK"
+            Margin="815,0,975,335"
+            Background="#0078D7"
+            Foreground="White"
+            FontWeight="Bold"
+            x:Name="OkButton"
+            VerticalAlignment="Bottom"
+            Click="OkButton_Click" Grid.Column="1" Height="45" FontSize="20"/>
+
+        <Button 
+            Content="Cancel"
+            Background="#D83B01"
+            Foreground="White"
+            FontWeight="Bold"
+            x:Name="CacelButton"
+            VerticalAlignment="Bottom"
+            Click="CancelButton_Click" Margin="975,0,815,335" RenderTransformOrigin="1.4,1.25" Grid.Column="1" Height="45" FontSize="20"/>
+
+
         <Grid x:Name="alert"
-              HorizontalAlignment="Center"
+              HorizontalAlignment="Left"
               VerticalAlignment="Top" 
-              Margin="0,82,0,0"
+              Margin="794,82,0,0"
               Width="312" 
               Height="80"
-              Visibility="Collapsed">
+              Visibility="Collapsed" Grid.Column="1">
 
             <Rectangle Fill="White"
                RadiusX="15"
@@ -173,9 +139,9 @@
                    Content="Connection Success"
                    VerticalAlignment="Center"
                    VerticalContentAlignment="Center"
-                   FontFamily="Hancom Hoonminjeongeum_H"
+                   FontFamily="#MilSpec33558"
                    FontSize="36" 
-                   Foreground="#333333" Margin="45,0,-52,0" Grid.ColumnSpan="2"/>
+                   Foreground="#333333" Margin="45,0,-64,0" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
     </Grid>

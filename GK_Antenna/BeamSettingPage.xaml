@@ -433,7 +433,7 @@
         <Rectangle Height="861" Margin="64,144,82,0" VerticalAlignment="Top" Fill="White"/>
 
         <Label Content="Satellite Beam Configuration" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top" Height="76" Width="678" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold"/>
-        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1170,177,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold"/>
+        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1178,177,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold"/>
 
         <Label Content="Working Mode:" HorizontalAlignment="Left" Margin="111,258,0,0" VerticalAlignment="Top" Height="58" Width="282" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
         <Label Content="Carrier Detect:" HorizontalAlignment="Left" Margin="103,337,0,0" VerticalAlignment="Top" Height="54" Width="290" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right"/>
