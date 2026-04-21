@@ -166,6 +166,7 @@ namespace GK_Antenna
                 UpdateEsNoBoxUI(response.antennaData, response.multiModeReceiverData);
                 UpdateSpeedGauge(response.gnssData.gpsSpeed);
                 UpdateGPSBoxUI(response.antennaData, response.gnssData);
+                UpdateIMUBoxUI(response.antennaData, response.imuData);
                 _currentValue = response.multiModeReceiverData.mmrCnrPower;
 
                 UpdateAttitude(
@@ -278,6 +279,32 @@ namespace GK_Antenna
                 GPS_Label.Text = "GPS(Disconnect)";
             }
         }
+
+        public void UpdateIMUBoxUI(AntennaData antennaData, ImuData imuData)
+        {
+            if (antennaData.antennaState != 0)
+            {
+                ipitch.Foreground = Brushes.Red;
+                ipitch.Text = "---";
+
+                iroll.Foreground = Brushes.Red;
+                iroll.Text = "---";
+
+                ihead.Foreground = Brushes.Red;
+                ihead.Text = "---";
+
+                return;
+            }
+
+            ipitch.Foreground = Brushes.White;
+            iroll.Foreground= Brushes.White;
+            ihead.Foreground= Brushes.White;
+
+            ipitch.Text = imuData.imuPitch.ToString("0.00");
+            iroll.Text = imuData.imuRoll.ToString("0.00");
+            ihead.Text = imuData.imuYaw.ToString("0.00");
+        }
+
 
         public void UpdateVoltageText(AntennaData data)
         {

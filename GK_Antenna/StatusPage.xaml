@@ -7,7 +7,7 @@
       mc:Ignorable="d"
       d:DesignHeight="1080"
       d:DesignWidth="1920"
-      Background="#666666">
+      Background="#001F3F">
 
 
 
@@ -57,7 +57,7 @@
 
             <StackPanel Margin="-9,83,-9,0" RenderTransformOrigin="0.5,0.5">
                 <TextBlock x:Name="GPS_Label" Text="GPS(Invalid)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
-                <Border x:Name="GPS_Box" Height="131" Background="#121212" Width="376">
+                <Border x:Name="GPS_Box" Height="130" Background="#121212" Width="376">
                     <Grid Margin="20,10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -79,12 +79,39 @@
                             <TextBlock Text="Altitude (m) :" Width="146" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
                             <TextBlock x:Name="galt" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="23" Width="187"/>
                         </StackPanel>
+                        
                     </Grid>
                 </Border>
             </StackPanel>
 
-            <StackPanel Margin="3,125,-6,0">
-                <Border x:Name="IMU_Box" Height="135" Background="#121212" Width="376"/>
+            <StackPanel Margin="3,83,-6,0">
+                <TextBlock x:Name="IMU_Label" Text="IMU" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <Border x:Name="IMU_Box" Height="130" Background="#121212" Width="376">
+                    <Grid Margin="20,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Pitch (°) :" Width="98" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ipitch" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="22" Width="188"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Roll (°) :" Width="88" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="iroll" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" RenderTransformOrigin="0.969,0.436" Height="21" Width="171"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="Heading (°) :" Width="138" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="ihead" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="23" Width="187"/>
+                        </StackPanel>
+
+
+                    </Grid>
+                </Border>
             </StackPanel>
 
             <!-- EsNo -->
@@ -111,7 +138,7 @@
 
             <Canvas VerticalAlignment="Top">
                 <Border x:Name="TopBar"
-                Background="#FF555555"
+                Background="#000080"
                 Height="86"
                 Width="1920" 
                 Canvas.Left="-20" 
@@ -401,11 +428,11 @@
         </Grid>
 
         <Viewbox x:Name="SpeedometerViewbox" 
-                 Width="610" Height="367" 
+                 Width="475" Height="367" 
                  HorizontalAlignment="Left" VerticalAlignment="Top" 
                  Margin="86,169,0,0" Grid.Row="2" Grid.ColumnSpan="2">
 
-            <Border Background="White" CornerRadius="12" Padding="30" Width="519" Height="398">
+            <Border Background="#001F3F" CornerRadius="12" Padding="30" Width="519" Height="398">
                 <StackPanel Width="500">
 
                     <Grid Width="450" Height="350" HorizontalAlignment="Center">
@@ -1114,7 +1141,7 @@
        Cursor="Hand" 
        PreviewMouseDown="amipClearDown" Height="51" Width="108" Grid.Column="1"/>
 
-        <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="608,622,44,26" Grid.Row="2" Grid.Column="1"/>
+        <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="608,612,44,26" Grid.Row="2" Grid.Column="1"/>
 
         <StackPanel Orientation="Horizontal" 
             Grid.Column="1" Grid.Row="2" 
