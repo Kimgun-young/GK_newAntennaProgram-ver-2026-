@@ -71,6 +71,7 @@ namespace GK_Antenna
             DrawCompass();
             CreateNeedle();
 
+
            
 
             // 연결 상태일 때 즉시 기동 로직
@@ -365,19 +366,18 @@ namespace GK_Antenna
 
         public void DrawCompass()
         {
-            double centerX = 200;
-            double centerY = 200;
-            double radius = 180;
+            double centerX = CompassCanvas.Width / 2;
+            double centerY = CompassCanvas.Height / 2;
+            double radius = Math.Min(centerX, centerY) - 10;
 
             var circle = new Ellipse
             {
                 Width = radius * 2,
                 Height = radius * 2,
-                Stroke = Brushes.Black,
+                Stroke = Brushes.White,
                 StrokeThickness = 3,
-                Fill = Brushes.White
+                Fill = Brushes.Black
             };
-
             Canvas.SetLeft(circle, centerX - radius);
             Canvas.SetTop(circle, centerY - radius);
             CompassCanvas.Children.Add(circle);
@@ -385,26 +385,17 @@ namespace GK_Antenna
             for (int i = 0; i < 360; i += 10)
             {
                 double angleRad = i * Math.PI / 180;
-
                 double inner = (i % 30 == 0) ? radius - 20 : radius - 10;
-                double outer = radius;
-
-                double x1 = centerX + inner * Math.Sin(angleRad);
-                double y1 = centerY - inner * Math.Cos(angleRad);
-
-                double x2 = centerX + outer * Math.Sin(angleRad);
-                double y2 = centerY - outer * Math.Cos(angleRad);
 
                 var tick = new Line
                 {
-                    X1 = x1,
-                    Y1 = y1,
-                    X2 = x2,
-                    Y2 = y2,
-                    Stroke = Brushes.Black,
+                    X1 = centerX + inner * Math.Sin(angleRad),
+                    Y1 = centerY - inner * Math.Cos(angleRad),
+                    X2 = centerX + radius * Math.Sin(angleRad),
+                    Y2 = centerY - radius * Math.Cos(angleRad),
+                    Stroke = Brushes.White,
                     StrokeThickness = (i % 30 == 0) ? 3 : 1
                 };
-
                 CompassCanvas.Children.Add(tick);
             }
 
@@ -428,7 +419,7 @@ namespace GK_Antenna
                 Text = text,
                 FontSize = 20,
                 FontWeight = FontWeights.Bold,
-                Foreground = Brushes.Black
+                Foreground = Brushes.White
             };
 
             tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -446,35 +437,38 @@ namespace GK_Antenna
 
         public void CreateNeedle()
         {
+            double centerX = CompassCanvas.Width / 2;
+            double centerY = CompassCanvas.Height / 2;
+            double size = Math.Min(centerX, centerY) * 0.6; // 바늘 길이
+
             needleTop = new Polygon
             {
                 Points = new PointCollection
-                {
-                    new Point(200, 100),
-                    new Point(185, 200),
-                    new Point(215, 200)
-                },
+        {
+            new Point(centerX,          centerY - size),
+            new Point(centerX - 15,     centerY),
+            new Point(centerX + 15,     centerY)
+        },
                 Fill = Brushes.Red
             };
 
             needleBottom = new Polygon
             {
                 Points = new PointCollection
-                {
-                    new Point(200, 300),
-                    new Point(185, 200),
-                    new Point(215, 200)
-                },
-                Fill = Brushes.Blue
+        {
+            new Point(centerX,          centerY + size),
+            new Point(centerX - 15,     centerY),
+            new Point(centerX + 15,     centerY)
+        },
+                Fill = Brushes.White
             };
 
-            needleRotate = new RotateTransform(0, 200, 200);
-
+            needleRotate = new RotateTransform(0, centerX, centerY);
             needleTop.RenderTransform = needleRotate;
             needleBottom.RenderTransform = needleRotate;
 
-            CompassCanvas.Children.Add(needleTop);
             CompassCanvas.Children.Add(needleBottom);
+            CompassCanvas.Children.Add(needleTop);
         }
 
         public void UpdateCompass(double azimuth)
@@ -756,6 +750,62 @@ namespace GK_Antenna
             YAxes[0].MinStep = step;
         }
 
+        private void SpeedometerCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            DrawTicks();
+            DrawLabels();
+        }
+
+        private void DrawTicks()
+        {
+            for (int angle = -120; angle <= 120; angle += 2)
+            {
+                bool isMajor = angle % 10 == 0;
+
+                var rect = new Rectangle
+                {
+                    Fill = isMajor ? Brushes.Black
+                                        : new SolidColorBrush(Color.FromRgb(0xA0, 0xAE, 0xC0)),
+                    Width = isMajor ? 3 : 1,
+                    Height = isMajor ? 20 : 8,
+                    RenderTransformOrigin = new Point(0.5, isMajor ? 8 : 20),
+                    RenderTransform = new RotateTransform(angle)
+                };
+
+                Canvas.SetLeft(rect, isMajor ? 223.5 : 224.5);
+                Canvas.SetTop(rect, 40);
+                SpeedometerCanvas.Children.Insert(0, rect); // 바늘 아래에 삽입
+            }
+        }
+
+        private void DrawLabels()
+        {
+            // (속도값, Canvas.Left, Canvas.Top)
+            var labels = new (int val, double left, double top)[]
+            {
+                (0,   108, 258), (20,  94,  211), (40,  94,  167),
+                (60,  109, 124), (80,  138,  90), (100, 167,  70),
+                (120, 208,  64), (140, 254,  70), (160, 291,  92),
+                (180, 315, 122), (200, 332, 165), (220, 332, 211),
+                (240, 315, 257)
+            };
+
+            foreach (var (val, left, top) in labels)
+            {
+                var tb = new TextBlock
+                {
+                    Text = val.ToString(),
+                    Foreground = Brushes.Black,
+                    FontSize = 16,
+                    FontWeight = FontWeights.Bold,
+                    Width = val >= 100 ? 31 : double.NaN
+                };
+
+                Canvas.SetLeft(tb, left);
+                Canvas.SetTop(tb, top);
+                SpeedometerCanvas.Children.Insert(0, tb); // 바늘 아래에 삽입
+            }
+        }
 
         private void TopBar_MouseEnter(object sender, MouseEventArgs e)
         {
