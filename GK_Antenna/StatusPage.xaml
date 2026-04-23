@@ -25,7 +25,7 @@
         <UniformGrid Rows="1" Columns="5" Margin="0,0,0,20" Grid.RowSpan="3" Grid.ColumnSpan="2">
 
             <StackPanel Margin="0,83,0,0">
-                <TextBlock Text="Connection" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <TextBlock Text="Connection" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 <Border x:Name="ConnectionBox" Height="130" Background="#121212">
                     <TextBlock x:Name="ConnectionText"
                                Text="N/A"
@@ -38,7 +38,7 @@
             </StackPanel>
 
             <StackPanel Margin="-1,78,-2,0">
-                <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 <Border x:Name="TemperatureBox" Height="130" Background="#121212" Margin="5" Width="376">
                     <TextBlock x:Name="TemperatureText"
                                Text="N/A"
@@ -51,7 +51,7 @@
             </StackPanel>
 
             <StackPanel Margin="-9,83,-9,0" RenderTransformOrigin="0.5,0.5">
-                <TextBlock x:Name="GPS_Label" Text="GPS(Invalid)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <TextBlock x:Name="GPS_Label" Text="GPS(Invalid)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 <Border x:Name="GPS_Box" Height="130" Background="#121212" Width="376">
                     <Grid Margin="20,10">
                         <Grid.RowDefinitions>
@@ -80,7 +80,7 @@
             </StackPanel>
 
             <StackPanel Margin="3,83,-6,0">
-                <TextBlock x:Name="IMU_Label" Text="IMU" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <TextBlock x:Name="IMU_Label" Text="IMU" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 <Border x:Name="IMU_Box" Height="130" Background="#121212" Width="376">
                     <Grid Margin="20,10">
                         <Grid.RowDefinitions>
@@ -111,7 +111,7 @@
 
             <!-- EsNo -->
             <StackPanel Margin="11,83,-11,0">
-                <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" FontWeight="Bold"/>
+                <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 <Border x:Name="EsNoBox" Height="130" Background="#121212" Width="376">
                     <TextBlock x:Name="EsNoText"
                                Text="N/A"
@@ -186,7 +186,6 @@
            Text="Azimuth: 0°"
            Foreground="White"
            FontSize="24"
-           FontWeight="Bold"
            HorizontalAlignment="Left"
            VerticalAlignment="Top"
            Margin="536,529,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031" Grid.Column="1"/>
@@ -572,7 +571,7 @@
 
                             <!-- 속도 텍스트 -->
                             <TextBlock x:Name="speed" Text="0.0 km/h" Foreground="White"
-                               FontSize="32" FontWeight="Bold"
+                               FontSize="32"
                                Canvas.Left="158" Canvas.Top="297"/>
 
                         </Canvas>

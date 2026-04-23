@@ -303,7 +303,8 @@ namespace GK_Antenna
 
             ipitch.Text = imuData.imuPitch.ToString("0.00");
             iroll.Text = imuData.imuRoll.ToString("0.00");
-            ihead.Text = imuData.imuYaw.ToString("0.00");
+            double yaw = imuData.imuYaw;
+            ihead.Text = (yaw >= 359.99 ? 0 : yaw).ToString("0.00");
         }
 
 
@@ -549,13 +550,12 @@ namespace GK_Antenna
             const double minTempY = 350.0;    // -60 눈금 Y위치
             const double maxTempY = 0.0;      // 80 눈금 Y위치
 
-            const double bottomOffset = barBottom - minTempY;       // 3px (눈금 아래 여백)
-            const double totalRangeHeight = minTempY - maxTempY;    // 350px
+            const double bottomOffset = barBottom - minTempY;       
+            const double totalRangeHeight = minTempY - maxTempY;    
 
             double clamped = Math.Max(minTemp, Math.Min(maxTemp, temp));
             double ratio = (clamped - minTemp) / (maxTemp - minTemp);
 
-            // temp=-60이면 3px(바닥 채움), temp=80이면 353px(꽉 참)
             double targetHeight = bottomOffset + (ratio * totalRangeHeight);
 
             Canvas.SetTop(TempLevelBar, barBottom);
