@@ -56,7 +56,7 @@ namespace GK_Antenna
             {
                 new LineSeries<double> {
                     Values = _values,
-                    Stroke = new SolidColorPaint(SKColors.DeepSkyBlue, 2),
+                    Stroke = new SolidColorPaint(SKColor.Parse("#FFA500"), 3),
                     Fill = null,
                     GeometryFill = null,
                     GeometryStroke = null
@@ -361,7 +361,11 @@ namespace GK_Antenna
                         EsNoText.Foreground = Brushes.Red; 
                     }
                 }
+
+                UpdateEsNoGauge(antenna, mmr);
             });
+
+     
         }
 
         public void DrawCompass()
@@ -376,7 +380,7 @@ namespace GK_Antenna
                 Height = radius * 2,
                 Stroke = Brushes.White,
                 StrokeThickness = 3,
-                Fill = Brushes.Black
+
             };
             Canvas.SetLeft(circle, centerX - radius);
             Canvas.SetTop(circle, centerY - radius);
@@ -460,7 +464,7 @@ namespace GK_Antenna
             new Point(centerX - 15,     centerY),
             new Point(centerX + 15,     centerY)
         },
-                Fill = Brushes.White
+                Fill = Brushes.Blue
             };
 
             needleRotate = new RotateTransform(0, centerX, centerY);
@@ -538,50 +542,48 @@ namespace GK_Antenna
         {
             if (TempLevelBar == null) return;
 
-            // 1. 온도 범위 설정
             const double minTemp = -60;
             const double maxTemp = 80;
 
-            // 2. 눈금의 물리적 거리 (XAML의 Y축 0 ~ 350 거리와 일치)
-            // 몸체 Height가 356이더라도, 눈금이 350 간격으로 그려졌다면 이 값을 350으로 유지해야 합니다.
-            const double totalRangeHeight = 350;
+            const double barBottom = 354.0;   // 튜브 내부 바닥 (Canvas.Top 고정)
+            const double minTempY = 350.0;    // -60 눈금 Y위치
+            const double maxTempY = 0.0;      // 80 눈금 Y위치
 
-            // 3. 온도 제한 (범위를 벗어나지 않게)
-            double clampedTemp = Math.Max(minTemp, Math.Min(maxTemp, temp));
+            const double bottomOffset = barBottom - minTempY;       // 3px (눈금 아래 여백)
+            const double totalRangeHeight = minTempY - maxTempY;    // 350px
 
-            // 4. 높이 비율 계산 
-            // (현재온도 - (-60)) / (80 - (-60)) * 350
-            double targetHeight = ((clampedTemp - minTemp) / (maxTemp - minTemp)) * totalRangeHeight;
+            double clamped = Math.Max(minTemp, Math.Min(maxTemp, temp));
+            double ratio = (clamped - minTemp) / (maxTemp - minTemp);
 
-            // 5. 애니메이션 적용
+            // temp=-60이면 3px(바닥 채움), temp=80이면 353px(꽉 참)
+            double targetHeight = bottomOffset + (ratio * totalRangeHeight);
+
+            Canvas.SetTop(TempLevelBar, barBottom);
+
             DoubleAnimation anim = new DoubleAnimation
             {
+                From = TempLevelBar.ActualHeight,
                 To = targetHeight,
                 Duration = TimeSpan.FromMilliseconds(300),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
-
             TempLevelBar.BeginAnimation(Rectangle.HeightProperty, anim);
         }
         public void UpdateSpeedGauge(double speedValue)
         {
-            // 1. 공식 적용: 220km/h일 때 100도, 240km/h일 때 120도가 나옵니다.
             double targetAngle = speedValue - 120;
 
             
-            if (targetAngle < -120) targetAngle = -120; // 0km/h일 때
-            if (targetAngle > 120) targetAngle = 120;   // 240km/h일 때
+            if (targetAngle < -120) targetAngle = -120; 
+            if (targetAngle > 120) targetAngle = 120;   
 
-            // 3. UI 스레드에서 업데이트 수행
             Dispatcher.Invoke(() =>
             {
-                // 바늘 회전 업데이트 (XAML의 RotateTransform 이름: NeedleRotation)
                 if (NeedleRotation != null)
                 {
                     NeedleRotation.Angle = targetAngle;
                 }
 
-                // 디지털 수치 텍스트 업데이트 (TextBlock 이름: SpeedText)
                 if (speed != null)
                 {
                     speed.Text = $"{speedValue:F1} km/h";
@@ -589,7 +591,41 @@ namespace GK_Antenna
             });
         }
 
-       
+        private void UpdateEsNoGauge(AntennaData antenna, MultiModeReceiverData mmr)
+        {
+            double esno = mmr.mmrCnrPower;
+            if (EsNoLevelBar == null) return;
+
+            const double minVal = -120;
+            const double maxVal = 30;
+
+            const double barBottom = 354.0;      // Canvas.Top 고정 (튜브 바닥)
+            const double minValY = 326.67;       // -120 눈금 Y위치
+            const double maxValY = 0.0;          // 30 눈금 Y위치
+
+            // -120일 때 바가 튜브 바닥(354)에서 -120 눈금(326.67)까지만 채움
+            const double bottomOffset = barBottom - minValY; // 약 27.33px
+            const double totalRangeHeight = minValY - maxValY; // 326.67px
+
+            double clamped = Math.Max(minVal, Math.Min(maxVal, esno));
+            double ratio = (clamped - minVal) / (maxVal - minVal);
+
+            // esno=-120 이면 bottomOffset만큼, esno=30 이면 354px
+            double targetHeight = bottomOffset + (ratio * totalRangeHeight);
+
+            Canvas.SetTop(EsNoLevelBar, barBottom);
+
+            EsNoLevelBar.BeginAnimation(Rectangle.HeightProperty, null);
+            DoubleAnimation anim = new DoubleAnimation
+            {
+                From = EsNoLevelBar.ActualHeight,
+                To = targetHeight,
+                Duration = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+            EsNoLevelBar.BeginAnimation(Rectangle.HeightProperty, anim);
+        }
+
 
         private WebSocketSharp.WebSocket ws2;
 
@@ -625,12 +661,17 @@ namespace GK_Antenna
         }
 
         public Axis[] XAxes { get; set; } =
-       {
+        {
             new Axis
             {
-
-                Labels = new string[] {"00:00"}, // 초기 레이블 예시
+                Labels = new string[] {"00:00"},
                 LabelsRotation = 20,
+
+                LabelsPaint = new SolidColorPaint
+                {
+                    Color = SKColors.White,
+                    StrokeThickness = 3
+                }
             }
         };
 
@@ -643,14 +684,19 @@ namespace GK_Antenna
                 MinStep = 2,
                 ForceStepToMin = true,
                 Labeler = value => value.ToString("0"),
+
+                LabelsPaint = new SolidColorPaint
+                {
+                    Color = SKColors.White 
+                },
+
                 SeparatorsPaint = new SolidColorPaint
                 {
-                    Color = SKColors.LightGray, // 가로선 색상
-                    StrokeThickness = 1         // 두께
+                    Color = SKColors.White, 
+                    StrokeThickness = 3
                 }
             }
         };
-
         private void UpdateData(object sender, ElapsedEventArgs e)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -724,7 +770,7 @@ namespace GK_Antenna
                     step = 5;
                 }
 
-                max = 0; // 음수일 때 최대값 고정
+                max = 5; // 음수일 때 최대값 고정
             }
             else
             {
@@ -764,7 +810,7 @@ namespace GK_Antenna
 
                 var rect = new Rectangle
                 {
-                    Fill = isMajor ? Brushes.Black
+                    Fill = isMajor ? Brushes.White
                                         : new SolidColorBrush(Color.FromRgb(0xA0, 0xAE, 0xC0)),
                     Width = isMajor ? 3 : 1,
                     Height = isMajor ? 20 : 8,
@@ -795,7 +841,7 @@ namespace GK_Antenna
                 var tb = new TextBlock
                 {
                     Text = val.ToString(),
-                    Foreground = Brushes.Black,
+                    Foreground = Brushes.White,
                     FontSize = 16,
                     FontWeight = FontWeights.Bold,
                     Width = val >= 100 ? 31 : double.NaN
