@@ -59,7 +59,7 @@
         <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
         <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FF0078D7"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="OrangeRed"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
@@ -79,15 +79,15 @@
             <GradientStop Color="#FFDAECFC" Offset="0.0"/>
             <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="OrangeRed"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF000000"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="OrangeRed"/>
         <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
             <GradientStop Color="#FFDAEBFC" Offset="0.0"/>
             <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="OrangeRed"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FFF0F0F0"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FFD9D9D9"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
@@ -337,13 +337,13 @@
         </Style>
         <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="OrangeRed"/>
         <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFF3F9FF"/>
-        <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="#FF5593FF"/>
-        <SolidColorBrush x:Key="RadioButton.MouseOver.Glyph" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="OrangeRed"/>
+        <SolidColorBrush x:Key="RadioButton.MouseOver.Glyph" Color="OrangeRed"/>
         <SolidColorBrush x:Key="RadioButton.Pressed.Background" Color="#FFD9ECFF"/>
-        <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="#FF3C77DD"/>
-        <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="#FF3C77DD"/>
+        <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="OrangeRed"/>
+        <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="OrangeRed"/>
         <SolidColorBrush x:Key="RadioButton.Disabled.Background" Color="#FFE6E6E6"/>
         <SolidColorBrush x:Key="RadioButton.Disabled.Border" Color="#FFBCBCBC"/>
         <SolidColorBrush x:Key="RadioButton.Disabled.Glyph" Color="#FF707070"/>
@@ -443,8 +443,8 @@
 
         <Rectangle Height="861" Margin="64,144,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
 
-        <Label Content="Satellite Beam Configuration" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top" Height="76" Width="678" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1178,177,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Satellite Beam Configuration" HorizontalAlignment="Left" Margin="90,177,0,0" VerticalAlignment="Top" Height="76" Width="678" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" Foreground="White"/>
+        <Label Content="Beam Setting" HorizontalAlignment="Left" Margin="1212,177,0,0" VerticalAlignment="Top" Height="76" Width="326" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" Foreground="White"/>
 
         <Label Content="Working Mode:" HorizontalAlignment="Left" Margin="111,258,0,0" VerticalAlignment="Top" Height="58" Width="282" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <Label Content="Carrier Detect:" HorizontalAlignment="Left" Margin="103,337,0,0" VerticalAlignment="Top" Height="54" Width="290" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
@@ -460,7 +460,7 @@
         <TextBox x:Name="Roll" HorizontalAlignment="Left" Margin="406,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="Roll_TextChanged" BorderThickness="2" FontSize="24" Background="Transparent" Foreground="White"/>
         <Label x:Name="rollRed" HorizontalAlignment="Left" Margin="406,468,0,0" VerticalAlignment="Top" Height="34" Width="126" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
-        <Label Content="GPS Configuration" HorizontalAlignment="Left" Margin="190,490,0,0" VerticalAlignment="Top" Height="74" Width="446" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" FontWeight="Bold" Foreground="White"/>
+        <Label Content="GPS Configuration" HorizontalAlignment="Left" Margin="190,490,0,0" VerticalAlignment="Top" Height="74" Width="446" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" Foreground="White"/>
         <Label Content="GPS Mode:" HorizontalAlignment="Left" Margin="199,572,0,0" VerticalAlignment="Top" Height="54" Width="194" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
 
 
@@ -483,7 +483,7 @@
         <Label x:Name="altRed" HorizontalAlignment="Left" Margin="408,864,0,0" VerticalAlignment="Top" Height="32" Width="183" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
 
         <Grid Margin="20,11,20,29">
-            <UniformGrid Rows="1" Columns="5" Margin="0,80,0,0"></UniformGrid>
+            <UniformGrid Rows="1" Columns="5" Margin="0,80,-10,0"></UniformGrid>
         </Grid>
 
         <Label Content="Longitude (°) " HorizontalAlignment="Left" Margin="906,412,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="51" Width="179" FontSize="24" Foreground="White"/>
@@ -543,18 +543,77 @@
             <Label Content="Rx" HorizontalAlignment="Left" Margin="28,0,0,0" VerticalAlignment="Center" FontFamily="#MilSpec33558" FontSize="14" Foreground="White"/>
         </Grid>
         <Grid x:Name="txOn" HorizontalAlignment="Left" Height="28" Margin="1622,295,0,0" VerticalAlignment="Top" Cursor="Hand" MouseDown="TxSwitchOff" Visibility="Hidden" Grid.Row="1" >
-            <Rectangle HorizontalAlignment="Left" Height="27" VerticalAlignment="Center" Width="56" Fill="#FF0977FF" RadiusX="13" RadiusY="13"/>
+            <Rectangle HorizontalAlignment="Left" Height="27" VerticalAlignment="Center" Width="56" Fill="OrangeRed" RadiusX="13" RadiusY="13"/>
             <Ellipse HorizontalAlignment="Left" Height="24" Margin="30,0,0,0" VerticalAlignment="Center" Width="24" Fill="White"/>
             <Label Content="Tx" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558" FontSize="14" Foreground="White" Margin="3,0,0,0"/>
         </Grid>
         <Grid x:Name="rxOn" HorizontalAlignment="Left" Height="28" Margin="1699,295,0,0" VerticalAlignment="Top" Cursor="Hand" MouseDown="RxSwitchOff" Visibility="Hidden" Grid.Row="1">
-            <Rectangle HorizontalAlignment="Left" Height="27" VerticalAlignment="Center" Width="56" Fill="#FF0977FF" RadiusX="13" RadiusY="13"/>
+            <Rectangle HorizontalAlignment="Left" Height="27" VerticalAlignment="Center" Width="56" Fill="OrangeRed" RadiusX="13" RadiusY="13"/>
             <Ellipse HorizontalAlignment="Left" Height="24" Margin="30,0,0,0" VerticalAlignment="Center" Width="24" Fill="White"/>
             <Label Content="Rx" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558" FontSize="14" Foreground="White" Margin="3,0,0,0"/>
         </Grid>
 
-        <Button x:Name="paramset" Content=" Tracking Start" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Width="312" Background="OrangeRed" BorderBrush="{x:Null}" Foreground="White" FontFamily="#MilSpec33558" FontSize="24" Click="setAutoPara" Height="70" Margin="1226,0,0,206"/>
-        <Button x:Name="setBtn" Content="Satellite Beam Setting" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Width="312" Background="OrangeRed" BorderBrush="{x:Null}" Foreground="White" FontFamily="#MilSpec33558" FontSize="24" Cursor="Hand" Click="setBtn_Click" Height="71" Margin="267,0,0,106"/>
+        <Button x:Name="paramset"
+                Content=" Tracking Start"
+                VerticalAlignment="Bottom"
+                Width="276"
+                Height="70"
+                Margin="1237,0,0,188"
+                HorizontalAlignment="Left"
+                Background="Transparent"
+                Foreground="White"
+                FontFamily="#MilSpec33558"
+                FontSize="24"
+                BorderBrush="OrangeRed"
+                BorderThickness="3"
+                Click="setAutoPara">
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+
+        <Button x:Name="setBtn" 
+                Content="Satellite Beam Setting" 
+                VerticalAlignment="Bottom"  
+                HorizontalAlignment="Left" 
+                Width="312" 
+                Background="Transparent" 
+                BorderBrush="OrangeRed" 
+                Foreground="White" 
+                FontFamily="#MilSpec33558" 
+                FontSize="24" 
+                Cursor="Hand" 
+                Click="setBtn_Click" 
+                Height="71" 
+                Margin="313,0,0,99" BorderThickness="3,3,3,3">
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="10">
+
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                          VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
         <Grid x:Name="manualModeBox" Margin="705,157,-237,170" Visibility= "Collapsed">
             <Grid.ColumnDefinitions>
@@ -562,7 +621,7 @@
                 <ColumnDefinition Width="169*"/>
             </Grid.ColumnDefinitions>
 
-            <Rectangle HorizontalAlignment="Left" Margin="6,199,0,-74" Width="1121" Fill="#001F3F" RenderTransformOrigin="0.5,0.5">
+            <Rectangle HorizontalAlignment="Left" Margin="6,199,0,-74" Width="1156" Fill="#001F3F" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -583,13 +642,13 @@
 
             <Rectangle HorizontalAlignment="Left" 
                Margin="433,215,0,46" 
-               Width="691" 
+               Width="702" 
                Fill="#001F3F" 
                Stroke="White" 
                StrokeThickness="2" 
                RenderTransformOrigin="0.5,0.5" />
 
-            <Label Content="TX Beam" HorizontalAlignment="Left" Margin="105,192,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="36" FontWeight="Bold" Height="47" Width="166" Background="#001F3F" Foreground="White"/>
+            <Label Content="TX Beam" HorizontalAlignment="Left" Margin="159,192,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="36" Height="47" Width="155" Background="#001F3F" Foreground="White"/>
 
             <Label Content="Tx-Freq (GHz)" HorizontalAlignment="Left" Margin="62,267,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="44" Width="152" FontSize="24" Foreground="White"/>
             <TextBox x:Name="manualtxfreq" HorizontalAlignment="Left" Margin="239,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="MTxFreq_TextChanged" FontSize="24" BorderThickness="2,2,2,2" Height="34" Foreground="White" Background="Transparent"/>
@@ -614,7 +673,7 @@
             <TextBox x:Name="txpoltb" HorizontalAlignment="Left" Margin="239,632,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="TxPol_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
             <Label x:Name="TxPolRed" HorizontalAlignment="Left" Margin="242,666,0,0" VerticalAlignment="Top" Height="25" FontSize="9" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="89" />
 
-            <Label Content="RX Beam" HorizontalAlignment="Left" Margin="499,192,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="36" FontWeight="Bold" Height="47" Width="170" Background="#001F3F" Foreground="White"/>
+            <Label Content="RX Beam" HorizontalAlignment="Left" Margin="715,192,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="36" Height="47" Width="161" Background="#001F3F" Foreground="White"/>
 
             <Label Content="Rx-Freq (GHz)" HorizontalAlignment="Left" Margin="464,278,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="38" Width="157" FontSize="24" Foreground="White"/>
             <TextBox x:Name="manualrxFreq" HorizontalAlignment="Left" Margin="630,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="MRxFreq_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
@@ -648,8 +707,66 @@
             <Label x:Name="rxtypelabel" Content="Pol-Type" HorizontalAlignment="Left" Margin="828,573,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="49" Width="114" Visibility="Visible" FontSize="24" Foreground="White"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="rxpolcb" HorizontalAlignment="Left" Margin="944,573,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="#MilSpec33558" Visibility="Visible" FontSize="24" BorderThickness="2,2,2,2" />
 
-            <Button x:Name="ManualTxSetBtn" Content="Tx Beam Setting" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Width="290" Background="OrangeRed" BorderBrush="{x:Null}" Foreground="White" FontFamily="#MilSpec33558" FontSize="24" Cursor="Hand" Click="ManualTxSetBtn_Click" Margin="106,0,0,-40" Height="71" />
-            <Button x:Name="ManualRxSetBtn" Content="Rx Beam Setting" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="290" Background="OrangeRed" BorderBrush="{x:Null}" Foreground="White" FontFamily="#MilSpec33558" FontSize="24" Cursor="Hand" Click="ManualRxSetBtn_Click" Margin="674,0,0,-40" Height="71"/>
+            <Button x:Name="ManualTxSetBtn" 
+                    Content="Tx Beam Setting" 
+                    VerticalAlignment="Bottom"  
+                    HorizontalAlignment="Left" 
+                    Width="290" 
+                    Background="Transparent" 
+                    BorderBrush="OrangeRed" 
+                    Foreground="White" 
+                    FontFamily="#MilSpec33558" 
+                    FontSize="24" 
+                    Cursor="Hand" 
+                    Click="ManualTxSetBtn_Click" 
+                    Margin="102,0,0,-68" 
+                    Height="71" BorderThickness="3,3,3,3">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+
+
+            <Button x:Name="ManualRxSetBtn" 
+                    Content="Rx Beam Setting" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Left" 
+                    Width="290" 
+                    Background="Transparent" 
+                    BorderBrush="OrangeRed" 
+                    Foreground="White" 
+                    FontFamily="#MilSpec33558" 
+                    FontSize="24" 
+                    Cursor="Hand" 
+                    Click="ManualRxSetBtn_Click" 
+                    Margin="665,0,0,-68" 
+                    Height="71" BorderThickness="3,3,3,3">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="10">
+
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
 
         </Grid>
