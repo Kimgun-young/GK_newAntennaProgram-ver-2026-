@@ -8,28 +8,27 @@
         mc:Ignorable="d"
         d:DesignHeight="1080"
         d:DesignWidth="1920"
-        Background="#666666"
+        Background="#001F3F"
         Title= "MapPage">
 
 
     <Grid>
-        <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
-        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
+        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
 
         <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
               Margin="90,170,99,119" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
 
-        <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1227,953,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="#MilSpec33558"/>
+        <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1227,953,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
 
-        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="445,954,0,0" VerticalAlignment="Top" Height="56" Width="178" FontSize="36" FontFamily="#MilSpec33558" RenderTransformOrigin="0.665,0.973"/>
-        <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="623,957,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="210" FontFamily="#MilSpec33558"/>
-        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,953,0,0" VerticalAlignment="Top" Height="58" Width="145" FontSize="36" FontFamily="#MilSpec33558"/>
-        <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="235,955,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="194" FontFamily="#MilSpec33558"/>
+        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="445,954,0,0" VerticalAlignment="Top" Height="56" Width="178" FontSize="36" FontFamily="#MilSpec33558" RenderTransformOrigin="0.665,0.973" Foreground="White"/>
+        <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="623,957,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="210" FontFamily="#MilSpec33558" Foreground="White"/>
+        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,953,0,0" VerticalAlignment="Top" Height="58" Width="145" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
+        <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="235,955,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="194" FontFamily="#MilSpec33558" Foreground="White"/>
 
 
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
-         Background="#FF555555"
+         Background="#001529"
          Height="86"
          Width="1920"
          MouseEnter="TopBar_MouseEnter"

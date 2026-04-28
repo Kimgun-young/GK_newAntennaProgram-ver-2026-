@@ -799,25 +799,6 @@
             </Border>
         </Grid>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
         Background="#001529"

@@ -12,6 +12,7 @@
     <None Remove="Resources\fonts\DS-DIGI.TTF" />
     <None Remove="Resources\fonts\LAB디지털.ttf" />
     <None Remove="Resources\fonts\MilSpec33558.ttf" />
+    <None Remove="Resources\Icons\appIcon.ico" />
     <None Remove="Resources\Icons\marker.png" />
     <None Remove="Resources\Images\ant-design--check-circle-filled %281%29.png" />
     <None Remove="Resources\Images\ant-design--close-circle-filled.png" />
@@ -33,6 +34,9 @@
   <ItemGroup>
     <Resource Include="Resources\fonts\LAB디지털.ttf" />
     <Resource Include="Resources\fonts\MilSpec33558.ttf" />
+    <Resource Include="Resources\Icons\appIcon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Icons\marker.png" />
     <Content Include="Resources\Images\ant-design--check-circle-filled (1).png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

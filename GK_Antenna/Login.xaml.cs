@@ -17,6 +17,7 @@ namespace GK_Antenna
         public Login()
         {
             InitializeComponent();
+            LoadIpOnStartup();
         }
 
         private string filePath = "ip.txt";
@@ -102,6 +103,8 @@ namespace GK_Antenna
 
                 if (isSuccess)
                 {
+                    File.WriteAllText(filePath, ip);
+
                     string msg = result.msg.Contains("repeat")
                         ? "Already Connected"
                         : "Connection Success";
@@ -192,7 +195,7 @@ namespace GK_Antenna
 
         
 
-        private void CompanyCodeBox_PasswordChanged(object sender, RoutedEventArgs e)
+        private void CompanyCodeBox_TextChanged(object sender, RoutedEventArgs e)
         {
             if (CompanyCodemsg == null)
                 return;
@@ -226,9 +229,13 @@ namespace GK_Antenna
 
         }
 
-        private void CompanyCodeBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void LoadIpOnStartup()
         {
-
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, defaultIp); // 기본 IP 저장
+            }
+            AntennaIpBox.Text = File.ReadAllText(filePath);
         }
     }
 }

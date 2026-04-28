@@ -62,7 +62,7 @@
 
                     <Label Grid.Row="3" Grid.Column="1"
                            x:Name="CompanyCodemsg"
-                           Foreground="Red" Margin="26,1,77,77" FontSize="20"/>
+                           Foreground="Red" Margin="26,1,53,77" FontSize="20"/>
 
                     <!-- Antenna IP -->
                     <TextBlock Grid.Row="3" Grid.Column="0"
@@ -72,11 +72,11 @@
 
                     <TextBox Grid.Row="3" Grid.Column="1"
                          Height="35"
-                         x:Name="AntennaIpBox" Margin="24,81,2,-4" FontSize="20" Width="300" BorderThickness="2,2,2,2"/>
+                         x:Name="AntennaIpBox" Margin="24,81,2,-4" FontSize="20" Width="300" TextChanged="IPTextBox_TextChanged" BorderThickness="2,2,2,2"/>
 
                     <Label Grid.Row="3" Grid.Column="1"
                            x:Name="ipmsg"
-                           Foreground="Red" Margin="26,116,67,-42" FontSize="20"/>
+                           Foreground="Red" Margin="26,116,-12,-42" FontSize="20"/>
 
                 </Grid>
 

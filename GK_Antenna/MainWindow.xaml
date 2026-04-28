@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GK_Antenna"
         mc:Ignorable="d"
+        Icon="/Resources/Icons/appIcon.ico"
         Title="GlobalKonet Antenna SW"
         WindowState="Maximized">
 

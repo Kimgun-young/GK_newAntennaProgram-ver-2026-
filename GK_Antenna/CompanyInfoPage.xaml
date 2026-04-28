@@ -7,11 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="1080"
       d:DesignWidth="1920"
-      Background="#FF555555"
+      Background="#001F3F"
       Title="CompanyInfoPage">
 
     <Grid>
-        <Rectangle Height="908" Margin="28,130,48,0" VerticalAlignment="Top" Fill="#FFDFDDDD"/>
         <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="White"/>
 
         <Image Source="/Resources/logos/GK_logo.png" 
@@ -27,7 +26,7 @@
             Stretch="Uniform" Margin="1280,467,151,377"/>
 
         <Label Content="GLOBAL KONET CO., LTD." HorizontalAlignment="Left" Margin="360,584,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KR" FontSize="30"/>
-        <Label Content="+82-31-388-8236, +82-31-1544-9874(International)" HorizontalAlignment="Left" Margin="170,733,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Noto Sans KR"/>
+        <Label Content="+82-31-388-8236, +82-31-1544-9874(International)" HorizontalAlignment="Left" Margin="188,735,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Noto Sans KR"/>
         <Label Content="sales@globalkonet.com" HorizontalAlignment="Left" Margin="369,656,0,0" VerticalAlignment="Top" FontSize="30" FontFamily="Noto Sans KR"/>
         <Label Content="V1.0.0" HorizontalAlignment="Left" Margin="777,513,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Arial Black" Height="60" Width="183" RenderTransformOrigin="0.12,-0.117"/>
         <Label Content="Headquarters: 704, ACA 25, Simin-daero 248beon-gil, Dongangu, Anyang, Gyeonggi-do" HorizontalAlignment="Left" Margin="97,880,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KR" FontSize="24" Width="1044" FontWeight="Bold"/>
@@ -36,7 +35,7 @@
 
         <Canvas VerticalAlignment="Top">
             <Border x:Name="TopBar"
-        Background="#FF555555"
+        Background="#001529"
         Height="86"
         Width="1920"
         MouseEnter="TopBar_MouseEnter"
