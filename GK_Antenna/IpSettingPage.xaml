@@ -18,28 +18,28 @@
 
         <Label Content="OpenAMIP IP:" HorizontalAlignment="Left" Margin="138,375,0,0" VerticalAlignment="Top" Height="56" Width="224" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <TextBox x:Name="amipIP" HorizontalAlignment="Left" Margin="392,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipIP_TextChanged" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-        <Label x:Name="amipIpRed" HorizontalAlignment="Left" Margin="393,420,0,0" VerticalAlignment="Top" Height="37" Width="162" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="amipIpRed" HorizontalAlignment="Left" Margin="393,420,0,0" VerticalAlignment="Top" Height="45" Width="317" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
         <Label Content="OpenAMIP Port:" HorizontalAlignment="Left" Margin="118,542,0,0" VerticalAlignment="Top" Height="47" Width="244" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <TextBox x:Name="amipPort" HorizontalAlignment="Left" Margin="392,544,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipPort_TextChanged" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="amipPortRed" HorizontalAlignment="Left" Margin="395,589,0,0" VerticalAlignment="Top" Height="33" Width="143" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="amipPortRed" HorizontalAlignment="Left" Margin="395,589,0,0" VerticalAlignment="Top" Height="56" Width="290" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
         <Label Content="OpenAMIP Mask:" HorizontalAlignment="Left" Margin="104,700,0,0" VerticalAlignment="Top" Height="54" Width="258" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <TextBox x:Name="amipMask" HorizontalAlignment="Left" Margin="392,700,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="OpenamipMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="amipMaskRed" HorizontalAlignment="Left" Margin="395,742,0,0" VerticalAlignment="Top" Height="35" Width="158" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="amipMaskRed" HorizontalAlignment="Left" Margin="395,742,0,0" VerticalAlignment="Top" Height="48" Width="275" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
         <Label Content="Antenna IP:" HorizontalAlignment="Left" Margin="932,364,0,0" VerticalAlignment="Top" Height="50" Width="202" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <TextBox x:Name="antennaIP" HorizontalAlignment="Left" Margin="1152,368,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="AntennaIP_TextChanged" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="antennaIPRed" HorizontalAlignment="Left" Margin="1154,412,0,0" VerticalAlignment="Top" Height="36" Width="181" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="antennaIPRed" HorizontalAlignment="Left" Margin="1154,412,0,0" VerticalAlignment="Top" Height="53" Width="306" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
 
         <Label Content="Antenna Mask:" HorizontalAlignment="Left" Margin="910,552,0,0" VerticalAlignment="Top" Height="46" Width="224" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
         <TextBox x:Name="antennaMask" HorizontalAlignment="Left" Margin="1152,554,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="AntennaMask_TextChanged" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,598,0,0" VerticalAlignment="Top" Height="32" Width="196" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,598,0,0" VerticalAlignment="Top" Height="57" Width="291" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
         <Button x:Name="AMIP_SettingBtn" 
             Content="AMIP Setting"  
@@ -69,7 +69,7 @@
             FontSize="24" 
             Click="RestartBtn_Click"/>
 
-        <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="191,946,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="20" Foreground="White"/>
+        <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="213,951,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="20" Foreground="White"/>
 
         <Button x:Name="DisconnectBtn" 
             Content="Disconnect" 

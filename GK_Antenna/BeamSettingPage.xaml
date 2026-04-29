@@ -458,7 +458,7 @@
 
         <!--Roll >> RoF로 수정필요-->
         <TextBox x:Name="Roll" HorizontalAlignment="Left" Margin="406,420,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="Roll_TextChanged" BorderThickness="2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="rollRed" HorizontalAlignment="Left" Margin="406,468,0,0" VerticalAlignment="Top" Height="34" Width="126" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="rollRed" HorizontalAlignment="Left" Margin="406,468,0,0" VerticalAlignment="Top" Height="34" Width="126" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
         <Label Content="GPS Configuration" HorizontalAlignment="Left" Margin="190,490,0,0" VerticalAlignment="Top" Height="74" Width="446" FontFamily="#MilSpec33558" FontSize="48" RenderTransformOrigin="0.533,0.289" Foreground="White"/>
         <Label Content="GPS Mode:" HorizontalAlignment="Left" Margin="199,572,0,0" VerticalAlignment="Top" Height="54" Width="194" FontFamily="#MilSpec33558" FontSize="30" RenderTransformOrigin="0.533,0.289" HorizontalContentAlignment="Right" Foreground="White"/>
@@ -473,14 +473,14 @@
         <ComboBox x:Name="GNSSMode" Style="{DynamicResource ComboBoxStyle1}" HorizontalAlignment="Left" Margin="406,576,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" SelectionChanged="GNSSMode_SelectionChanged" BorderThickness="2" FontSize="24"/>
 
         <TextBox x:Name="manaulLong" HorizontalAlignment="Left" Margin="406,652,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="ManualLong_TextChanged" BorderThickness="2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="longRed" HorizontalAlignment="Left" Margin="408,696,0,0" VerticalAlignment="Top" Height="33" Width="122" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="longRed" HorizontalAlignment="Left" Margin="408,696,0,0" VerticalAlignment="Top" Height="33" Width="122" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
         <TextBox x:Name="ManualLat" HorizontalAlignment="Left" Margin="406,734,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="ManualLat_TextChanged" BorderThickness="2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="latRed" HorizontalAlignment="Left" Margin="408,782,0,0" VerticalAlignment="Top" Height="35" Width="133" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="latRed" HorizontalAlignment="Left" Margin="408,782,0,0" VerticalAlignment="Top" Height="35" Width="133" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
         <TextBox x:Name="ManualAlt" HorizontalAlignment="Left" Margin="406,817,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" TextChanged="ManualAlt_TextChanged" BorderThickness="2" FontSize="24" Background="Transparent" Foreground="White"/>
-        <Label x:Name="altRed" HorizontalAlignment="Left" Margin="408,864,0,0" VerticalAlignment="Top" Height="32" Width="183" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="altRed" HorizontalAlignment="Left" Margin="408,864,0,0" VerticalAlignment="Top" Height="32" Width="183" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
         <Grid Margin="20,11,20,29">
             <UniformGrid Rows="1" Columns="5" Margin="0,80,-10,0"></UniformGrid>
@@ -488,19 +488,19 @@
 
         <Label Content="Longitude (°) " HorizontalAlignment="Left" Margin="906,412,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="51" Width="179" FontSize="24" Foreground="White"/>
         <TextBox x:Name="longitude" HorizontalAlignment="Left" Margin="1089,412,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="230" FontFamily="#MilSpec33558" TextChanged="autolongitude_TextChanged" MaxLength="20" FontSize="20" BorderThickness="2" VerticalContentAlignment="Center" Foreground="White" Background="Transparent"/>
-        <Label x:Name="autolongred" HorizontalAlignment="Left" Margin="408,696,0,0" VerticalAlignment="Top" Height="33" Width="122" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="#FF970D0D" FontSize="20"/>
+        <Label x:Name="autolongred" HorizontalAlignment="Left" Margin="1093,459,0,0" VerticalAlignment="Top" Height="33" Width="212" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
 
         <Label Content="Sym. Rate (ksps)" HorizontalAlignment="Left" Margin="1356,411,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="41" Width="182"  FontSize="24" Foreground="White"/>
         <TextBox x:Name="sym" HorizontalAlignment="Left" Margin="1570,412,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" TextChanged="Autosym_TextChanged" MaxLength="20" FontSize="20" BorderThickness="2" VerticalContentAlignment="Center" Background="Transparent" Foreground="White"/>
-        <Label x:Name="symRed" HorizontalAlignment="Left" Margin="1573,455,0,0" VerticalAlignment="Top" Height="30" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Visibility="Visible" Width="120"/>
+        <Label x:Name="symRed" HorizontalAlignment="Left" Margin="1573,455,0,0" VerticalAlignment="Top" Height="44" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Visibility="Visible" Width="217"/>
 
 
 
 
         <Label Content="Tx__Freq (GHz)" HorizontalAlignment="Left" Margin="896,508,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="38" Width="175" RenderTransformOrigin="1.341,2.4" FontSize="24" Foreground="White"/>
         <TextBox x:Name="txfreq" HorizontalAlignment="Left" Margin="1089,506,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="41" FontFamily="#MilSpec33558" TextChanged="TxFreq_TextChanged" MaxLength="20" FontSize="20" BorderThickness="2" VerticalContentAlignment="Center" Background="Transparent" Foreground="White"/>
-        <Label x:Name="txFreqRed" HorizontalAlignment="Left" Margin="1092,552,0,0" VerticalAlignment="Top" Height="39" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Visibility="Visible" Width="171"/>
+        <Label x:Name="txFreqRed" HorizontalAlignment="Left" Margin="1092,552,0,0" VerticalAlignment="Top" Height="39" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Visibility="Visible" Width="213"/>
 
         <Label Content="Tx__Pol" HorizontalAlignment="Left" Margin="972,592,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="42" Width="73" RenderTransformOrigin="-3.687,-4.792" FontSize="24" Foreground="White"/>
 
@@ -513,7 +513,7 @@
 
         <Label Content="Rx__Freq (GHz)" HorizontalAlignment="Left" Margin="1381,506,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="38" Width="157" FontSize="24" Foreground="White"/>
         <TextBox x:Name="rxfreq" HorizontalAlignment="Left" Margin="1570,504,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" FontFamily="#MilSpec33558" TextChanged="RxFreq_TextChanged" MaxLength="20" Height="42" BorderThickness="2" FontSize="20" VerticalContentAlignment="Center" Background="Transparent" Foreground="White"/>
-        <Label x:Name="RxFreqRed" HorizontalAlignment="Left" Margin="1573,547,0,0" VerticalAlignment="Top" Height="39" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Visibility="Visible" Width="182" />
+        <Label x:Name="RxFreqRed" HorizontalAlignment="Left" Margin="1573,547,0,0" VerticalAlignment="Top" Height="39" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Visibility="Visible" Width="227" />
 
         <Label Content="Rx__Pol" HorizontalAlignment="Left" Margin="1456,593,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="44" Width="82" FontSize="24"  Foreground="White"/>
         <ComboBox x:Name="rxpolType" Style="{DynamicResource ComboBoxStyle1}"  HorizontalAlignment="Left" Margin="1570,591,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" BorderThickness="2" FontSize="20" Foreground="White"/>
@@ -523,7 +523,7 @@
         <ComboBox x:Name="Autorxlocb" Style="{DynamicResource ComboBoxStyle1}" HorizontalAlignment="Left" Margin="1570,679,0,0" VerticalAlignment="Top" Width="230" Height="42" FontFamily="#MilSpec33558" VerticalContentAlignment="Center" SelectionChanged="autorxlo_SelectionChanged" FontSize="20" BorderThickness="2"/>
         <TextBlock x:Name="rxtextb" HorizontalAlignment="Left" Margin="1576,686,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontFamily="#MilSpec33558" FontSize="20" Height="30" Foreground="White"/>
         <TextBox x:Name="rxlo" HorizontalAlignment="Left" Margin="1230,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontFamily="#MilSpec33558" TextChanged="RxLo_TextChanged" Visibility="Collapsed" MaxLength="20"  Grid.Row="1" Foreground="White"/>
-        <Label x:Name="RxLORed" HorizontalAlignment="Left" Margin="1572,726,0,0" VerticalAlignment="Top" Height="29" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Visibility="Visible" Width="155"/>
+        <Label x:Name="RxLORed" HorizontalAlignment="Left" Margin="1572,726,0,0" VerticalAlignment="Top" Height="29" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Visibility="Visible" Width="198"/>
 
 
 
@@ -598,7 +598,7 @@
                 Cursor="Hand" 
                 Click="setBtn_Click" 
                 Height="71" 
-                Margin="313,0,0,99" BorderThickness="3,3,3,3">
+                Margin="313,0,0,84" BorderThickness="3,3,3,3">
 
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -633,7 +633,7 @@
             </Rectangle>
 
             <Rectangle HorizontalAlignment="Left" 
-               Margin="45,215,0,46" 
+               Margin="45,215,0,25" 
                Width="383" 
                Fill="#001F3F" 
                Stroke="White" 
@@ -641,7 +641,7 @@
                RenderTransformOrigin="0.5,0.5" />
 
             <Rectangle HorizontalAlignment="Left" 
-               Margin="433,215,0,46" 
+               Margin="433,215,0,25" 
                Width="702" 
                Fill="#001F3F" 
                Stroke="White" 
@@ -652,7 +652,7 @@
 
             <Label Content="Tx-Freq (GHz)" HorizontalAlignment="Left" Margin="62,267,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="44" Width="152" FontSize="24" Foreground="White"/>
             <TextBox x:Name="manualtxfreq" HorizontalAlignment="Left" Margin="239,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="MTxFreq_TextChanged" FontSize="24" BorderThickness="2,2,2,2" Height="34" Foreground="White" Background="Transparent"/>
-            <Label x:Name="mTxFreqRed" HorizontalAlignment="Left" Margin="245,309,0,0" VerticalAlignment="Top" Height="22" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="95"/>
+            <Label x:Name="mTxFreqRed" HorizontalAlignment="Left" Margin="242,305,0,0" VerticalAlignment="Top" Height="32" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="167"/>
 
 
             <Label Content="Tx-LO(GHz)" HorizontalAlignment="Left" Margin="84,340,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="44" Width="130" FontSize="24" Foreground="White"/>
@@ -660,29 +660,29 @@
 
             <Label Content="Tx-Phi (°)" HorizontalAlignment="Left" Margin="108,408,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="43" Width="106" FontSize="24" RenderTransformOrigin="0.479,0.372" Foreground="White"/>
             <TextBox x:Name="txphi" HorizontalAlignment="Left" Margin="239,412,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="Txphi_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Foreground="White" Background="Transparent"/>
-            <Label x:Name="TxPhiRed" HorizontalAlignment="Left" Margin="242,447,0,0" VerticalAlignment="Top" Height="28" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="96" />
+            <Label x:Name="TxPhiRed" HorizontalAlignment="Left" Margin="242,446,0,0" VerticalAlignment="Top" Height="35" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="167" />
 
             <Label Content="Tx-Theta (°)" HorizontalAlignment="Left" Margin="84,481,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="44" Width="130" FontSize="24" Foreground="White"/>
             <TextBox x:Name="txtheta" HorizontalAlignment="Left" Margin="239,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="TxTheta_TextChanged" Height="34" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-            <Label x:Name="TxThetaRed" HorizontalAlignment="Left" Margin="242,520,0,0" VerticalAlignment="Top" Height="25" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="118" />
+            <Label x:Name="TxThetaRed" HorizontalAlignment="Left" Margin="242,520,0,0" VerticalAlignment="Top" Height="35" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="167" />
 
             <Label x:Name="txtypelabel" Content="Pol-Type" HorizontalAlignment="Left" Margin="108,558,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="42" Width="106" Visibility="Visible" FontSize="24" Foreground="White"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="txpolcb" HorizontalAlignment="Left" Margin="239,560,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="#MilSpec33558" Visibility="Visible" FontSize="24" BorderThickness="2,2,2,2" Foreground="White"/>
 
             <Label x:Name="mtxlabel" Content="Tx-Pol (°)" HorizontalAlignment="Left" Margin="110,629,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="41" Width="104" FontSize="24" RenderTransformOrigin="0.496,0.415" Foreground="White"/>
             <TextBox x:Name="txpoltb" HorizontalAlignment="Left" Margin="239,632,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="TxPol_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-            <Label x:Name="TxPolRed" HorizontalAlignment="Left" Margin="242,666,0,0" VerticalAlignment="Top" Height="25" FontSize="9" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="89" />
+            <Label x:Name="TxPolRed" HorizontalAlignment="Left" Margin="242,666,0,0" VerticalAlignment="Top" Height="32" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="163" />
 
             <Label Content="RX Beam" HorizontalAlignment="Left" Margin="715,192,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="36" Height="47" Width="161" Background="#001F3F" Foreground="White"/>
 
             <Label Content="Rx-Freq (GHz)" HorizontalAlignment="Left" Margin="464,278,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="38" Width="157" FontSize="24" Foreground="White"/>
             <TextBox x:Name="manualrxFreq" HorizontalAlignment="Left" Margin="630,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="MRxFreq_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-            <Label x:Name="mRxFreqRed" HorizontalAlignment="Left" Margin="630,320,0,0" VerticalAlignment="Top" Height="34" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="109"/>
+            <Label x:Name="mRxFreqRed" HorizontalAlignment="Left" Margin="630,320,0,0" VerticalAlignment="Top" Height="56" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="170"/>
 
 
             <Label Content="Sym. Rate (ksps)" HorizontalAlignment="Left" Margin="443,385,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="52" Width="184" FontSize="24" Foreground="White"/>
             <TextBox x:Name="manualsym" HorizontalAlignment="Left" Margin="632,387,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="MSym_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-            <Label x:Name="mSymRed" HorizontalAlignment="Left" Margin="636,423,0,0" VerticalAlignment="Top" Height="28" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="128" />
+            <Label x:Name="mSymRed" HorizontalAlignment="Left" Margin="636,423,0,0" VerticalAlignment="Top" Height="41" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="166" />
 
             <Label Content="Carrier Detect" HorizontalAlignment="Left" Margin="462,476,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="40" Width="160" FontSize="24" Foreground="White"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="trackmode" HorizontalAlignment="Left" Margin="632,481,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="#MilSpec33558" BorderThickness="2,2,2,2" FontSize="24" />
@@ -694,15 +694,15 @@
 
             <Label Content="Rx-Phi (°)" HorizontalAlignment="Left" Margin="832,280,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="38" Width="110" FontSize="24" Foreground="White"/>
             <TextBox x:Name="rxphi" HorizontalAlignment="Left" Margin="944,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="Rxphi_TextChanged" Height="34" FontSize="24" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-            <Label x:Name="RxPhiRed" HorizontalAlignment="Left" Margin="945,321,0,0" VerticalAlignment="Top" Height="32" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="150"/>
+            <Label x:Name="RxPhiRed" HorizontalAlignment="Left" Margin="945,319,0,0" VerticalAlignment="Top" Height="43" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="169"/>
 
             <Label Content="Rx-Theta (°)" HorizontalAlignment="Left" Margin="809,383,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="42" Width="133" FontSize="24" Foreground="White"/>
             <TextBox x:Name="rxtheta" HorizontalAlignment="Left" Margin="944,387,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="RxTheta_TextChanged" Height="34" BorderThickness="2,2,2,2" FontSize="24" Background="Transparent" Foreground="White"/>
-            <Label x:Name="RxThetaRed" HorizontalAlignment="Left" Margin="947,423,0,0" VerticalAlignment="Top" Height="30" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="124"/>
+            <Label x:Name="RxThetaRed" HorizontalAlignment="Left" Margin="947,423,0,0" VerticalAlignment="Top" Height="38" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="167"/>
 
             <Label x:Name="mrxlabel" Content="Rx-Pol (°)" HorizontalAlignment="Left" Margin="824,476,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="39" Width="110" FontSize="24" Foreground="White"/>
             <TextBox x:Name="rxpoltb" HorizontalAlignment="Left" Margin="944,478,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontFamily="#MilSpec33558" TextChanged="RxPol_TextChanged" FontSize="24" Height="34" BorderThickness="2,2,2,2" Background="Transparent" Foreground="White"/>
-            <Label x:Name="RxPolRed" HorizontalAlignment="Left" Margin="947,516,0,0" VerticalAlignment="Top" Height="29" FontSize="20" FontFamily="#MilSpec33558" Foreground="#FFBB0000" Width="124" />
+            <Label x:Name="RxPolRed" HorizontalAlignment="Left" Margin="947,516,0,0" VerticalAlignment="Top" Height="39" FontSize="20" FontFamily="#MilSpec33558" Foreground="Yellow" Width="167" />
 
             <Label x:Name="rxtypelabel" Content="Pol-Type" HorizontalAlignment="Left" Margin="828,573,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" Height="49" Width="114" Visibility="Visible" FontSize="24" Foreground="White"/>
             <ComboBox Style="{DynamicResource ComboBoxStyle1}" x:Name="rxpolcb" HorizontalAlignment="Left" Margin="944,573,0,0" VerticalAlignment="Top" Width="170" Height="34" FontFamily="#MilSpec33558" Visibility="Visible" FontSize="24" BorderThickness="2,2,2,2" />
