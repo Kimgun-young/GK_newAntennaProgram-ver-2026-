@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36908.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK_Antenna", "GK_Antenna\GK_Antenna.csproj", "{A39B6812-1E90-4FCB-B988-37D028F6E409}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GK_Setup1", "GK_Setup1\GK_Setup1.vdproj", "{34AA7A8E-1BE5-A4BE-680B-681427A0D116}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GK_AntennaSW", "GK_Setup1\GK_Setup1.vdproj", "{34AA7A8E-1BE5-A4BE-680B-681427A0D116}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
