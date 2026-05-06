@@ -122,13 +122,13 @@ namespace GK_Antenna
                     string realData = rawdata.Replace("\\", "");
                     // Console.Write(realData);
                     Root3 realResponse = JsonConvert.DeserializeObject<Root3>(realData);
-                    
+
 
                     amipIP.Text = realResponse.openamipHost;
                     amipPort.Text = realResponse.openamipPort.ToString();
                     amipMask.Text = realResponse.openamipMask.ToString();
 
-                    antennaIP.Text = realResponse.serverHost;                   
+                    antennaIP.Text = realResponse.serverHost;
                     antennaMask.Text = realResponse.serverMask.ToString();
 
                     AppSettings.WorkMode = realResponse.workMode.ToString();
@@ -267,7 +267,7 @@ namespace GK_Antenna
 
                     await alertt(@"\ant-design--check-circle-filled (1).png", "Disconnect Success");
 
-                   //this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
+                    //this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
 
                 }
                 else if (classRes.code == -1)
@@ -549,7 +549,8 @@ namespace GK_Antenna
             }
         }
 
-        public void RestartBtn_Click(object sender, EventArgs e) { 
+        public void RestartBtn_Click(object sender, EventArgs e)
+        {
 
             ResetAPi();
         }

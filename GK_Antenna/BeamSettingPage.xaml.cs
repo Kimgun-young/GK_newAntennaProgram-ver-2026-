@@ -2123,7 +2123,7 @@ namespace GK_Antenna
             }
             catch (Exception ex)
             {
-                await alertt(@"\ant-design--close-circle-filled.png", "Beam/GPS Setting Failed"); 
+                await alertt(@"\ant-design--close-circle-filled.png", "Beam/GPS Setting Failed");
                 Console.WriteLine("에러: " + ex);
             }
         }
@@ -2228,7 +2228,7 @@ namespace GK_Antenna
 
         public async void ManualRxSetBtn_Click(Object sender, RoutedEventArgs e)
         {
-           
+
             if (mRxFreqRed.Content.ToString() == "" && mSymRed.Content.ToString() == "" && RxPhiRed.Content.ToString() == "" && RxThetaRed.Content.ToString() == "" && RxPolRed.Content.ToString() == "")
             {
 
@@ -2336,7 +2336,5 @@ namespace GK_Antenna
 
 
     }
-    
+
 }
-
-

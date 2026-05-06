@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace GK_Antenna
 {
-  
+
     public partial class MainWindow : Window
     {
         public MainWindow()

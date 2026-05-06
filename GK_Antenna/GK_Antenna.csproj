@@ -57,4 +57,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WebServerOld\jre\lib\applet\" />
+    <Folder Include="WebServerOld\webapp\download\" />
+    <Folder Include="WebServerOld\webapp\upload\firmware\" />
+  </ItemGroup>
+
 </Project>

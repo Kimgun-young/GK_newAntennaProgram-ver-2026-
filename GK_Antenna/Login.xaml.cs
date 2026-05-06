@@ -83,7 +83,7 @@ namespace GK_Antenna
                 ipmsg.Content = "";
             }
 
-            
+
 
             if (!isValid)
                 return;
@@ -193,7 +193,7 @@ namespace GK_Antenna
             }
         }
 
-        
+
 
         private void CompanyCodeBox_TextChanged(object sender, RoutedEventArgs e)
         {

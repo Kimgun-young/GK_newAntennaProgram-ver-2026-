@@ -35,7 +35,7 @@ SET "var="&for /f "delims=0123456789" %%i in ("%2") do set var=%%i
 
 if defined var (echo %2 NOT numeric) else (set "JAVA_OPTS=-Dundertow.port=%2 -Dundertow.host=0.0.0.0")
 echo %JAVA_OPTS%
-"%APP_BASE_PATH%jre\bin\java" -Xverify:none %JAVA_OPTS% -cp "%CP%" %MAIN_CLASS%
+"%APP_BASE_PATH%jre\bin\java.exe" -Xverify:none %JAVA_OPTS% -cp "%CP%" %MAIN_CLASS%
 goto :eof
 
 

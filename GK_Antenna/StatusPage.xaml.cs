@@ -44,7 +44,7 @@ namespace GK_Antenna
 
         public StatusPage(bool isConnect)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             DataContext = this;
             _currentTime = DateTime.Now;
 
@@ -91,7 +91,7 @@ namespace GK_Antenna
                 try
                 {
                     using (var stream = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (var reader = new StreamReader(stream, Encoding.Default)) 
+                    using (var reader = new StreamReader(stream, Encoding.Default))
                     {
                         long startPos = Math.Max(0, stream.Length - 5000);
                         stream.Seek(startPos, SeekOrigin.Begin);
@@ -112,7 +112,7 @@ namespace GK_Antenna
                             }
                             else
                             {
-                                Thread.Sleep(200); 
+                                Thread.Sleep(200);
                             }
                         }
                     }
@@ -175,9 +175,9 @@ namespace GK_Antenna
             if (data.antennaState == 0)
             {
                 ConnectionText.Text = "OK";
-                ConnectionText.Foreground = Brushes.Lime; 
-                ConnectionBox.Background = DefaultBrush;  
-                ConnectionBox.BorderBrush = Brushes.Lime; 
+                ConnectionText.Foreground = Brushes.Lime;
+                ConnectionBox.Background = DefaultBrush;
+                ConnectionBox.BorderBrush = Brushes.Lime;
             }
             else
             {
@@ -196,7 +196,7 @@ namespace GK_Antenna
             if (data.antennaState != 0)
             {
                 TemperatureText.Text = "---";
-                TemperatureText.Foreground = Brushes.Red; 
+                TemperatureText.Foreground = Brushes.Red;
             }
             else if (temp >= 60 || temp <= -10)
             {
@@ -227,7 +227,7 @@ namespace GK_Antenna
                 GPS_Label.Foreground = Brushes.Red;
                 GPS_Label.Text = "GPS(Off)";
 
-                return; 
+                return;
             }
 
             glong.Foreground = Brushes.White;
@@ -281,8 +281,8 @@ namespace GK_Antenna
             }
 
             ipitch.Foreground = Brushes.White;
-            iroll.Foreground= Brushes.White;
-            ihead.Foreground= Brushes.White;
+            iroll.Foreground = Brushes.White;
+            ihead.Foreground = Brushes.White;
 
             ipitch.Text = imuData.imuPitch.ToString("0.00");
             iroll.Text = imuData.imuRoll.ToString("0.00");
@@ -295,9 +295,9 @@ namespace GK_Antenna
         {
             double voltage = data.antennaVoltage;
             VoltageText.Text = $"{voltage:F1} V";
-            
 
-            if(data.antennaState != 0)
+
+            if (data.antennaState != 0)
             {
                 VoltageText.Foreground = Brushes.Red;
                 VoltageText.Text = "---";
@@ -308,7 +308,7 @@ namespace GK_Antenna
         {
             double current = data.antennaElectricity;
             CurrentText.Text = $"{current:F1} A";
-            
+
 
             if (data.antennaState != 0)
             {
@@ -338,18 +338,18 @@ namespace GK_Antenna
 
                     if (isNormal)
                     {
-                        EsNoText.Foreground = Brushes.Lime; 
+                        EsNoText.Foreground = Brushes.Lime;
                     }
                     else
                     {
-                        EsNoText.Foreground = Brushes.Red; 
+                        EsNoText.Foreground = Brushes.Red;
                     }
                 }
 
                 UpdateEsNoGauge(antenna, mmr);
             });
 
-     
+
         }
 
         public void DrawCompass()
@@ -448,9 +448,9 @@ namespace GK_Antenna
             {
                 Points = new PointCollection
         {
-            new Point(centerX,         centerY - size), 
-            new Point(centerX - width, centerY + 0.5),  
-            new Point(centerX + width, centerY + 0.5)  
+            new Point(centerX,         centerY - size),
+            new Point(centerX - width, centerY + 0.5),
+            new Point(centerX + width, centerY + 0.5)
         },
                 Fill = redGradient,
                 StrokeThickness = 0
@@ -460,9 +460,9 @@ namespace GK_Antenna
             {
                 Points = new PointCollection
         {
-            new Point(centerX,         centerY + size), 
-            new Point(centerX - width, centerY - 0.5), 
-            new Point(centerX + width, centerY - 0.5)   
+            new Point(centerX,         centerY + size),
+            new Point(centerX - width, centerY - 0.5),
+            new Point(centerX + width, centerY - 0.5)
         },
                 Fill = blueGradient,
                 StrokeThickness = 0
@@ -534,8 +534,8 @@ namespace GK_Antenna
 
             if (YawValueText != null)
                 YawValueText.Text = $"{yaw:F1}°";
-          }
-        
+        }
+
 
         public void UpdateAttitude(ImuData data)
         {
@@ -550,12 +550,12 @@ namespace GK_Antenna
             const double minTemp = -60;
             const double maxTemp = 80;
 
-            const double barBottom = 354.0;   
-            const double minTempY = 350.0;    
-            const double maxTempY = 0.0;      
+            const double barBottom = 354.0;
+            const double minTempY = 350.0;
+            const double maxTempY = 0.0;
 
-            const double bottomOffset = barBottom - minTempY;       
-            const double totalRangeHeight = minTempY - maxTempY;    
+            const double bottomOffset = barBottom - minTempY;
+            const double totalRangeHeight = minTempY - maxTempY;
 
             double clamped = Math.Max(minTemp, Math.Min(maxTemp, temp));
             double ratio = (clamped - minTemp) / (maxTemp - minTemp);
@@ -577,9 +577,9 @@ namespace GK_Antenna
         {
             double targetAngle = speedValue - 120;
 
-            
-            if (targetAngle < -120) targetAngle = -120; 
-            if (targetAngle > 120) targetAngle = 120;   
+
+            if (targetAngle < -120) targetAngle = -120;
+            if (targetAngle > 120) targetAngle = 120;
 
             Dispatcher.Invoke(() =>
             {
@@ -603,12 +603,12 @@ namespace GK_Antenna
             const double minVal = -120;
             const double maxVal = 30;
 
-            const double barBottom = 354.0;      
-            const double minValY = 326.67;       
-            const double maxValY = 0.0;          
+            const double barBottom = 354.0;
+            const double minValY = 326.67;
+            const double maxValY = 0.0;
 
-            const double bottomOffset = barBottom - minValY; 
-            const double totalRangeHeight = minValY - maxValY; 
+            const double bottomOffset = barBottom - minValY;
+            const double totalRangeHeight = minValY - maxValY;
 
             double clamped = Math.Max(minVal, Math.Min(maxVal, esno));
             double ratio = (clamped - minVal) / (maxVal - minVal);
@@ -688,12 +688,12 @@ namespace GK_Antenna
 
                 LabelsPaint = new SolidColorPaint
                 {
-                    Color = SKColors.White 
+                    Color = SKColors.White
                 },
 
                 SeparatorsPaint = new SolidColorPaint
                 {
-                    Color = SKColors.White, 
+                    Color = SKColors.White,
                     StrokeThickness = 3
                 }
             }
@@ -706,7 +706,7 @@ namespace GK_Antenna
                 {
 
                     _currentTime = _currentTime.AddSeconds(1);
-                    
+
                     if (_currentTime.Second % 40 == 0)
                     {
                         _values.Clear();
@@ -716,7 +716,7 @@ namespace GK_Antenna
 
                     _values.Add(_currentValue);
                     _timeStamps.Add(_currentTime.ToString("HH:mm:ss"));
-                    
+
 
                     UpdateChartLimits(_currentValue);
 
@@ -759,7 +759,7 @@ namespace GK_Antenna
                     step = 5;
                 }
 
-                max = 5; 
+                max = 5;
             }
             else
             {
@@ -806,7 +806,7 @@ namespace GK_Antenna
 
                 Canvas.SetLeft(rect, isMajor ? 223.5 : 224.5);
                 Canvas.SetTop(rect, 40);
-                SpeedometerCanvas.Children.Insert(0, rect); 
+                SpeedometerCanvas.Children.Insert(0, rect);
             }
         }
 
@@ -834,7 +834,7 @@ namespace GK_Antenna
 
                 Canvas.SetLeft(tb, left);
                 Canvas.SetTop(tb, top);
-                SpeedometerCanvas.Children.Insert(0, tb); 
+                SpeedometerCanvas.Children.Insert(0, tb);
             }
         }
 
@@ -860,8 +860,8 @@ namespace GK_Antenna
 
         private void BeamSettingText_Click(object sender, MouseButtonEventArgs e)
         {
-                MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                main.fr.Content = new BeamSettingPage();
+            MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            main.fr.Content = new BeamSettingPage();
         }
 
         private void IP_SettingText_Click(Object sender, MouseButtonEventArgs e)
@@ -875,7 +875,7 @@ namespace GK_Antenna
             MainWindow main = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             main.fr.Content = new StatusPage();
         }
-        
+
 
         private void MapText_Click(System.Object sender, MouseButtonEventArgs e)
         {

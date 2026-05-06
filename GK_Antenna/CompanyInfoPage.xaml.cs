@@ -24,9 +24,9 @@ namespace GK_Antenna
         {
             InitializeComponent();
         }
-    
 
-    private void TopBar_MouseEnter(object sender, MouseEventArgs e)
+
+        private void TopBar_MouseEnter(object sender, MouseEventArgs e)
         {
             DropBar.Visibility = Visibility.Visible;
         }

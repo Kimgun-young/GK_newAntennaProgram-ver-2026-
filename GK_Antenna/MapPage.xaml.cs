@@ -215,7 +215,7 @@ namespace GK_Antenna
 
                 if (response.antennaData.antennaState == 0)
                 {
-                    
+
                     /* latitude.Content = response.gnssData.gpsLatitude;
                      longitude.Content = response.gnssData.gpsLongitude;*/
 
@@ -243,7 +243,7 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    
+
                     latitude.Content = "0.00";
                     longitude.Content = "0.00";
                     currentlat = 0;
@@ -252,7 +252,7 @@ namespace GK_Antenna
                     timer.Stop();
                 }
 
-               
+
             }));
 
 
