@@ -84,8 +84,11 @@ namespace GK_Antenna
 
         public void StartLatestLogMonitoring()
         {
-            string logPath = @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\log\server.log";
-
+            string logPath = System.IO.Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "WebServer",
+                "log",
+                "server.log");
             Task.Run(() =>
             {
                 try

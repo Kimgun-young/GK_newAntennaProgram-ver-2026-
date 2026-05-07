@@ -11,39 +11,41 @@
         Background="#001F3F"
         Title= "MapPage">
 
+    <Viewbox Stretch="Uniform">
 
-    <Grid>
-        <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
+        <Grid Width="1920" Height="1080">
+            <Grid>
+                <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
 
-        <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
+                <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
               Margin="90,170,99,119" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
 
-        <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1227,953,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
+                <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1227,953,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
 
-        <Label Content="Longitude:" HorizontalAlignment="Left" Margin="445,954,0,0" VerticalAlignment="Top" Height="56" Width="178" FontSize="36" FontFamily="#MilSpec33558" RenderTransformOrigin="0.665,0.973" Foreground="White"/>
-        <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="623,957,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="210" FontFamily="#MilSpec33558" Foreground="White"/>
-        <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,953,0,0" VerticalAlignment="Top" Height="58" Width="145" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
-        <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="235,955,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="194" FontFamily="#MilSpec33558" Foreground="White"/>
+                <Label Content="Longitude:" HorizontalAlignment="Left" Margin="445,954,0,0" VerticalAlignment="Top" Height="56" Width="178" FontSize="36" FontFamily="#MilSpec33558" RenderTransformOrigin="0.665,0.973" Foreground="White"/>
+                <Label x:Name="longitude" Content="0.00" HorizontalAlignment="Left" Margin="623,957,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="210" FontFamily="#MilSpec33558" Foreground="White"/>
+                <Label Content="Latitude:" HorizontalAlignment="Left" Margin="90,953,0,0" VerticalAlignment="Top" Height="58" Width="145" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
+                <Label x:Name="latitude" Content="0.00" HorizontalAlignment="Left" Margin="235,955,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.563,0.2" FontSize="36" Width="194" FontFamily="#MilSpec33558" Foreground="White"/>
 
 
-        <Canvas VerticalAlignment="Top">
-            <Border x:Name="TopBar"
+                <Canvas VerticalAlignment="Top">
+                    <Border x:Name="TopBar"
          Background="#001529"
          Height="86"
          Width="1920"
          MouseEnter="TopBar_MouseEnter"
          MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Image Source="/Resources/logos/white_GK_logo.png"
+                        <Image Source="/Resources/logos/white_GK_logo.png"
                 Stretch="Uniform"
                 Margin="20,-27,1625,-19"/>
-            </Border>
+                    </Border>
 
-            <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="11" FontWeight="Bold"/>
-            <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="9" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="9" IsHitTestVisible="False" Height="68" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558" FontWeight="Bold"/>
-            <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="11"/>
+                    <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="9" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="9" IsHitTestVisible="False" Height="68" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558"/>
+                    <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            <Border x:Name="DropBar"
+                    <Border x:Name="DropBar"
          Background="White"
          Height="173"
          Width="1920"
@@ -52,19 +54,20 @@
          MouseEnter="DropBar_MouseEnter"
          MouseLeave="DropBar_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top">
 
-                <Canvas>
-                    <TextBlock x:Name="StatusText"  Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                        <Canvas>
+                            <TextBlock x:Name="StatusText"  Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
 
-                    <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" RenderTransformOrigin="0.44,0.606" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-                    <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="958" Canvas.Top="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                            <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" RenderTransformOrigin="0.44,0.606" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                            <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="958" Canvas.Top="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
 
-                    <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1352" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
+                            <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1352" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
 
 
-                    <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1648" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                            <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1648" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                        </Canvas>
+                    </Border>
                 </Canvas>
-            </Border>
-        </Canvas>
-
-    </Grid>
+            </Grid>
+        </Grid>
+ </Viewbox>
 </Page>

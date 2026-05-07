@@ -20,21 +20,34 @@ namespace GK_Antenna
             LoadIpOnStartup();
         }
 
-        private string filePath = "ip.txt";
+        private string filePath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "GK_Antenna",
+            "ip.txt"
+        );
         private string defaultIp = "192.168.0.2";
 
 
         private void StartWebServer()
         {
-            string batPath = @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\start.bat";
+            string batPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "WebServer",
+                "start.bat");
 
             try
             {
+                if (!File.Exists(batPath))
+                {
+                    MessageBox.Show($"start.bat 파일을 찾을 수 없습니다.\n{batPath}");
+                    return;
+                }
+
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = batPath,
                     WorkingDirectory = Path.GetDirectoryName(batPath),
-                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
                     UseShellExecute = false
                 });
             }
@@ -136,8 +149,11 @@ namespace GK_Antenna
         public class CompanyVerifier
         {
             private readonly string _jsonPath =
-                @"C:\GlobalKonet SW\GK antenna SW\GK_NewAntennaProgram\GK_Antenna\GK_Antenna\WebServer\config\CompanyCode.json";
-
+                Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "WebServer",
+                    "config",
+                    "CompanyCode.json");
             public bool Verify(string inputCompanyCode)
             {
                 if (!File.Exists(_jsonPath)) return false;
@@ -231,11 +247,31 @@ namespace GK_Antenna
 
         private void LoadIpOnStartup()
         {
-            if (!File.Exists(filePath))
+            try
             {
-                File.WriteAllText(filePath, defaultIp); // 기본 IP 저장
+                // 1. 파일이 저장될 폴더 경로를 가져옵니다.
+                string directoryPath = Path.GetDirectoryName(filePath);
+
+                // 2. 폴더가 존재하지 않으면 생성합니다. (C:\Users\...\AppData\Local\GK_Antenna)
+                if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // 3. 파일이 없으면 기본 IP를 저장합니다.
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, defaultIp);
+                }
+
+                // 4. 저장된 IP를 불러와 텍스트 박스에 표시합니다.
+                AntennaIpBox.Text = File.ReadAllText(filePath);
             }
-            AntennaIpBox.Text = File.ReadAllText(filePath);
+            catch (Exception ex)
+            {
+                // 예외 발생 시 프로그램이 꺼지지 않도록 메시지 박스를 띄웁니다.
+                MessageBox.Show($"IP 로드 중 오류 발생: {ex.Message}");
+            }
         }
     }
 }

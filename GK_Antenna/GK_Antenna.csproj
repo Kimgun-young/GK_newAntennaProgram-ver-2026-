@@ -32,23 +32,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\fonts\LAB디지털.ttf" />
-    <Resource Include="Resources\fonts\MilSpec33558.ttf" />
-    <Resource Include="Resources\Icons\appIcon.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Icons\marker.png" />
+    <Content Include="Resources\fonts\LAB디지털.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fonts\MilSpec33558.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\appIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\marker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\ant-design--check-circle-filled (1).png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\ant-design--close-circle-filled.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\logos\AS9100D.png" />
-    <Resource Include="Resources\logos\GK_logo.png" />
-    <Resource Include="Resources\logos\Innobiz.png" />
-    <Resource Include="Resources\logos\Venture_Enterprise.png" />
-    <Resource Include="Resources\logos\white_gk_logo.png" />
+    <Content Include="Resources\logos\AS9100D.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logos\GK_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logos\Innobiz.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logos\Venture_Enterprise.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\logos\white_gk_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

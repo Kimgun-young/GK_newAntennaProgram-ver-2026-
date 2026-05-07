@@ -124,9 +124,10 @@ namespace GK_Antenna
             {
                 await Disconnect();
 
-                await Task.Delay(200);
+                await Task.Delay(3000);
 
                 HttpResponseMessage response = await client.GetAsync(url);
+
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
@@ -135,13 +136,47 @@ namespace GK_Antenna
 
                 return result;
             }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(
+                    $"[HttpRequestException]\n\n" +
+                    $"Message:\n{ex.Message}\n\n" +
+                    $"Inner Exception:\n{ex.InnerException?.Message}\n\n" +
+                    $"Request URL:\n{url}",
+                    "API Connection Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                throw;
+            }
+            catch (TaskCanceledException ex)
+            {
+                MessageBox.Show(
+                    $"[Timeout Error]\n\n" +
+                    $"Message:\n{ex.Message}\n\n" +
+                    $"Request URL:\n{url}",
+                    "Timeout",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+
+                throw;
+            }
             catch (Exception ex)
             {
-                throw new Exception("API Connection Failed: " + ex.Message);
+                MessageBox.Show(
+                    $"[General Exception]\n\n" +
+                    $"Message:\n{ex.Message}\n\n" +
+                    $"StackTrace:\n{ex.StackTrace}\n\n" +
+                    $"Inner Exception:\n{ex.InnerException?.Message}",
+                    "Unknown Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                throw;
             }
         }
 
-        
+
 
     }
 }

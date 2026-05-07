@@ -267,7 +267,7 @@ namespace GK_Antenna
 
                     await alertt(@"\ant-design--check-circle-filled (1).png", "Disconnect Success");
 
-                    //this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
+                    this.NavigationService.Navigate(new Uri("Login.xaml", UriKind.Relative));
 
                 }
                 else if (classRes.code == -1)
