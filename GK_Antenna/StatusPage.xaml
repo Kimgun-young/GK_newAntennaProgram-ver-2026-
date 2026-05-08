@@ -9,19 +9,53 @@
       d:DesignWidth="1920"
       Background="#001F3F">
 
-
-    <Viewbox Stretch="Uniform">
-
+    <Viewbox Stretch="Fill">
         <Grid Width="1920" Height="1080">
 
+            <!-- TopBar/DropBar: Margin 없는 최상위 Grid에 바로 배치 -->
+            <Canvas x:Name="TopBarCanvas" VerticalAlignment="Top" Panel.ZIndex="10">
+                <Border x:Name="TopBar"
+                        Background="#001529"
+                        Height="86"
+                        Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                        MouseEnter="TopBar_MouseEnter"
+                        MouseLeave="TopBar_MouseLeave"
+                        BorderBrush="Black"/>
+                <Image Source="/Resources/logos/white_GK_logo.png"
+                       Stretch="Uniform"
+                       Width="180" Height="86"
+                       Canvas.Left="0" Canvas.Top="0"
+                       IsHitTestVisible="False"/>
+                <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="327" Canvas.Top="11" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558"/>
+                <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="958" Canvas.Top="11" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558"/>
+                <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1330" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="104" FontFamily="#MilSpec33558"/>
+                <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1661" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558"/>
+
+                <Border x:Name="DropBar"
+                        Background="White"
+                        Height="173"
+                        Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                        Canvas.Top="86"
+                        Visibility="Collapsed"
+                        MouseEnter="DropBar_MouseEnter"
+                        MouseLeave="DropBar_MouseLeave">
+                    <Canvas>
+                        <TextBlock x:Name="StatusText" Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="342" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                        <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="944" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                        <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="944" Canvas.Top="86" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                        <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1334" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
+                        <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1639" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                    </Canvas>
+                </Border>
+            </Canvas>
+
+            <!-- 내부 콘텐츠 Grid -->
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="93*"/>
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="932*"/>
                 </Grid.RowDefinitions>
-
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15*"/>
                     <ColumnDefinition Width="173*"/>
@@ -32,30 +66,18 @@
                     <StackPanel Margin="0,83,0,0">
                         <TextBlock Text="Connection" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                         <Border x:Name="ConnectionBox" Height="130" Background="#121212">
-                            <TextBlock x:Name="ConnectionText"
-                               Text="N/A"
-                               Foreground="White"
-                               FontFamily="/Resources/fonts/#MilSpec33558"
-                               FontSize="48"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock x:Name="ConnectionText" Text="N/A" Foreground="White" FontFamily="/Resources/fonts/#MilSpec33558" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Border>
                     </StackPanel>
 
                     <StackPanel Margin="-1,78,-2,0">
                         <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                         <Border x:Name="TemperatureBox" Height="130" Background="#121212" Margin="5" Width="376">
-                            <TextBlock x:Name="TemperatureText"
-                               Text="N/A"
-                               Foreground="White"
-                               FontFamily="/Resources/fonts/#LAB디지털"
-                               FontSize="48"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock x:Name="TemperatureText" Text="N/A" Foreground="White" FontFamily="/Resources/fonts/#LAB디지털" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Margin="-9,83,-9,0" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel Margin="-9,83,-9,0">
                         <TextBlock x:Name="GPS_Label" Text="GPS(Invalid)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                         <Border x:Name="GPS_Box" Height="130" Background="#121212" Width="376">
                             <Grid Margin="20,10">
@@ -64,22 +86,18 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Latitude (°) :" Width="135" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
                                     <TextBlock x:Name="glat" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="22" Width="188"/>
                                 </StackPanel>
-
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Longitude (°) :" Width="157" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="glong" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" RenderTransformOrigin="0.969,0.436" Height="21" Width="171"/>
+                                    <TextBlock x:Name="glong" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="21" Width="171"/>
                                 </StackPanel>
-
                                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Altitude (m) :" Width="146" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
                                     <TextBlock x:Name="galt" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="23" Width="187"/>
                                 </StackPanel>
-
                             </Grid>
                         </Border>
                     </StackPanel>
@@ -93,112 +111,37 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Pitch (°) :" Width="98" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
                                     <TextBlock x:Name="ipitch" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="22" Width="188"/>
                                 </StackPanel>
-
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Roll (°) :" Width="88" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
-                                    <TextBlock x:Name="iroll" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" RenderTransformOrigin="0.969,0.436" Height="21" Width="171"/>
+                                    <TextBlock x:Name="iroll" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="21" Width="171"/>
                                 </StackPanel>
-
                                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="Heading (°) :" Width="138" Foreground="#AAAAAA" FontSize="24" FontFamily="/Resources/fonts/#MilSpec33558" VerticalAlignment="Center"/>
                                     <TextBlock x:Name="ihead" Text="N/A" Foreground="White" FontSize="24" FontFamily="/Resources/fonts/#LAB디지털" Height="23" Width="187"/>
                                 </StackPanel>
-
-
                             </Grid>
                         </Border>
                     </StackPanel>
 
-                    <!-- EsNo -->
                     <StackPanel Margin="11,83,-11,0">
                         <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                         <Border x:Name="EsNoBox" Height="130" Background="#121212" Width="376">
-                            <TextBlock x:Name="EsNoText"
-                               Text="N/A"
-                               Foreground="White"
-                               FontFamily="/Resources/fonts/#LAB디지털"
-                               FontSize="48"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
+                            <TextBlock x:Name="EsNoText" Text="N/A" Foreground="White" FontFamily="/Resources/fonts/#LAB디지털" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </StackPanel>
 
                 </UniformGrid>
 
-                <Grid Grid.ColumnSpan="2">
-                    <Grid Margin="20">
-                        <UniformGrid Rows="1" Columns="5" Margin="0,80,0,0"></UniformGrid>
-                    </Grid>
+                <Canvas x:Name="CompassCanvas" Width="350" Height="314" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="440,208,0,0" Grid.Row="2" Grid.Column="1" Background="#001F3F"/>
 
-                    <Canvas VerticalAlignment="Top">
-                        <Border x:Name="TopBar"
-                Background="#001529"
-                Height="86"
-                Width="1920" 
-                Canvas.Left="-20" 
-                Canvas.Top="-20"
-                MouseEnter="TopBar_MouseEnter"
-                MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Image Source="/Resources/logos/white_GK_logo.png"
-                   Stretch="Uniform"
-                   Margin="0,-27,1645,-19"/>
-                        </Border>
+                <TextBlock x:Name="AzimuthText" Text="Azimuth: 0°" Foreground="White" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="536,529,0,0" Grid.Row="2" Grid.Column="1"/>
 
-                        <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="327" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="-9"/>
-                        <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="958" Canvas.Top="-9" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1330" Canvas.Top="-9" IsHitTestVisible="False" Height="68" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558"/>
-                        <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1661" Canvas.Top="-9" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                        <Border x:Name="DropBar"
-                    Background="White"
-                    Height="173"
-                    Width="1920"
-                    Canvas.Left="-20"
-                    Canvas.Top="66" 
-                    Visibility="Collapsed"
-                    MouseEnter="DropBar_MouseEnter"
-                    MouseLeave="DropBar_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-                            <Canvas>
-                                <TextBlock x:Name="StatusText"  Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="342" Canvas.Top="22" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-
-                                <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="944" Canvas.Top="22" RenderTransformOrigin="0.44,0.606" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-                                <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="944" Canvas.Top="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-
-                                <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1334" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
-
-
-                                <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1639" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-                            </Canvas>
-                        </Border>
-                    </Canvas>
-                </Grid>
-
-                <Canvas x:Name="CompassCanvas"
-                Width="350"
-                Height="314"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Margin="440,208,0,0" Grid.Row="2" Grid.Column="1" Background="#001F3F"/>
-
-                <TextBlock x:Name="AzimuthText"
-           Text="Azimuth: 0°"
-           Foreground="White"
-           FontSize="24"
-           HorizontalAlignment="Left"
-           VerticalAlignment="Top"
-           Margin="536,529,0,0"  Grid.Row="2" RenderTransformOrigin="0.345,-0.031" Grid.Column="1"/>
-
-                <Viewbox x:Name="AttitudeIndicatorGroup" Width="316" Height="316" 
-         HorizontalAlignment="Left" VerticalAlignment="Top" Margin="820,210,0,0" Grid.Row="2" Grid.Column="1">
+                <Viewbox x:Name="AttitudeIndicatorGroup" Width="316" Height="316" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="820,210,0,0" Grid.Row="2" Grid.Column="1">
                     <Canvas Width="450" Height="450">
-
                         <Grid Canvas.Left="25" Canvas.Top="25" Width="400" Height="400">
                             <Ellipse Stroke="Black" StrokeThickness="1" Fill="#1A1A1A"/>
                             <Grid Margin="5">
@@ -209,10 +152,7 @@
                                 <Rectangle Fill="#5D4037" Height="195" VerticalAlignment="Bottom"/>
                             </Grid>
                         </Grid>
-
-                        <Polygon Points="-12,0 12,0 0,45" Fill="White" 
-                 Canvas.Left="225" Canvas.Top="30"/>
-
+                        <Polygon Points="-12,0 12,0 0,45" Fill="White" Canvas.Left="225" Canvas.Top="30"/>
                         <Canvas IsHitTestVisible="False" Width="450" Height="450">
                             <Rectangle Fill="White" Width="2" Height="15" Canvas.Left="224" Canvas.Top="60" RenderTransformOrigin="0.5,11.0">
                                 <Rectangle.RenderTransform>
@@ -244,7 +184,6 @@
                                     <RotateTransform Angle="45"/>
                                 </Rectangle.RenderTransform>
                             </Rectangle>
-
                             <Rectangle Fill="White" Width="4" Height="45" Canvas.Left="223" Canvas.Top="30" RenderTransformOrigin="0.5,4.33">
                                 <Rectangle.RenderTransform>
                                     <RotateTransform Angle="-30"/>
@@ -275,7 +214,6 @@
                                     <RotateTransform Angle="90"/>
                                 </Rectangle.RenderTransform>
                             </Rectangle>
-
                             <TextBlock Text="10" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="249" Canvas.Top="6"/>
                             <TextBlock Text="20" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="285" Canvas.Top="13"/>
                             <TextBlock Text="30" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="318" Canvas.Top="30"/>
@@ -283,313 +221,148 @@
                             <TextBlock Text="60" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="401" Canvas.Top="109"/>
                             <TextBlock Text="90" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="429" Canvas.Top="213"/>
                         </Canvas>
-
                         <Canvas x:Name="InnerRotatingCircle" Canvas.Left="75" Canvas.Top="75" Width="300" Height="300" RenderTransformOrigin="0.5,0.5">
                             <Canvas.RenderTransform>
                                 <RotateTransform x:Name="RollTransform" Angle="0"/>
                             </Canvas.RenderTransform>
-
                             <Ellipse Width="300" Height="300" Stroke="Black" StrokeThickness="2" Fill="#1A1A1A"/>
-
                             <Grid Width="300" Height="300">
                                 <Grid.Clip>
                                     <EllipseGeometry Center="150,150" RadiusX="148" RadiusY="148"/>
                                 </Grid.Clip>
-
                                 <StackPanel Orientation="Vertical">
                                     <Rectangle x:Name="SkyRect" Fill="#2196F3" Height="150"/>
                                     <Rectangle x:Name="GroundRect" Fill="#5D4037" Height="150"/>
                                 </StackPanel>
-
                                 <Canvas Width="300" Height="300">
                                     <Line X1="110" Y1="90" X2="190" Y2="90" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
                                     <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="85" Canvas.Top="82"/>
                                     <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="195" Canvas.Top="82"/>
-
                                     <Line X1="130" Y1="120" X2="170" Y2="120" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
                                     <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="105" Canvas.Top="112"/>
                                     <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="175" Canvas.Top="112"/>
-
                                     <Line X1="130" Y1="180" X2="170" Y2="180" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
                                     <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="105" Canvas.Top="172"/>
                                     <TextBlock Text="10" Foreground="White" FontSize="14" Canvas.Left="175" Canvas.Top="172"/>
-
                                     <Line X1="110" Y1="210" X2="190" Y2="210" Stroke="White" StrokeThickness="2" Opacity="0.7"/>
                                     <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="85" Canvas.Top="202"/>
                                     <TextBlock Text="20" Foreground="White" FontSize="14" Canvas.Left="195" Canvas.Top="202"/>
                                 </Canvas>
-
                                 <Canvas Width="300" Height="300">
                                     <Rectangle x:Name="HorizonLine" Width="300" Height="3" Fill="White" Canvas.Top="148.5"/>
                                 </Canvas>
                             </Grid>
-
-                            <Polygon Points="-10,25 10,25 0,0" Fill="Transparent" Stroke="Orange" StrokeThickness="3" 
-                     Canvas.Left="150" Canvas.Top="6"/>
-
-                            <Path Data="M 90,150 L 140,150 L 140,165 M 160,165 L 160,150 L 210,150" 
-                  Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                            <Polygon Points="-10,25 10,25 0,0" Fill="Transparent" Stroke="Orange" StrokeThickness="3" Canvas.Left="150" Canvas.Top="6"/>
+                            <Path Data="M 90,150 L 140,150 L 140,165 M 160,165 L 160,150 L 210,150" Stroke="Orange" StrokeThickness="5" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
                         </Canvas>
-
-                        <!-- ROLL 레이블 -->
-                        <TextBlock Text="ROLL" Foreground="White" FontSize="24"
-           Canvas.Left="54" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                        <!-- PITCH 레이블 -->
-                        <TextBlock Text="PITCH" Foreground="White" FontSize="24"
-           Canvas.Left="198" Canvas.Top="431"/>
-
-                        <!-- YAW 레이블 -->
-                        <TextBlock Text="YAW" Foreground="White" FontSize="24"
-           Canvas.Left="351" Canvas.Top="431" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                        <!-- ROLL 값 -->
-                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="White" FontSize="24"
-           Canvas.Left="9" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="147" TextAlignment="Center"/>
-
-                        <!-- PITCH 값 -->
-                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="White" FontSize="24"
-           Canvas.Left="172" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="117" TextAlignment="Center" RenderTransformOrigin="0.487,0.304"/>
-
-                        <!-- YAW 값 -->
-                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="White" FontSize="24"
-           Canvas.Left="309" Canvas.Top="465" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" TextAlignment="Center" RenderTransformOrigin="0.424,0.467"/>
-
+                        <TextBlock Text="ROLL" Foreground="White" FontSize="24" Canvas.Left="54" Canvas.Top="431"/>
+                        <TextBlock Text="PITCH" Foreground="White" FontSize="24" Canvas.Left="198" Canvas.Top="431"/>
+                        <TextBlock Text="YAW" Foreground="White" FontSize="24" Canvas.Left="351" Canvas.Top="431"/>
+                        <TextBlock x:Name="RollValueText" Text="0.0°" Foreground="White" FontSize="24" Canvas.Left="9" Canvas.Top="465" Width="147" TextAlignment="Center"/>
+                        <TextBlock x:Name="PitchValueText" Text="0.0°" Foreground="White" FontSize="24" Canvas.Left="172" Canvas.Top="465" Width="117" TextAlignment="Center"/>
+                        <TextBlock x:Name="YawValueText" Text="0.0°" Foreground="White" FontSize="24" Canvas.Left="309" Canvas.Top="465" Width="140" TextAlignment="Center"/>
                     </Canvas>
                 </Viewbox>
 
-                <Grid x:Name="TempGaugeGroup" 
-              HorizontalAlignment="Left" 
-              VerticalAlignment="Top" 
-              Margin="1235,162,0,0" 
-              Background="Transparent" 
-              Height="465" 
-              Width="184" 
-              Grid.Row="2" 
-              Grid.Column="1">
-
-
-                    <TextBlock Text="Temperature (°C)" 
-                       Foreground="White" 
-                       FontSize="20" 
-                       HorizontalAlignment="Left" 
-                       FontFamily="/Resources/fonts/#MilSpec33558" 
-                       Margin="24,6,0,425" 
-                       Width="150"/>
-
-
-                    <Canvas x:Name="TempLevelCanvas" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top" 
-                    Margin="0,45,0,0" 
-                    Width="60" 
-                    Height="360">
-
-                        <Rectangle x:Name="ThermometerTubePath" 
-                   Fill="Transparent"
-                   Stroke="White" 
-                   StrokeThickness="3" 
-                   Width="44" 
-                   Height="356"
-                   Canvas.Left="8"
-                   Canvas.Top="0"/>
-
-                        <Rectangle x:Name="TempLevelBar" 
-                   Fill="#F44336" 
-                   Width="38" 
-                   Height="0" 
-                   Canvas.Left="11" 
-                   Canvas.Top="354" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid x:Name="TempGaugeGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1235,162,0,0" Background="Transparent" Height="465" Width="184" Grid.Row="2" Grid.Column="1">
+                    <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="20" HorizontalAlignment="Left" FontFamily="/Resources/fonts/#MilSpec33558" Margin="24,6,0,425" Width="150"/>
+                    <Canvas x:Name="TempLevelCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,45,0,0" Width="60" Height="360">
+                        <Rectangle x:Name="ThermometerTubePath" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="44" Height="356" Canvas.Left="8" Canvas.Top="0"/>
+                        <Rectangle x:Name="TempLevelBar" Fill="#F44336" Width="38" Height="0" Canvas.Left="11" Canvas.Top="354">
                             <Rectangle.RenderTransform>
                                 <ScaleTransform ScaleY="-1"/>
                             </Rectangle.RenderTransform>
                         </Rectangle>
-
                     </Canvas>
-
                     <Canvas Width="65" Height="360" VerticalAlignment="Top" Margin="105,45,0,0" HorizontalAlignment="Left">
                         <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="80" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
                         <Line X1="0" Y1="25" X2="8" Y2="25" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="50" X2="15" Y2="50" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="60" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="43"/>
                         <Line X1="0" Y1="75" X2="8" Y2="75" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="100" X2="15" Y2="100" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="40" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="93"/>
                         <Line X1="0" Y1="125" X2="8" Y2="125" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="150" X2="15" Y2="150" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="20" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="143"/>
                         <Line X1="0" Y1="175" X2="8" Y2="175" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="200" X2="20" Y2="200" Stroke="White" StrokeThickness="2.5"/>
                         <TextBlock Text="0" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="25" Canvas.Top="193"/>
                         <Line X1="0" Y1="225" X2="8" Y2="225" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="250" X2="15" Y2="250" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-20" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="243"/>
                         <Line X1="0" Y1="275" X2="8" Y2="275" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="300" X2="15" Y2="300" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-40" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="293"/>
                         <Line X1="0" Y1="325" X2="8" Y2="325" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="350" X2="15" Y2="350" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-60" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="343"/>
                     </Canvas>
                 </Grid>
 
-
-                <Grid x:Name="EsNoGroup" 
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Top" 
-                  Margin="1442,162,0,0" 
-                  Background="Transparent" 
-                  Height="465" 
-                  Width="184" 
-                  Grid.Row="2" 
-                  Grid.Column="1">
-
-
-                    <TextBlock Text="Es/No (dBm)" 
-                       Foreground="White" 
-                       FontSize="20" 
-                       HorizontalAlignment="Center" 
-                       FontFamily="/Resources/fonts/#MilSpec33558" 
-                       Margin="0,6,0,425" 
-                       Width="110"/>
-
-
-                    <Canvas x:Name="EsNoLevelCanvas" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Top" 
-                        Margin="0,45,0,0" 
-                        Width="60" 
-                        Height="360">
-
-                        <Rectangle x:Name="EsNoTubePath" 
-                           Fill="Transparent"
-                           Stroke="White" 
-                           StrokeThickness="3" 
-                           Width="44" 
-                           Height="356"
-                           Canvas.Left="8"
-                           Canvas.Top="0"/>
-
-                        <Rectangle x:Name="EsNoLevelBar"
-                                Fill="#F44336"
-                                Width="38"
-                                Height="1"
-                                Canvas.Left="11"
-                                Canvas.Top="353" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid x:Name="EsNoGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1442,162,0,0" Background="Transparent" Height="465" Width="184" Grid.Row="2" Grid.Column="1">
+                    <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="20" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" Margin="0,6,0,425" Width="110"/>
+                    <Canvas x:Name="EsNoLevelCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,45,0,0" Width="60" Height="360">
+                        <Rectangle x:Name="EsNoTubePath" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="44" Height="356" Canvas.Left="8" Canvas.Top="0"/>
+                        <Rectangle x:Name="EsNoLevelBar" Fill="#F44336" Width="38" Height="1" Canvas.Left="11" Canvas.Top="353">
                             <Rectangle.RenderTransform>
                                 <ScaleTransform ScaleY="-1"/>
                             </Rectangle.RenderTransform>
                         </Rectangle>
                     </Canvas>
-
                     <Canvas Width="65" Height="360" VerticalAlignment="Top" Margin="105,45,0,0" HorizontalAlignment="Left">
-
                         <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="30" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
-
                         <Line X1="0" Y1="23.33" X2="8" Y2="23.33" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="46.67" X2="15" Y2="46.67" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="10" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="39.67"/>
-
                         <Line X1="0" Y1="70" X2="8" Y2="70" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="93.33" X2="15" Y2="93.33" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-10" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="86.33"/>
-
                         <Line X1="0" Y1="116.67" X2="8" Y2="116.67" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="140" X2="15" Y2="140" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-30" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="133"/>
-
                         <Line X1="0" Y1="163.33" X2="8" Y2="163.33" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="186.67" X2="15" Y2="186.67" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-50" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="179.67"/>
-
                         <Line X1="0" Y1="210" X2="8" Y2="210" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="233.33" X2="15" Y2="233.33" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-70" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="226.33"/>
-
                         <Line X1="0" Y1="256.67" X2="8" Y2="256.67" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="280" X2="15" Y2="280" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-90" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="273"/>
-
                         <Line X1="0" Y1="303.33" X2="8" Y2="303.33" Stroke="White" StrokeThickness="1"/>
-
                         <Line X1="0" Y1="326.67" X2="15" Y2="326.67" Stroke="White" StrokeThickness="2"/>
                         <TextBlock Text="-120" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="319.67"/>
-
-
                     </Canvas>
                 </Grid>
 
-                <Viewbox x:Name="SpeedometerViewbox" 
-         Width="549" Height="406" 
-         HorizontalAlignment="Left" VerticalAlignment="Top" 
-         Margin="86,169,0,0" Grid.Row="2" Grid.ColumnSpan="2">
-
+                <Viewbox x:Name="SpeedometerViewbox" Width="549" Height="406" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,169,0,0" Grid.Row="2" Grid.ColumnSpan="2">
                     <Border Background="#001F3F" CornerRadius="12" Padding="30" Width="519" Height="398">
                         <StackPanel Width="500">
                             <Grid Width="450" Height="350" HorizontalAlignment="Center">
-                                <Canvas x:Name="SpeedometerCanvas" Margin="-30,-12,-78,-36"
-                                    Loaded="SpeedometerCanvas_Loaded">
-
-                                    <Rectangle x:Name="NeedleRect"
-                                           Width="4" Height="140" Fill="Red"
-                                           Canvas.Left="223" Canvas.Top="80"
-                                           RenderTransformOrigin="0.5,1.0">
+                                <Canvas x:Name="SpeedometerCanvas" Margin="-30,-12,-78,-36" Loaded="SpeedometerCanvas_Loaded">
+                                    <Rectangle x:Name="NeedleRect" Width="4" Height="140" Fill="Red" Canvas.Left="223" Canvas.Top="80" RenderTransformOrigin="0.5,1.0">
                                         <Rectangle.RenderTransform>
                                             <RotateTransform x:Name="NeedleRotation" Angle="-120"/>
                                         </Rectangle.RenderTransform>
                                     </Rectangle>
-
-                                    <Ellipse Width="24" Height="24" Fill="White"
-                                        Canvas.Left="213" Canvas.Top="208"/>
-
-                                    <TextBlock x:Name="speed" Text="0.0 km/h" Foreground="White"
-                                           FontSize="32"
-                                           Canvas.Left="158" Canvas.Top="297"/>
-
+                                    <Ellipse Width="24" Height="24" Fill="White" Canvas.Left="213" Canvas.Top="208"/>
+                                    <TextBlock x:Name="speed" Text="0.0 km/h" Foreground="White" FontSize="32" Canvas.Left="158" Canvas.Top="297"/>
                                 </Canvas>
                             </Grid>
                         </StackPanel>
                     </Border>
                 </Viewbox>
 
-                <GroupBox x:Name="openAmip" 
-                      Header="OpenAMIP Log" 
-                      HorizontalAlignment="Left"
-                      Width="708"
-                      Margin="28,597,0,29"
-                      FontFamily="/Resources/fonts/#MilSpec33558"
-                      FontSize="20" 
-                      Foreground="White" Grid.Row="2" Grid.ColumnSpan="2">
+                <GroupBox x:Name="openAmip" Header="OpenAMIP Log" HorizontalAlignment="Left" Width="708" Margin="28,597,0,29" FontFamily="/Resources/fonts/#MilSpec33558" FontSize="20" Foreground="White" Grid.Row="2" Grid.ColumnSpan="2">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-                        <ListBox x:Name="openlistbox" 
-                                 Foreground="White"        
-                                 FontFamily="/Resources/fonts/#MilSpec33558"        
-                                 Grid.Row="1"
-                                 Margin="5,0,0,5" 
-                                 FontSize="16"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                 Background="#001F3F">
+                        <ListBox x:Name="openlistbox" Foreground="White" FontFamily="/Resources/fonts/#MilSpec33558" Grid.Row="1" Margin="5,0,0,5" FontSize="16" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="#001F3F">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" TextWrapping="NoWrap"/>
@@ -599,31 +372,18 @@
                     </Grid>
                 </GroupBox>
 
-                <Label Grid.Row="2"
-                   Content="Clear log" 
-                   HorizontalAlignment="Right" 
-                   VerticalAlignment="Bottom" 
-                   Margin="0,0,1136,-13" 
-                   Foreground="#FF087DFF" 
-                   FontSize="20" 
-                   Cursor="Hand" 
-                   PreviewMouseDown="amipClearDown" Height="52" Width="97" Grid.Column="1"/>
+                <Label Grid.Row="2" Content="Clear log" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,1136,-13" Foreground="#FF087DFF" FontSize="20" Cursor="Hand" PreviewMouseDown="amipClearDown" Height="52" Width="97" Grid.Column="1"/>
 
-                <lvc:CartesianChart Series="{Binding Series}"  ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="605,586,47,26" Grid.Row="2" Grid.Column="1" Background="#001F3F"/>
+                <lvc:CartesianChart Series="{Binding Series}" ZoomMode="X" XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" Margin="605,586,47,26" Grid.Row="2" Grid.Column="1" Background="#001F3F"/>
 
-                <StackPanel Orientation="Horizontal" 
-                        Grid.Column="1" Grid.Row="2" 
-                        HorizontalAlignment="Right" 
-                        VerticalAlignment="Bottom" 
-                        Margin="0,0,10,0">
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,0">
                     <TextBlock Text="Voltage (V): " Foreground="White" FontSize="20" FontFamily="/Resources/fonts/#MilSpec33558"/>
                     <TextBlock x:Name="VoltageText" Text="N/A" Foreground="White" FontSize="20" FontFamily="/Resources/fonts/#MilSpec33558" Margin="0,0,20,0"/>
-
                     <TextBlock Text="Current (A): " Foreground="White" FontSize="20" FontFamily="/Resources/fonts/#MilSpec33558"/>
                     <TextBlock x:Name="CurrentText" Text="N/A" Foreground="White" FontSize="20" FontFamily="/Resources/fonts/#MilSpec33558"/>
                 </StackPanel>
 
-                </Grid>
-             </Grid>
-        </Viewbox>
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Page>

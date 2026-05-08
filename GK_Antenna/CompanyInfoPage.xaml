@@ -10,7 +10,7 @@
       Background="#001F3F"
       Title="CompanyInfoPage">
 
-    <Viewbox Stretch="Uniform">
+    <Viewbox Stretch="Fill">
 
         <Grid Width="1920" Height="1080">
 
@@ -37,46 +37,45 @@
                 <Label Content="Factory: 901, ACA 25, Simin-daero 248beon-gil, Dongangu, Anyang, Gyeonggi-do" HorizontalAlignment="Left" Margin="97,944,0,0" VerticalAlignment="Top" FontFamily="Noto Sans KRt" FontSize="24" Width="945" FontWeight="Bold"/>
 
 
-                <Canvas VerticalAlignment="Top">
-                    <Border x:Name="TopBar"
-        Background="#001529"
-        Height="86"
-        Width="1920"
-        MouseEnter="TopBar_MouseEnter"
-        MouseLeave="TopBar_MouseLeave" BorderBrush="Black" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid Width="1920" Height="1080">
+
+                    <Canvas x:Name="TopBarCanvas" VerticalAlignment="Top" Panel.ZIndex="10">
+                        <Border x:Name="TopBar"
+                 Background="#001529"
+                 Height="86"
+                 Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                 MouseEnter="TopBar_MouseEnter"
+                 MouseLeave="TopBar_MouseLeave"
+                 BorderBrush="Black"/>
                         <Image Source="/Resources/logos/white_GK_logo.png"
-               Stretch="Uniform"
-               Margin="20,-27,1625,-19"/>
-                    </Border>
+                Stretch="Uniform"
+                Width="180" Height="86"
+                Canvas.Left="20" Canvas.Top="0"
+                IsHitTestVisible="False"/>
+                        <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" Canvas.Top="11" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558"/>
+                        <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="11" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558"/>
+                        <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="104" FontFamily="#MilSpec33558"/>
+                        <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558"/>
 
-                    <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="11"/>
-                    <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="9" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="9" IsHitTestVisible="False" Height="68" Width="104" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="#MilSpec33558"/>
-                    <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <Border x:Name="DropBar"
+                 Background="White"
+                 Height="173"
+                 Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                 Canvas.Top="86"
+                 Visibility="Collapsed"
+                 MouseEnter="DropBar_MouseEnter"
+                 MouseLeave="DropBar_MouseLeave">
+                            <Canvas>
+                                <TextBlock x:Name="StatusText" Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                                <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                                <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="958" Canvas.Top="86" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                                <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1352" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
+                                <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1648" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
+                            </Canvas>
+                        </Border>
+                    </Canvas>
 
-                    <Border x:Name="DropBar"
-        Background="White"
-        Height="173"
-        Width="1920"
-        Canvas.Top="86" 
-        Visibility="Collapsed"
-        MouseEnter="DropBar_MouseEnter"
-        MouseLeave="DropBar_MouseLeave" HorizontalAlignment="Center" VerticalAlignment="Top">
-
-                        <Canvas>
-                            <TextBlock x:Name="StatusText"  Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-
-                            <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" RenderTransformOrigin="0.44,0.606" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-                            <TextBlock x:Name="IP_SettingText" Text="• IP Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="IP_SettingText_Click" Canvas.Left="958" Canvas.Top="86" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-
-                            <TextBlock Text="• Map" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="MapText_Click" Canvas.Left="1352" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558" Width="111"/>
-
-
-                            <TextBlock Text="• Company Info" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="CompanyInfoText_Click" Canvas.Left="1648" Canvas.Top="22" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" FontFamily="#MilSpec33558"/>
-                        </Canvas>
-                    </Border>
-                </Canvas>
-
+                </Grid>
             </Grid>
         </Grid>
     </Viewbox>
