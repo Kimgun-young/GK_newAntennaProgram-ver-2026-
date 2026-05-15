@@ -21,9 +21,7 @@ using WebSocketSharp;
 
 namespace GK_Antenna
 {
-    /// <summary>
-    /// MapPage.xaml에 대한 상호 작용 논리
-    /// </summary>
+
     public partial class MapPage : Page
     {
 
@@ -70,7 +68,6 @@ namespace GK_Antenna
             {
                 Width = 25,
                 Height = 25,
-                // 2. WebServerPath를 지우고 Pack URI 체계로 바로 연결
                 Source = new BitmapImage(new Uri(uri, UriKind.Relative))
             };
 
@@ -85,7 +82,6 @@ namespace GK_Antenna
 
         private void TopBar_MouseLeave(object sender, MouseEventArgs e)
         {
-            // 바로 사라지지 않게 약간 딜레이 느낌 필요하면 나중에 개선 가능
             DropBar.Visibility = Visibility.Collapsed;
         }
 
@@ -145,14 +141,6 @@ namespace GK_Antenna
         private void Timer_Tick(object sender, EventArgs e)
         {
 
-
-            /* // 마커 업데이트
-             AddMarker(currentlat, currentlng);
-
-             // 맵 중앙 이동
-             gmap.Position = new PointLatLng(currentlat, currentlng);*/
-
-            // 랜덤 좌표 변경 (테스트용, 실제 GPS 데이터 연동 가능)
             double newLat = currentlat;
             double newLng = currentlng;
 
@@ -170,8 +158,8 @@ namespace GK_Antenna
 
             try
             {
-                await WebSocket(); // 비동기 웹소켓 호출
-                                   // MessageBox.Show("웹소켓 작업 완료!");
+                await WebSocket();
+
             }
             catch (Exception ex)
             {
@@ -215,10 +203,6 @@ namespace GK_Antenna
 
                 if (response.antennaData.antennaState == 0)
                 {
-
-                    /* latitude.Content = response.gnssData.gpsLatitude;
-                     longitude.Content = response.gnssData.gpsLongitude;*/
-
 
                     antenna_ON = true;
                     timer.Start();

@@ -20,9 +20,7 @@ using Newtonsoft.Json;
 
 namespace GK_Antenna
 {
-    /// <summary>
-    /// IpSettingPage.xaml에 대한 상호 작용 논리
-    /// </summary>
+
     public partial class IpSettingPage : Page
     {
         public IpSettingPage()
@@ -38,7 +36,6 @@ namespace GK_Antenna
 
         private void TopBar_MouseLeave(object sender, MouseEventArgs e)
         {
-            // 바로 사라지지 않게 약간 딜레이 느낌 필요하면 나중에 개선 가능
             DropBar.Visibility = Visibility.Collapsed;
         }
 
@@ -90,16 +87,13 @@ namespace GK_Antenna
             string WorkApiUrl = "http://localhost:9999/api/executeCommand?commandCode=QueryWorkParam&param={}";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(WorkApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -111,16 +105,15 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
+
                 if (classRes.code == 0)
                 {
                     //연결성공
                     Console.WriteLine("Workmode연결성공");
                     string rawdata = classRes.data;
                     string realData = rawdata.Replace("\\", "");
-                    // Console.Write(realData);
+
                     Root3 realResponse = JsonConvert.DeserializeObject<Root3>(realData);
 
 
@@ -178,12 +171,10 @@ namespace GK_Antenna
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(resetApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -195,9 +186,8 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
+
                 if (classRes.code == 0)
                 {
 
@@ -241,12 +231,10 @@ namespace GK_Antenna
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -258,9 +246,8 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
+
                 if (classRes.code == 0)
                 {
                     //연결성공
@@ -272,9 +259,7 @@ namespace GK_Antenna
                 }
                 else if (classRes.code == -1)
                 {
-                    //연결실패
-                    // Console.WriteLine("연결실패");
-
+                   
                     await alertt(@"\ant-design--close-circle-filled.png", "Disconnect Failed");
 
                 }
@@ -301,7 +286,6 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
                     bool isMatch = regex.IsMatch(amipIP.Text);
 
@@ -332,18 +316,15 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^(?:[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$");
                     bool isMatch = regex.IsMatch(amipPort.Text);
 
                     if (!isMatch)
                     {
-                        //매치실패시
                         amipPortRed.Content = "Please Check The Port Number(0~65535)";
                     }
                     else
                     {
-                        //매치시
                         amipPortRed.Content = "";
                     }
 
@@ -365,18 +346,15 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^(((255\\.){3}(255|254|252|248|240|224|192|128+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$");
                     bool isMatch = regex.IsMatch(amipMask.Text);
 
                     if (!isMatch)
                     {
-                        //매치실패시
                         amipMaskRed.Content = "Please Check Net Mask";
                     }
                     else
                     {
-                        //매치시
                         amipMaskRed.Content = "";
                     }
 
@@ -397,7 +375,6 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
                     bool isMatch = regex.IsMatch(antennaIP.Text);
 
@@ -431,13 +408,11 @@ namespace GK_Antenna
                 }
                 else
                 {
-                    //텍스트가 있을시
                     Regex regex = new Regex("^(((255\\.){3}(255|254|252|248|240|224|192|128+))|((255\\.){2}(255|254|252|248|240|224|192|128|0+)\\.0)|((255\\.)(255|254|252|248|240|224|192|128|0+)(\\.0+){2})|((255|254|252|248|240|224|192|128|0+)(\\.0+){3}))$");
                     bool isMatch = regex.IsMatch(antennaMask.Text);
 
                     if (!isMatch)
                     {
-                        //매치실패시
                         antennaMaskRed.Content = "Please Check Net Mask";
                     }
                     else
@@ -567,7 +542,6 @@ namespace GK_Antenna
 
             await Task.Run(() =>
             {
-                //버튼누를시 작동시
                 this.Dispatcher.Invoke(new Action(delegate ()
                 {
                     alertImg.Source = new BitmapImage(new Uri(WebServerPath + url));

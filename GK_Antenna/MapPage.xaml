@@ -18,7 +18,7 @@
                 <Rectangle Height="861" Margin="64,153,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
 
                 <gmap:GMapControl x:Name="gmap" MouseWheelZoomEnabled="True" MouseWheelZoomType="MousePositionAndCenter" 
-              Margin="90,170,99,119" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
+                     Margin="90,170,99,119" MaxZoom="14" MinZoom="1" Zoom="2" CanDragMap="True"/>
 
                 <Label Content="The map is updated every 5 seconds" HorizontalAlignment="Left" Margin="1227,953,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="#MilSpec33558" Foreground="White"/>
 
@@ -32,30 +32,30 @@
 
                     <Canvas x:Name="TopBarCanvas" VerticalAlignment="Top" Panel.ZIndex="10">
                         <Border x:Name="TopBar"
-                 Background="#001529"
-                 Height="86"
-                 Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
-                 MouseEnter="TopBar_MouseEnter"
-                 MouseLeave="TopBar_MouseLeave"
-                 BorderBrush="Black"/>
+                             Background="#001529"
+                             Height="86"
+                             Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                             MouseEnter="TopBar_MouseEnter"
+                             MouseLeave="TopBar_MouseLeave"
+                             BorderBrush="Black"/>
                         <Image Source="/Resources/logos/white_GK_logo.png"
-                Stretch="Uniform"
-                Width="180" Height="86"
-                Canvas.Left="20" Canvas.Top="0"
-                IsHitTestVisible="False"/>
+                            Stretch="Uniform"
+                            Width="180" Height="86"
+                            Canvas.Left="20" Canvas.Top="0"
+                           IsHitTestVisible="False"/>
                         <TextBlock x:Name="TopBarTrackingDashboard" Text="Tracking Dashboard" Foreground="White" FontSize="48" Canvas.Left="345" Canvas.Top="11" IsHitTestVisible="False" Height="64" Width="458" FontFamily="#MilSpec33558"/>
                         <TextBlock x:Name="TopBarSetting" Text="Setting" Foreground="White" FontSize="48" Canvas.Left="978" Canvas.Top="11" IsHitTestVisible="False" Height="62" Width="163" FontFamily="#MilSpec33558"/>
                         <TextBlock x:Name="TopBarMap" Text="Map" Foreground="White" FontSize="48" Canvas.Left="1362" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="104" FontFamily="#MilSpec33558"/>
                         <TextBlock x:Name="TopBarMapAbout" Text="About" Foreground="White" FontSize="48" Canvas.Left="1681" Canvas.Top="11" IsHitTestVisible="False" Height="68" Width="146" FontFamily="#MilSpec33558"/>
 
                         <Border x:Name="DropBar"
-                 Background="White"
-                 Height="173"
-                 Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
-                 Canvas.Top="86"
-                 Visibility="Collapsed"
-                 MouseEnter="DropBar_MouseEnter"
-                 MouseLeave="DropBar_MouseLeave">
+                                 Background="White"
+                                 Height="173"
+                                 Width="{Binding ActualWidth, ElementName=TopBarCanvas}"
+                                 Canvas.Top="86"
+                                 Visibility="Collapsed"
+                                 MouseEnter="DropBar_MouseEnter"
+                                 MouseLeave="DropBar_MouseLeave">
                             <Canvas>
                                 <TextBlock x:Name="StatusText" Text="• Status" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="StatusText_Click" Width="148" Canvas.Left="362" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>
                                 <TextBlock x:Name="BeamSettingText" Text="• Beam Setting" Foreground="Black" FontSize="36" Cursor="Hand" MouseLeftButtonDown="BeamSettingText_Click" Canvas.Left="958" Canvas.Top="22" FontWeight="Bold" FontFamily="#MilSpec33558"/>

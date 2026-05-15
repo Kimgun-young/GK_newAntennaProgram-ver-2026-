@@ -12,7 +12,6 @@
     <Viewbox Stretch="Fill">
         <Grid Width="1920" Height="1080">
 
-            <!-- TopBar/DropBar: Margin 없는 최상위 Grid에 바로 배치 -->
             <Canvas x:Name="TopBarCanvas" VerticalAlignment="Top" Panel.ZIndex="10">
                 <Border x:Name="TopBar"
                         Background="#001529"
@@ -49,7 +48,6 @@
                 </Border>
             </Canvas>
 
-            <!-- 내부 콘텐츠 Grid -->
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="93*"/>
@@ -128,7 +126,7 @@
                     </StackPanel>
 
                     <StackPanel Margin="11,83,-11,0">
-                        <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
+                        <TextBlock Text="Es/No (dB)" Foreground="White" FontSize="36" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558"/>
                         <Border x:Name="EsNoBox" Height="130" Background="#121212" Width="376">
                             <TextBlock x:Name="EsNoText" Text="N/A" Foreground="White" FontFamily="/Resources/fonts/#LAB디지털" FontSize="48" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -265,7 +263,7 @@
                 </Viewbox>
 
                 <Grid x:Name="TempGaugeGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1235,162,0,0" Background="Transparent" Height="465" Width="184" Grid.Row="2" Grid.Column="1">
-                    <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="20" HorizontalAlignment="Left" FontFamily="/Resources/fonts/#MilSpec33558" Margin="24,6,0,425" Width="150"/>
+                    <TextBlock Text="Temperature (°C)" Foreground="White" FontSize="24" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" Margin="0,6,0,425" Width="179"/>
                     <Canvas x:Name="TempLevelCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,45,0,0" Width="60" Height="360">
                         <Rectangle x:Name="ThermometerTubePath" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="44" Height="356" Canvas.Left="8" Canvas.Top="0"/>
                         <Rectangle x:Name="TempLevelBar" Fill="#F44336" Width="38" Height="0" Canvas.Left="11" Canvas.Top="354">
@@ -276,33 +274,33 @@
                     </Canvas>
                     <Canvas Width="65" Height="360" VerticalAlignment="Top" Margin="105,45,0,0" HorizontalAlignment="Left">
                         <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="80" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
+                        <TextBlock Text="80" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="25" X2="8" Y2="25" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="50" X2="15" Y2="50" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="60" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="43"/>
+                        <TextBlock Text="60" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="39" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="75" X2="8" Y2="75" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="100" X2="15" Y2="100" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="40" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="93"/>
+                        <TextBlock Text="40" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="88" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="125" X2="8" Y2="125" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="150" X2="15" Y2="150" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="20" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="143"/>
+                        <TextBlock Text="20" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="139" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="175" X2="8" Y2="175" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="200" X2="20" Y2="200" Stroke="White" StrokeThickness="2.5"/>
-                        <TextBlock Text="0" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="25" Canvas.Top="193"/>
+                        <TextBlock Text="0" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="25" Canvas.Top="188" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="225" X2="8" Y2="225" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="250" X2="15" Y2="250" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-20" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="243"/>
+                        <TextBlock Text="-20" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="237" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="275" X2="8" Y2="275" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="300" X2="15" Y2="300" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-40" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="293"/>
+                        <TextBlock Text="-40" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="287" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="325" X2="8" Y2="325" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="350" X2="15" Y2="350" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-60" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="343"/>
+                        <TextBlock Text="-60" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="336" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     </Canvas>
                 </Grid>
 
                 <Grid x:Name="EsNoGroup" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1442,162,0,0" Background="Transparent" Height="465" Width="184" Grid.Row="2" Grid.Column="1">
-                    <TextBlock Text="Es/No (dBm)" Foreground="White" FontSize="20" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" Margin="0,6,0,425" Width="110"/>
+                    <TextBlock Text="Es/No (dB)" Foreground="White" FontSize="24" HorizontalAlignment="Center" FontFamily="/Resources/fonts/#MilSpec33558" Margin="0,6,0,425" Width="118"/>
                     <Canvas x:Name="EsNoLevelCanvas" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,45,0,0" Width="60" Height="360">
                         <Rectangle x:Name="EsNoTubePath" Fill="Transparent" Stroke="White" StrokeThickness="3" Width="44" Height="356" Canvas.Left="8" Canvas.Top="0"/>
                         <Rectangle x:Name="EsNoLevelBar" Fill="#F44336" Width="38" Height="1" Canvas.Left="11" Canvas.Top="353">
@@ -313,28 +311,28 @@
                     </Canvas>
                     <Canvas Width="65" Height="360" VerticalAlignment="Top" Margin="105,45,0,0" HorizontalAlignment="Left">
                         <Line X1="0" Y1="0" X2="15" Y2="0" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="30" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-7"/>
+                        <TextBlock Text="30" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="-10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="23.33" X2="8" Y2="23.33" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="46.67" X2="15" Y2="46.67" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="10" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="39.67"/>
+                        <TextBlock Text="10" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="70" X2="8" Y2="70" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="93.33" X2="15" Y2="93.33" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-10" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="86.33"/>
+                        <TextBlock Text="-10" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="116.67" X2="8" Y2="116.67" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="140" X2="15" Y2="140" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-30" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="133"/>
+                        <TextBlock Text="-30" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="127" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="163.33" X2="8" Y2="163.33" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="186.67" X2="15" Y2="186.67" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-50" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="179.67"/>
+                        <TextBlock Text="-50" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="174" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="210" X2="8" Y2="210" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="233.33" X2="15" Y2="233.33" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-70" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="226.33"/>
+                        <TextBlock Text="-70" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="221" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="256.67" X2="8" Y2="256.67" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="280" X2="15" Y2="280" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-90" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="273"/>
+                        <TextBlock Text="-90" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="268" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                         <Line X1="0" Y1="303.33" X2="8" Y2="303.33" Stroke="White" StrokeThickness="1"/>
                         <Line X1="0" Y1="326.67" X2="15" Y2="326.67" Stroke="White" StrokeThickness="2"/>
-                        <TextBlock Text="-120" Foreground="White" FontSize="11" FontWeight="Bold" Canvas.Left="20" Canvas.Top="319.67"/>
+                        <TextBlock Text="-120" Foreground="White" FontSize="16" FontWeight="Bold" Canvas.Left="20" Canvas.Top="315" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                     </Canvas>
                 </Grid>
 

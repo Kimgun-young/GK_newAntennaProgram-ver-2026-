@@ -52,7 +52,6 @@ namespace GK_Antenna
 
                 ws.OnMessage += webMessage;
                 ws.Connect();
-                //Console.ReadKey(true);
                 await Task.Delay(Timeout.Infinite);
 
 

@@ -84,15 +84,33 @@ namespace GK_Antenna
 
         public void StartLatestLogMonitoring()
         {
+            // 1. 기존의 BaseDirectory 대신 ProgramData 경로를 사용합니다.
+            string programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             string logPath = System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "WebServer",
+                programDataPath,
+                "GlobalKonet",
+                "AntennaSW",
                 "log",
                 "server.log");
+
             Task.Run(() =>
             {
                 try
                 {
+                    // 폴더가 없는 경우에 대비한 방어 코드
+                    string logDir = System.IO.Path.GetDirectoryName(logPath);
+                    if (!System.IO.Directory.Exists(logDir))
+                    {
+                        System.IO.Directory.CreateDirectory(logDir);
+                    }
+
+                    // 파일이 아직 생성되지 않았을 경우를 대비
+                    if (!System.IO.File.Exists(logPath))
+                    {
+                        // 파일이 생길 때까지 잠시 대기하거나 빈 파일 생성
+                        using (var fs = System.IO.File.Create(logPath)) { }
+                    }
+
                     using (var stream = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     using (var reader = new StreamReader(stream, Encoding.Default))
                     {

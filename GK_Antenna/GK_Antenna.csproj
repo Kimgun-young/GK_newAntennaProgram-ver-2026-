@@ -32,12 +32,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\fonts\LAB디지털.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\fonts\MilSpec33558.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Resources\fonts\LAB디지털.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\fonts\MilSpec33558.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\Icons\appIcon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

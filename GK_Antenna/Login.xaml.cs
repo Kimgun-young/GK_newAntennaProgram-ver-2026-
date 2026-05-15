@@ -30,30 +30,34 @@ namespace GK_Antenna
 
         private void StartWebServer()
         {
-            string batPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "WebServer",
-                "start.bat");
+            
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+
+           
+            string webServerPath = Path.Combine(baseDir, "WebServer");
+            string batPath = Path.Combine(webServerPath, "start.bat");
 
             try
             {
                 if (!File.Exists(batPath))
                 {
-                    MessageBox.Show($"start.bat 파일을 찾을 수 없습니다.\n{batPath}");
+                   
+                    MessageBox.Show($"파일을 찾을 수 없습니다: {batPath}");
                     return;
                 }
 
                 Process.Start(new ProcessStartInfo
                 {
                     FileName = batPath,
-                    WorkingDirectory = Path.GetDirectoryName(batPath),
+                    WorkingDirectory = webServerPath, 
                     WindowStyle = ProcessWindowStyle.Hidden,
-                    UseShellExecute = false
+                    UseShellExecute = false,
+                    CreateNoWindow = true 
                 });
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"WebServer 실행 실패: {ex.Message}");
+                MessageBox.Show($"실행 실패: {ex.Message}");
             }
         }
 
@@ -249,27 +253,22 @@ namespace GK_Antenna
         {
             try
             {
-                // 1. 파일이 저장될 폴더 경로를 가져옵니다.
                 string directoryPath = Path.GetDirectoryName(filePath);
 
-                // 2. 폴더가 존재하지 않으면 생성합니다. (C:\Users\...\AppData\Local\GK_Antenna)
                 if (!string.IsNullOrEmpty(directoryPath) && !Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
 
-                // 3. 파일이 없으면 기본 IP를 저장합니다.
                 if (!File.Exists(filePath))
                 {
                     File.WriteAllText(filePath, defaultIp);
                 }
 
-                // 4. 저장된 IP를 불러와 텍스트 박스에 표시합니다.
                 AntennaIpBox.Text = File.ReadAllText(filePath);
             }
             catch (Exception ex)
             {
-                // 예외 발생 시 프로그램이 꺼지지 않도록 메시지 박스를 띄웁니다.
                 MessageBox.Show($"IP 로드 중 오류 발생: {ex.Message}");
             }
         }

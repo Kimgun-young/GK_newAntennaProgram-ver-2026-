@@ -9,7 +9,7 @@
       d:DesignWidth="1920"
       Background="#001F3F"
       Title="IpSettingPage">
-    
+
     <Viewbox Stretch="Fill">
 
         <Grid Width="1920" Height="1080">
@@ -45,48 +45,48 @@
                 <Label x:Name="antennaMaskRed" HorizontalAlignment="Left" Margin="1154,598,0,0" VerticalAlignment="Top" Height="57" Width="291" FontFamily="#MilSpec33558" RenderTransformOrigin="0.533,0.289" Foreground="Yellow" FontSize="20"/>
 
                 <Button x:Name="AMIP_SettingBtn" 
-            Content="AMIP Setting"  
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top" 
-            Margin="754,851,0,0" 
-            Width="342" 
-            Height="78" 
-            Background="#FF007CFA" 
-            Foreground="White" 
-            BorderBrush="{x:Null}" 
-            FontFamily="#MilSpec33558"
-            FontSize="24" 
-            Click="OpenAmipSetting_Click"/>
+                    Content="AMIP Setting"  
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="754,851,0,0" 
+                    Width="342" 
+                    Height="78" 
+                    Background="#FF007CFA" 
+                    Foreground="White" 
+                    BorderBrush="{x:Null}" 
+                    FontFamily="#MilSpec33558"
+                    FontSize="24" 
+                    Click="OpenAmipSetting_Click"/>
 
                 <Button x:Name="RestartBtn" 
-            Content="Antenna Restart" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top" 
-            Margin="263,851,0,0" 
-            Width="342" 
-            Height="78" 
-            Background="#FF9E0000" 
-            Foreground="White" 
-            BorderBrush="{x:Null}" 
-            FontFamily="#MilSpec33558"
-            FontSize="24" 
-            Click="RestartBtn_Click"/>
+                    Content="Antenna Restart" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="263,851,0,0" 
+                    Width="342" 
+                    Height="78" 
+                    Background="#FF9E0000" 
+                    Foreground="White" 
+                    BorderBrush="{x:Null}" 
+                    FontFamily="#MilSpec33558"
+                    FontSize="24" 
+                    Click="RestartBtn_Click"/>
 
                 <Label Content="Only Takes Effect When The Antenna Is Restarted" HorizontalAlignment="Left" Margin="200,951,0,0" VerticalAlignment="Top" FontFamily="#MilSpec33558" FontSize="20" Foreground="White"/>
 
                 <Button x:Name="DisconnectBtn" 
-            Content="Disconnect" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top" 
-            Margin="1234,851,0,0" 
-            Width="342" 
-            Height="78" 
-            Background="#8C8C8C" 
-            Foreground="White" 
-            BorderBrush="{x:Null}" 
-            FontFamily="#MilSpec33558"
-            FontSize="24" 
-            Click="DisconnectBtn_Click"/>
+                    Content="Disconnect" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="1234,851,0,0" 
+                    Width="342" 
+                    Height="78" 
+                    Background="#8C8C8C" 
+                    Foreground="White" 
+                    BorderBrush="{x:Null}" 
+                    FontFamily="#MilSpec33558"
+                    FontSize="24" 
+                    Click="DisconnectBtn_Click"/>
 
 
 
@@ -139,7 +139,7 @@
                                     CornerRadius="15"
                                     BorderBrush="#EEEEEE"
                                     BorderThickness="1"
-                                    Padding="20,0,30,0" Margin="0,-28,0,28">    
+                                    Padding="20,0,30,0" Margin="0,-28,0,28">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <Image x:Name="alertImg"
                                        Width="50"

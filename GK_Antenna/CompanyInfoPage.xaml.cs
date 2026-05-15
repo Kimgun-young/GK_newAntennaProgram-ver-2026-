@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace GK_Antenna
 {
-    /// <summary>
-    /// ComapnyInfoPage.xaml에 대한 상호 작용 논리
-    /// </summary>
+
     public partial class CompanyInfoPage : Page
     {
         public CompanyInfoPage()
@@ -33,7 +31,6 @@ namespace GK_Antenna
 
         private void TopBar_MouseLeave(object sender, MouseEventArgs e)
         {
-            // 바로 사라지지 않게 약간 딜레이 느낌 필요하면 나중에 개선 가능
             DropBar.Visibility = Visibility.Collapsed;
         }
 

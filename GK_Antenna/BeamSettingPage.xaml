@@ -11,7 +11,6 @@
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Page.Resources>
-        <!-- 기존 Resources 전체 동일하게 유지 -->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -468,7 +467,6 @@
                 </Border>
             </Canvas>
 
-            <!-- 기존 콘텐츠 Grid -->
             <Grid>
                 <Rectangle Height="861" Margin="64,144,82,0" VerticalAlignment="Top" Fill="#001F3F"/>
 

@@ -28,9 +28,6 @@ using WebSocketSharp;
 
 namespace GK_Antenna
 {
-    /// <summary>
-    /// BeamSetting.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class BeamSettingPage : Page
     {
 
@@ -111,7 +108,6 @@ namespace GK_Antenna
 
         private void TopBar_MouseLeave(object sender, MouseEventArgs e)
         {
-            // 바로 사라지지 않게 약간 딜레이 느낌 필요하면 나중에 개선 가능
             DropBar.Visibility = Visibility.Collapsed;
         }
 
@@ -331,16 +327,13 @@ namespace GK_Antenna
             string WorkApiUrl = "http://localhost:9999/api/executeCommand?commandCode=QueryWorkParam&param={}";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(WorkApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -352,16 +345,13 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     //연결성공
                     Console.WriteLine("Workmode연결성공");
                     string rawdata = classRes.data;
                     string realData = rawdata.Replace("\\", "");
-                    // Console.Write(realData);
                     Root3 realResponse = JsonConvert.DeserializeObject<Root3>(realData);
 
                     workMode.SelectedIndex = realResponse.workMode;
@@ -447,18 +437,15 @@ namespace GK_Antenna
             string disconnectApiUrl = "http://localhost:9999/api/executeCommand?commandCode=QueryDeviceInfo&param={mode:0}";
 
             string response = "";
-            //localhost:9999 고정
 
 
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -470,12 +457,10 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
-                    //연결성공
+
                     Console.WriteLine("deviceQuery연결성공");
                     string rawdata = classRes.data;
                     string realData = rawdata.Replace("\\", "");
@@ -500,14 +485,10 @@ namespace GK_Antenna
                     rxOscMin = Response.deviceParamRange.rxOscMin;
 
 
-
-                    //tx폴타입설정
-                    //txpolType.ItemsSource = Response.deviceParamRange.txDirectionPolarityType;
                     txpolType.Items.Add("HORIZONTAL");
                     txpolType.Items.Add("VERTICAL");
                     txpolType.Items.Add("LEFT");
                     txpolType.Items.Add("RIGHT");
-                    //  rxpolType.ItemsSource = Response.deviceParamRange.rxDirectionPolarityType;
                     rxpolType.Items.Add("HORIZONTAL");
                     rxpolType.Items.Add("VERTICAL");
                     rxpolType.Items.Add("LEFT");
@@ -633,9 +614,6 @@ namespace GK_Antenna
             {
                 try
                 {
-                    // =========================
-                    // 🔥 TX / RX 상태
-                    // =========================
                     if (response.antennaData?.antennaTxRfState == "ON")
                     {
                         txOn.Visibility = Visibility.Visible;
@@ -658,9 +636,7 @@ namespace GK_Antenna
                         rxOff.Visibility = Visibility.Visible;
                     }
 
-                    // =========================
-                    // 🔥 Auto Mode
-                    // =========================
+
                     if (isGetAutoParam)
                     {
                         sym.Text = response.multiModeReceiverData?.mmrSym.ToString();
@@ -680,9 +656,7 @@ namespace GK_Antenna
                         isGetAutoParam = false;
                     }
 
-                    // =========================
-                    // 🔥 Manual Mode
-                    // =========================
+
                     if (isGetManualParam)
                     {
                         manualrxFreq.Text = response.rxArrayPanelData?.directionRFFreq.ToString();
@@ -708,9 +682,7 @@ namespace GK_Antenna
                         isGetManualParam = false;
                     }
 
-                    // =========================
-                    // 🔥 내부 값 업데이트
-                    // =========================
+
                     if (response.txArrayPanelData != null)
                     {
                         _txPhiValue = response.txArrayPanelData.directionPhi;
@@ -830,23 +802,19 @@ namespace GK_Antenna
 
         private void ManualMode_Checked(object sender, RoutedEventArgs e)
         {
-            // 사용자가 선택한 값 저장
             if (rxpolType.SelectedItem != null)
                 _manualRxPolarity = rxpolType.SelectedItem.ToString();
             if (txpolType.SelectedItem != null)
                 _manualTxPolarity = txpolType.SelectedItem.ToString();
 
-            // Rx/Tx LO 값도 저장
             if (double.TryParse(rxlo.Text, out double rxValue))
                 _manualRxLO = rxValue;
             if (double.TryParse(txlo.Text, out double txValue))
                 _manualTxLO = txValue;
 
-            // Tx 상태 표시
             txOn.Visibility = _isTxOn ? Visibility.Visible : Visibility.Hidden;
             txOff.Visibility = _isTxOn ? Visibility.Hidden : Visibility.Visible;
 
-            // Manual UI 표시
             if (manualModeBox != null)
                 manualModeBox.Visibility = Visibility.Visible;
 
@@ -890,7 +858,6 @@ namespace GK_Antenna
 
         private void AutoMode_Checked(object sender, RoutedEventArgs e)
         {
-            // Manual UI 숨기기
             if (manualModeBox != null)
                 manualModeBox.Visibility = Visibility.Collapsed;
 
@@ -899,7 +866,6 @@ namespace GK_Antenna
             isGetAutoParam = true;
             isGetManualParam = false;
 
-            // Manual에서 마지막으로 입력한 값 적용
             rxlo.Text = _manualRxLO.ToString();
             txlo.Text = _manualTxLO.ToString();
             if (!string.IsNullOrEmpty(_manualRxPolarity))
@@ -1092,7 +1058,6 @@ namespace GK_Antenna
 
         private void RxPol_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //check finish
 
             if (RxPolRed != null)
             {
@@ -1260,7 +1225,6 @@ namespace GK_Antenna
 
         private void TxPol_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //check finish
 
             if (TxPolRed != null)
             {
@@ -1307,14 +1271,12 @@ namespace GK_Antenna
 
         private void TxSwitchOn(object sender, MouseEventArgs e)
         {
-            //tx:1 
             if (autoRadio.IsChecked == true)
             {
                 AutoTrackTrue(1, true);
             }
             else
             {
-                //매뉴얼모드 체크
                 AutoTrackFalse(1, true);
             }
 
@@ -1356,20 +1318,16 @@ namespace GK_Antenna
 
         public void AutoTrackFalse(int tr, bool isOn)
         {
-            //tx스위치 키기 tx:1
             string AutoTrackApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchAutoTrack&param={isOn:false}";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(AutoTrackApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1381,9 +1339,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     //autoTrack연결성공
@@ -1430,16 +1386,13 @@ namespace GK_Antenna
             string AutoTrackApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchAutoTrack&param={isOn:true}";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(AutoTrackApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1451,9 +1404,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     //autoTrack연결성공
@@ -1494,16 +1445,13 @@ namespace GK_Antenna
             string disconnectApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchRF&param={ tr:1 , isOn: false }";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1515,9 +1463,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     _txPolarValues.Clear();
@@ -1555,16 +1501,13 @@ namespace GK_Antenna
             string TxOnApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchRF&param={ tr:1 , isOn: true }";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(TxOnApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1576,9 +1519,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     _txPolarValues.Clear();
@@ -1615,16 +1556,13 @@ namespace GK_Antenna
             string disconnectApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SwitchRF&param={ tr:2 , isOn: true }";
 
             string response = "";
-            //localhost:9999 고정
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1636,9 +1574,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     _RxPolarValues.Clear();
@@ -1677,12 +1613,10 @@ namespace GK_Antenna
 
             try
             {
-                // request setting
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(disconnectApiUrl);
                 request.Method = "GET";
                 request.Timeout = 10 * 1000;
 
-                // GET Request & Response
                 using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                 {
                     HttpStatusCode status = res.StatusCode;
@@ -1694,9 +1628,7 @@ namespace GK_Antenna
                 }
 
 
-                //  Console.WriteLine(response);
                 Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                //Console.WriteLine(classRes.code);
                 if (classRes.code == 0)
                 {
                     _RxPolarValues.Clear();
@@ -1726,140 +1658,12 @@ namespace GK_Antenna
 
         }
 
-
-
-
-
-        //private void HandleBeamData(Root2 response)
-        //{
-
-
-        //    //tx 스위치
-        //    if (response.antennaData.antennaTxRfState == "ON")
-        //    {
-
-        //        txOn.Visibility = Visibility.Visible;
-        //        txOff.Visibility = Visibility.Hidden;
-
-        //    }
-        //    else if (response.antennaData.antennaTxRfState == "OFF")
-        //    {
-
-        //        txOn.Visibility = Visibility.Hidden;
-        //        txOff.Visibility = Visibility.Visible;
-
-        //    }
-        //    //rx 스위치
-        //    if (response.antennaData.antennaRxRfState == "ON")
-        //    {
-
-        //        rxOn.Visibility = Visibility.Visible;
-        //        rxOff.Visibility = Visibility.Hidden;
-
-        //    }
-        //    else if (response.antennaData.antennaRxRfState == "OFF")
-        //    {
-        //        rxOn.Visibility = Visibility.Hidden;
-        //        rxOff.Visibility = Visibility.Visible;
-
-        //    }
-
-        //    if (isGetAutoParam)
-        //    {
-
-        //        //sym rate가 3000이여야 하는데 300으로 뜬다????
-        //        sym.Text = response.multiModeReceiverData.mmrSym.ToString();
-        //        txfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-        //        rxfreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-        //        txpolType.Text = response.txArrayPanelData.directionPolarityType.ToString();
-        //        rxpolType.Text = response.rxArrayPanelData.directionPolarityType.ToString();
-        //        txlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-        //        rxlo.Text = response.frequencyConverterData.fcRxOsc.ToString();
-        //        rxtextb.Text = response.frequencyConverterData.fcRxOsc.ToString();
-        //        txtextb.Text = response.frequencyConverterData.fcTxOsc.ToString();
-
-
-        //        isGetAutoParam = false;
-
-        //    }
-
-
-        //    //manual 파라미터
-        //    if (isGetManualParam)
-        //    {
-        //        //매뉴얼모드
-        //        manualrxFreq.Text = response.rxArrayPanelData.directionRFFreq.ToString();
-        //        manualsym.Text = response.multiModeReceiverData.mmrSym.ToString();
-        //        if (response.multiModeReceiverData.mmrWorkMode == null)
-        //        {
-        //            trackmode.Text = "DVB";
-        //        }
-        //        else
-        //        {
-        //            trackmode.Text = response.multiModeReceiverData.mmrWorkMode.ToString();
-        //        }
-        //        //rxlolist.Text = BeamResponse.rx_osc.ToString();
-        //        mrxloblock.Text = response.frequencyConverterData.fcRxOsc.ToString();
-        //        rxphi.Text = response.rxArrayPanelData.directionPhi.ToString();
-        //        rxtheta.Text = response.rxArrayPanelData.directionTheta.ToString();
-        //        rxpoltb.Text = response.rxArrayPanelData.directionPolarityAngle.ToString();
-        //        rxpolcb.Text = response.rxArrayPanelData.directionPolarityType.ToString();
-
-        //        manualtxfreq.Text = response.txArrayPanelData.directionRFFreq.ToString();
-        //        manualtxlo.Text = response.frequencyConverterData.fcTxOsc.ToString();
-        //        txphi.Text = response.txArrayPanelData.directionPhi.ToString();
-        //        txtheta.Text = response.txArrayPanelData.directionTheta.ToString();
-        //        txpoltb.Text = response.txArrayPanelData.directionPolarityAngle.ToString();
-        //        txpolcb.Text = response.txArrayPanelData.directionPolarityType.ToString();
-
-
-        //        isGetManualParam = false;
-
-
-
-        //    }
-
-
-
-
-
-        //    if (response?.txArrayPanelData != null)
-        //    {
-        //        _txPhiValue = response.txArrayPanelData.directionPhi;
-        //        _txThetaValue = response.txArrayPanelData.directionTheta;
-        //    }
-
-        //    if (response?.rxArrayPanelData != null)
-        //    {
-        //        _rxPhiValue = response.rxArrayPanelData.directionPhi;
-        //        _rxThetaValue = response.rxArrayPanelData.directionTheta;
-        //    }
-
-
-
-
-
-
-
-
-        //}
-
-
-
-
-
-
-
-
-
         public async void setAutoPara(object sender, RoutedEventArgs e)
         {
             if (rxOscMin == 0 || rxOscMax == 0)
             {
                 if (longRed.Content.ToString() == "" && symRed.Content.ToString() == "" && txFreqRed.Content.ToString() == "" && RxFreqRed.Content.ToString() == "")
                 {
-
-
 
                     string satLongitude = longitude.Text;
                     string rxFreq = rxfreq.Text;
@@ -1869,7 +1673,6 @@ namespace GK_Antenna
                     string symm = sym.Text;
                     string txOsc = txtextb.Text;
                     string txPolType = txpolType.Text;
-                    //   string satName = "";
 
 
                     string SetAutoApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetAutoTrackParam&param={sat_longitude:" + satLongitude + ", rx_freq:" + rxFreq + ", tx_freq:" + txFreq + ", rx_osc:" + rxOsc + ", rx_polarity_type:\"" + rxPolType + "\", sym:" + symm + ", tx_osc:" + txOsc + ", tx_polarity_type:\"" + txPolType + "\"}";
@@ -1897,9 +1700,7 @@ namespace GK_Antenna
                         }
 
 
-                        //  Console.WriteLine(response);
                         Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                        //Console.WriteLine(classRes.code);
                         if (classRes.code == 0)
                         {
                             //연결성공
@@ -1948,7 +1749,6 @@ namespace GK_Antenna
                     string symm = sym.Text;
                     string txOsc = txtextb.Text;
                     string txPolType = txpolType.Text;
-                    //   string satName = "";
 
 
                     string SetAutoApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetAutoTrackParam&param={sat_longitude:" + satLongitude + ", rx_freq:" + rxFreq + ", tx_freq:" + txFreq + ", rx_osc:" + rxOsc + ", rx_polarity_type:\"" + rxPolType + "\", sym:" + symm + ", tx_osc:" + txOsc + ", tx_polarity_type:\"" + txPolType + "\"}";
@@ -1959,12 +1759,10 @@ namespace GK_Antenna
 
                     try
                     {
-                        // request setting
                         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SetAutoApiUrl);
                         request.Method = "GET";
                         request.Timeout = 10 * 1000;
 
-                        // GET Request & Response
                         using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                         {
                             HttpStatusCode status = res.StatusCode;
@@ -1976,9 +1774,7 @@ namespace GK_Antenna
                         }
 
 
-                        //  Console.WriteLine(response);
                         Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                        //Console.WriteLine(classRes.code);
                         if (classRes.code == 0)
                         {
                             //연결성공
@@ -2039,6 +1835,7 @@ namespace GK_Antenna
                 trackM = "3";
 
             // GNSS
+
             if (GNSSMode.SelectedValue.ToString() == "Auto")
                 mGPS = "0";
             else
@@ -2157,17 +1954,12 @@ namespace GK_Antenna
             if (mTxFreqRed.Content.ToString() == "" && TxPhiRed.Content.ToString() == "" && TxThetaRed.Content.ToString() == "" && TxPolRed.Content.ToString() == "")
             {
 
-
                 string txOsc = manualtxlo.Text;
                 string txFreq = manualtxfreq.Text;
                 string txTheta = txtheta.Text;
                 string txPhi = txphi.Text;
                 string txPol = txpoltb.Text;
                 string txPolType = txpolcb.Text;
-
-
-                //   string satName = "";
-
 
                 string SettxApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetManualTrackParam&param={requestMode:1, tx_freq:" + txFreq + ", tx_osc:" + txOsc + ", tx_polarity_type:\"" + txPolType + "\", tx_phi:" + txPhi + ", tx_theta:" + txTheta + ", tx_pol:" + txPol + "}";
                 Console.WriteLine(SettxApiUrl);
@@ -2177,12 +1969,10 @@ namespace GK_Antenna
 
                 try
                 {
-                    // request setting
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SettxApiUrl);
                     request.Method = "GET";
                     request.Timeout = 10 * 1000;
 
-                    // GET Request & Response
                     using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                     {
                         HttpStatusCode status = res.StatusCode;
@@ -2194,9 +1984,7 @@ namespace GK_Antenna
                     }
 
 
-                    //  Console.WriteLine(response);
                     Root classRes = JsonConvert.DeserializeObject<Root>(response);
-                    //Console.WriteLine(classRes.code);
                     if (classRes.code == 0)
                     {
                         //연결성공
@@ -2233,36 +2021,23 @@ namespace GK_Antenna
             {
 
                 string mrxFreq = manualrxFreq.Text;
-                //  string mtxFreq = manualtxfreq.Text;
                 string mrxOsc = mrxloblock.Text;
                 string mrxpolType = rxpolcb.Text;
                 string msym = manualsym.Text;
                 string trackMode = trackmode.Text;
-                //   string mtxOsc = manualtxlo.Text;
-                //   string mtxpolType=txpolcb.Text;
-                //  string txPhi=txphi.Text;
-                //    string txTheta=txtheta.Text;
                 string rxPhi = rxphi.Text;
                 string rxTheta = rxtheta.Text;
-                //    string txPol=txpoltb.Text;
                 string rxPol = rxpoltb.Text;
-                //   string satName = "";
-
-
                 string SetrxApiUrl = "http://localhost:9999/api/executeCommand?commandCode=SetManualTrackParam&param={requestMode:0, rx_freq:" + mrxFreq + ", rx_osc:" + mrxOsc + ", rx_polarity_type:\"" + mrxpolType + "\", sym:" + msym + ", workMode:\"" + trackMode + "\", rx_phi:" + rxPhi + ", rx_theta:" + rxTheta + ", rx_pol:" + rxPol + "}";
-                // Console.WriteLine(SetrxApiUrl);
-
                 string response = "";
                 //localhost:9999 고정
 
                 try
                 {
-                    // request setting
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SetrxApiUrl);
                     request.Method = "GET";
                     request.Timeout = 10 * 1000;
 
-                    // GET Request & Response
                     using (HttpWebResponse res = (HttpWebResponse)request.GetResponse())
                     {
                         HttpStatusCode status = res.StatusCode;
@@ -2274,7 +2049,6 @@ namespace GK_Antenna
                     }
 
 
-                    //  Console.WriteLine(response);
                     Root classRes = JsonConvert.DeserializeObject<Root>(response);
                     //Console.WriteLine(classRes.code);
                     if (classRes.code == 0)
